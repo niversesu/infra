@@ -6,6 +6,7 @@
   caelestia-cli,
   better-control,
   nixvim,
+  zen-browser,
   ...
 }: let
   system = pkgs.stdenv.hostPlatform.system;
@@ -72,6 +73,7 @@ in {
     (caelestia-shell.packages.${system}.default.override {withCli = true;})
     caelestia-cli.packages.${system}.default
     better-control.packages.${system}.default
+    zen-browser.packages."${system}".specific
     # fonts
     minecraftia
   ];
