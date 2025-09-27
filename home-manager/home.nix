@@ -7,6 +7,7 @@
   better-control,
   nixvim,
   zen-browser,
+  nixcord,
   ...
 }: let
   system = pkgs.stdenv.hostPlatform.system;
@@ -14,8 +15,9 @@
 in {
   # Import Hyprland configuration
   imports = [
-    #./hyprland.nix
+    # ./hyprland.nix
     nixvim.homeModules.nixvim
+    nixcord.homeModules.nixcord
   ];
 
   # User
@@ -27,6 +29,7 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
   };
+
   # Packages
   home.packages = with pkgs; [
     # Tools
@@ -38,8 +41,8 @@ in {
     cliphist
     fuzzel
     fzf
-    zsh-powerlevel10k
     kdePackages.filelight
+
     # Multimedia
     mpv
     celluloid
@@ -59,22 +62,23 @@ in {
 
     # Fun
     prismlauncher
-    vesktop
     lutris
 
-    # misc
+    # Misc
     wineWowPackages.full
     steam-run
     winetricks
     rclone
     slurp
+    kitty
 
     # Custom flakes
     (caelestia-shell.packages.${system}.default.override {withCli = true;})
     caelestia-cli.packages.${system}.default
     better-control.packages.${system}.default
-    zen-browser.packages."${system}".specific
-    # fonts
+    zen-browser.packages.${system}.specific
+
+    # Fonts (check if minecraftia exists in nixpkgs/overlay)
     minecraftia
   ];
 
@@ -88,7 +92,8 @@ in {
     };
     iconTheme = {
       package = pkgs.whitesur-icon-theme;
-      name = "dracula-icons-circle";
+      # make sure this name actually exists in the package
+      name = "WhiteSur-dark";
     };
     theme = {
       package = pkgs.adw-gtk3;
@@ -107,12 +112,12 @@ in {
   programs = {
     fish = {
       enable = true;
-
       shellAliases = {
         nano = "nvim";
-        ls = "lsd";
+        ls = "eza"; # use eza since you installed it
       };
     };
+
     nixvim = {
       enable = true;
 
@@ -143,9 +148,19 @@ in {
           mode = "n"; # normal mode
           options.silent = true;
         }
-      ];
+      ]; # <-- fixed: missing semicolon
     };
-
+    nixcord = {
+      enable = true;
+      vesktop.enable = true;
+      config = {
+        plugins = {
+          youtubeAdblock.enable = true;
+	  whoReacted.enable = true;
+	  betterFolders.enable = true;
+        };
+      };
+    };
     vscode = {
       enable = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [

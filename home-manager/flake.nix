@@ -23,6 +23,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser.url = "github:MarceColl/zen-browser-flake";
+    nixcord = {
+      url = "github:kaylorben/nixcord";
+    };
   };
 
   outputs = {
@@ -36,6 +39,7 @@
     nix-minecraft,
     nixvim,
     zen-browser,
+    nixcord,
     ...
   }: let
     system = "x86_64-linux";
@@ -60,7 +64,7 @@
     homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = {
-        inherit spicetify-nix caelestia-shell caelestia-cli better-control nix-minecraft nixvim zen-browser;
+        inherit spicetify-nix caelestia-shell caelestia-cli better-control nix-minecraft nixvim zen-browser nixcord;
       };
       modules = [
         spicetify-nix.homeManagerModules.default
