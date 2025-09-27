@@ -114,7 +114,7 @@ in {
       enable = true;
       shellAliases = {
         nano = "nvim";
-        ls = "eza"; # use eza since you installed it
+        ls = "eza";
       };
     };
 
@@ -148,19 +148,21 @@ in {
           mode = "n"; # normal mode
           options.silent = true;
         }
-      ]; # <-- fixed: missing semicolon
+      ];
     };
+
     nixcord = {
       enable = true;
       vesktop.enable = true;
       config = {
         plugins = {
           youtubeAdblock.enable = true;
-	  whoReacted.enable = true;
-	  betterFolders.enable = true;
+          whoReacted.enable = true;
+          betterFolders.enable = true;
         };
       };
     };
+
     vscode = {
       enable = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [
@@ -184,6 +186,18 @@ in {
         bestMoment
       ];
       theme = spicePkgs.themes.comfy;
+    };
+
+    ssh = {
+      enable = true;
+      extraConfig = ''
+        Host github.com
+          HostName ssh.github.com
+          Port 443
+          User git
+          IdentityFile ~/.ssh/id_ed25519
+          IdentitiesOnly yes
+      '';
     };
   };
 
