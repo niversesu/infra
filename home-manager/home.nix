@@ -100,12 +100,19 @@ in {
       name = "adw-gtk3-dark";
     };
   };
-
   # Qt theming
   qt = {
     enable = true;
     platformTheme.name = "kvantum";
     style.name = "kvantum";
+  };
+
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 24;
+
+    x11.enable = true;
   };
 
   # Programs
@@ -159,16 +166,16 @@ in {
           youtubeAdblock.enable = true;
           whoReacted.enable = true;
           betterFolders.enable = true;
-	  betterSettings.enable = true;
-	  callTimer.enable = true;
-	  clearURLs.enable = true;
-	  copyStickerLinks.enable = true;
-	  customRPC.enable = true;
-	  fakeNitro.enable = true;
-	  favoriteEmojiFirst.enable = true;
-	  favoriteGifSearch.enable = true;
-	  fixYoutubeEmbeds.enable = true;
-	  iLoveSpam.enable = true;
+          betterSettings.enable = true;
+          callTimer.enable = true;
+          clearURLs.enable = true;
+          copyStickerLinks.enable = true;
+          customRPC.enable = true;
+          fakeNitro.enable = true;
+          favoriteEmojiFirst.enable = true;
+          favoriteGifSearch.enable = true;
+          fixYoutubeEmbeds.enable = true;
+          iLoveSpam.enable = true;
         };
       };
     };
