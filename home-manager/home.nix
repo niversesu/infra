@@ -159,6 +159,16 @@ in {
           youtubeAdblock.enable = true;
           whoReacted.enable = true;
           betterFolders.enable = true;
+	  betterSettings.enable = true;
+	  callTimer.enable = true;
+	  clearURLs.enable = true;
+	  copyStickerLinks.enable = true;
+	  customRPC.enable = true;
+	  fakeNitro.enable = true;
+	  favoriteEmojiFirst.enable = true;
+	  favoriteGifSearch.enable = true;
+	  fixYoutubeEmbeds.enable = true;
+	  iLoveSpam.enable = true;
         };
       };
     };
@@ -190,14 +200,16 @@ in {
 
     ssh = {
       enable = true;
-      extraConfig = ''
-        Host github.com
-          HostName ssh.github.com
-          Port 443
-          User git
-          IdentityFile ~/.ssh/id_ed25519
-          IdentitiesOnly yes
-      '';
+      enableDefaultConfig = false; # silence the warning
+      matchBlocks = {
+        "github.com" = {
+          host = "ssh.github.com";
+          port = 443;
+          user = "git";
+          identityFile = ["~/.ssh/id_ed25519"];
+          identitiesOnly = true;
+        };
+      };
     };
   };
 
