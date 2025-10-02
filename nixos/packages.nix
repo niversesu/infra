@@ -13,6 +13,10 @@
     nautilus
     qpwgraph
     home-manager
+    wl-clipboard
+    gnomeExtensions.appindicator
+    gnomeExtensions.just-perfection
+    gnome-extensions-cli
   ];
 }
 

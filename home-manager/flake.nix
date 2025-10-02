@@ -22,9 +22,12 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
     nixcord = {
       url = "github:kaylorben/nixcord";
+    };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -38,11 +41,19 @@
     better-control,
     nix-minecraft,
     nixvim,
-    zen-browser,
     nixcord,
+    nur,
     ...
   }: let
     system = "x86_64-linux";
+
+    overlays = [
+      nur.overlays.default
+    ];
+
+    pkgs = import nixpkgs {
+      inherit system overlays;
+    };
   in {
     # ✅ NixOS system configuration (for nixos-rebuild)
     nixosConfigurations.niver = nixpkgs.lib.nixosSystem {
@@ -62,9 +73,9 @@
 
     # ✅ Home Manager standalone config (for home-manager switch)
     homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
+      inherit pkgs;
       extraSpecialArgs = {
-        inherit spicetify-nix caelestia-shell caelestia-cli better-control nix-minecraft nixvim zen-browser nixcord;
+        inherit spicetify-nix caelestia-shell caelestia-cli better-control nix-minecraft nixvim nixcord;
       };
       modules = [
         spicetify-nix.homeManagerModules.default

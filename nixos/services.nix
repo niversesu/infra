@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   services = {
     keyd = {
       enable = true;
@@ -17,7 +21,11 @@
       layout = "us";
       variant = "";
     };
-
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+    };
     getty.autologinUser = "niver";
     flatpak.enable = true;
     upower.enable = true;
@@ -35,5 +43,8 @@
         obs-vkcapture
       ];
     };
+  };
+  virtualisation = {
+  waydroid.enable = true;
   };
 }

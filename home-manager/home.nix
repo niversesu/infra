@@ -6,7 +6,6 @@
   caelestia-cli,
   better-control,
   nixvim,
-  zen-browser,
   nixcord,
   ...
 }: let
@@ -29,7 +28,6 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
   };
-
   # Packages
   home.packages = with pkgs; [
     # Tools
@@ -42,6 +40,7 @@ in {
     fuzzel
     fzf
     kdePackages.filelight
+    cliphist
 
     # Multimedia
     mpv
@@ -76,7 +75,7 @@ in {
     (caelestia-shell.packages.${system}.default.override {withCli = true;})
     caelestia-cli.packages.${system}.default
     better-control.packages.${system}.default
-    zen-browser.packages.${system}.specific
+    nur.repos.ataraxiasjel.waydroid-script
 
     # Fonts (check if minecraftia exists in nixpkgs/overlay)
     minecraftia
@@ -91,9 +90,9 @@ in {
       size = 24;
     };
     iconTheme = {
-      package = pkgs.whitesur-icon-theme;
+      package = pkgs.dracula-icon-theme;
       # make sure this name actually exists in the package
-      name = "WhiteSur-dark";
+      name = "Dracula";
     };
     theme = {
       package = pkgs.adw-gtk3;
@@ -124,7 +123,6 @@ in {
         ls = "eza";
       };
     };
-
     nixvim = {
       enable = true;
 
@@ -218,11 +216,11 @@ in {
         };
       };
     };
+    firefox.enable = true;
   };
 
   # Services
   services.kdeconnect.enable = true;
-
   # Session variables
   home.sessionVariables = {
     QT_STYLE_OVERRIDE = "kvantum";
