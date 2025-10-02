@@ -216,7 +216,6 @@ in {
         };
       };
     };
-    firefox.enable = true;
   };
 
   # Services
