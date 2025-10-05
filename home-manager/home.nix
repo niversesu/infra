@@ -62,7 +62,6 @@ in {
     # Fun
     prismlauncher
     lutris
-
     # Misc
     wineWowPackages.full
     steam-run
