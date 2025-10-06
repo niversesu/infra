@@ -41,6 +41,7 @@ in {
     fzf
     kdePackages.filelight
     cliphist
+    gh-copilot
 
     # Multimedia
     mpv
@@ -58,6 +59,7 @@ in {
     nwg-look
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
+    nerd-fonts.jetbrains-mono
 
     # Fun
     prismlauncher
