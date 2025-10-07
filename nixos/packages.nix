@@ -17,6 +17,7 @@
     gnomeExtensions.appindicator
     gnomeExtensions.just-perfection
     gnome-extensions-cli
+    gnomeExtensions.pano
   ];
 }
 

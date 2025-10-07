@@ -31,6 +31,10 @@
     upower.enable = true;
   };
 
+  environment.gnome.excludePackages = with pkgs; [
+    epiphany
+  ];
+
   programs = {
     obs-studio = {
       enable = true;
@@ -44,7 +48,9 @@
       ];
     };
   };
+
   virtualisation = {
-  waydroid.enable = true;
+    waydroid.enable = true;
   };
 }
+

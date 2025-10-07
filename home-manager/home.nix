@@ -25,8 +25,13 @@ in {
   home.stateVersion = "25.05";
 
   # Nixpkgs
-  nixpkgs.config = {
-    allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [
+      (final: prev: {
+        erlang-ls = prev.erlang-language-platform;
+      })
+    ];
   };
   # Packages
   home.packages = with pkgs; [
@@ -126,7 +131,6 @@ in {
     };
     nixvim = {
       enable = true;
-
       colorschemes.catppuccin = {
         enable = true;
         settings.style = "default";
