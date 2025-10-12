@@ -13,10 +13,6 @@
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    caelestia-cli = {
-      url = "github:caelestia-dots/cli";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixvim = {
       url = "github:nix-community/nixvim";
     };
@@ -35,7 +31,6 @@
     home-manager,
     spicetify-nix,
     caelestia-shell,
-    caelestia-cli,
     better-control,
     nixvim,
     nixcord,
@@ -64,7 +59,7 @@
     homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit spicetify-nix caelestia-shell caelestia-cli better-control nixvim nixcord;
+        inherit spicetify-nix caelestia-shell better-control nixvim nixcord;
       };
       modules = [
         spicetify-nix.homeManagerModules.default

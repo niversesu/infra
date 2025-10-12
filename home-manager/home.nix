@@ -3,7 +3,6 @@
   pkgs,
   spicetify-nix,
   caelestia-shell,
-  caelestia-cli,
   better-control,
   nixvim,
   nixcord,
@@ -12,27 +11,15 @@
   system = pkgs.stdenv.hostPlatform.system;
   spicePkgs = spicetify-nix.legacyPackages.${system};
 in {
-  # Import Hyprland configuration
   imports = [
-    # ./hyprland.nix
     nixvim.homeModules.nixvim
     nixcord.homeModules.nixcord
   ];
-
   # User
   home.username = "niver";
   home.homeDirectory = "/home/niver";
   home.stateVersion = "25.05";
-
-  # Nixpkgs
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = [
-      (final: prev: {
-        erlang-ls = prev.erlang-language-platform;
-      })
-    ];
-  };
+  nixpkgs.config.allowUnfree = true;
   # Packages
   home.packages = with pkgs; [
     # Tools
@@ -46,40 +33,25 @@ in {
     fzf
     kdePackages.filelight
     cliphist
-    gh-copilot
-
+    gh
+    github-copilot-cli
     # Multimedia
     mpv
-    celluloid
-    gnome-sound-recorder
     qpwgraph
-    lyrebird
-    gnome-font-viewer
 
     # Theming
-    whitesur-icon-theme
-    adwaita-icon-theme
-    adwaita-qt
     gimp3-with-plugins
-    nwg-look
-    libsForQt5.qt5ct
-    libsForQt5.qtstyleplugin-kvantum
     nerd-fonts.jetbrains-mono
 
     # Fun
     prismlauncher
-    lutris
     # Misc
-    wineWowPackages.full
     steam-run
-    winetricks
     rclone
-    slurp
     kitty
 
     # Custom flakes
     (caelestia-shell.packages.${system}.default.override {withCli = true;})
-    caelestia-cli.packages.${system}.default
     better-control.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
 
@@ -105,13 +77,6 @@ in {
       name = "adw-gtk3-dark";
     };
   };
-  # Qt theming
-  qt = {
-    enable = true;
-    platformTheme.name = "kvantum";
-    style.name = "kvantum";
-  };
-
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Ice";
@@ -194,6 +159,9 @@ in {
       enable = true;
       userName = "niversesu";
       userEmail = "niversesu@gmail.com";
+      extraConfig = {
+        init.defaultBranch = "main";
+      };
     };
 
     spicetify = {
@@ -225,11 +193,4 @@ in {
 
   # Services
   services.kdeconnect.enable = true;
-  # Session variables
-  home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "kvantum";
-    QT_QPA_PLATFORMTHEME = "kvantum";
-    XCURSOR_THEME = "Bibata-Modern-Ice";
-    XCURSOR_SIZE = "24";
-  };
 }
