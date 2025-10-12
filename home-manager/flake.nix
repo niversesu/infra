@@ -5,7 +5,6 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     better-control.url = "github:rishabh5321/better-control-flake";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,7 +37,6 @@
     caelestia-shell,
     caelestia-cli,
     better-control,
-    nix-minecraft,
     nixvim,
     nixcord,
     nur,
@@ -57,16 +55,8 @@
     # ✅ NixOS system configuration (for nixos-rebuild)
     nixosConfigurations.niver = nixpkgs.lib.nixosSystem {
       inherit system;
-      inherit nix-minecraft;
       modules = [
-        ./configuration.nix
-        ./minecraft.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.niver = import ./home.nix;
-        }
+      ./home.nix
       ];
     };
 
@@ -74,7 +64,7 @@
     homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit spicetify-nix caelestia-shell caelestia-cli better-control nix-minecraft nixvim nixcord;
+        inherit spicetify-nix caelestia-shell caelestia-cli better-control nixvim nixcord;
       };
       modules = [
         spicetify-nix.homeManagerModules.default

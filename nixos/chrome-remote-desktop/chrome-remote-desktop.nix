@@ -42,7 +42,7 @@ in {
     ];
     
     # Reference : ${pkgs.chrome-remote-desktop}/lib/systemd/system/chrome-remote-desktop@.service
-    systemd.services."chrome-remote-desktop@${cfg.user}" = {
+    systemd.services."chrome-remote-desktop@niver" = {
       enable = true;
       description = "Chrome Remote Desktop instance for ${cfg.user}";
       after = [ "network.target" ];

@@ -18,6 +18,7 @@
     gnomeExtensions.just-perfection
     gnome-extensions-cli
     gnomeExtensions.pano
+    chromium  # Added for Chrome Remote Desktop
   ];
 }
 

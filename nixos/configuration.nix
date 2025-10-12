@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./services.nix
     ./packages.nix
+    #./chrome-remote-desktop/chrome-remote-desktop.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -30,6 +31,13 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
+
+  # Chrome Remote Desktop overlay
+#  nixpkgs.overlays = [
+#    (self: super: {
+#      chrome-remote-desktop = super.callPackage ./chrome-remote-desktop/default.nix {};
+#    })
+#  ];
 
   system.stateVersion = "25.05";
 }

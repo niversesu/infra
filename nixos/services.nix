@@ -29,6 +29,12 @@
     getty.autologinUser = "niver";
     flatpak.enable = true;
     upower.enable = true;
+
+    # Chrome Remote Desktop service
+    #chrome-remote-desktop = {
+      #enable = true;
+      #user = "niver";  # Updated to use your username instead of "sepiabrown"
+    #};
   };
 
   environment.gnome.excludePackages = with pkgs; [
