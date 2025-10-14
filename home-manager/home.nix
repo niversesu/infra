@@ -20,6 +20,12 @@ in {
   home.homeDirectory = "/home/niver";
   home.stateVersion = "25.05";
   nixpkgs.config.allowUnfree = true;
+
+  # File configurations
+  home.file.".config/hypr" = {
+    source = ./hypr;
+    recursive = true;
+  };
   # Packages
   home.packages = with pkgs; [
     # Tools

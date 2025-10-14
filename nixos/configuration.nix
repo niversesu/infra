@@ -29,6 +29,17 @@
     packages = with pkgs; [];
   };
 
+  # Create directories with full permissions
+  systemd = {
+    tmpfiles.settings = {
+      "docker_folders" = {
+        "${config.users.users.niver.home}/yeat_1" = {d.mode = "0777";};
+        "${config.users.users.niver.home}/yeat_2" = {d.mode = "0777";};
+        "${config.users.users.niver.home}/yeat_3" = {d.mode = "0777";};
+      };
+    };
+  };
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
 
