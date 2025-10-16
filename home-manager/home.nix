@@ -148,8 +148,9 @@ in {
           fakeNitro.enable = true;
           favoriteEmojiFirst.enable = true;
           favoriteGifSearch.enable = true;
-          fixYoutubeEmbeds.enable = true;
           iLoveSpam.enable = true;
+	  messageLogger.enable = true;
+	  imageZoom.enable = true;
         };
       };
     };
@@ -182,19 +183,19 @@ in {
       theme = spicePkgs.themes.comfy;
     };
 
-    ssh = {
-      enable = true;
-      enableDefaultConfig = false; # silence the warning
-      matchBlocks = {
-        "github.com" = {
-          host = "ssh.github.com";
-          port = 443;
-          user = "git";
-          identityFile = ["~/.ssh/id_ed25519"];
-          identitiesOnly = true;
-        };
-      };
-    };
+    #ssh = {
+      #enable = true;
+      #enableDefaultConfig = false; # silence the warning
+      #matchBlocks = {
+        #"github.com" = {
+          #host = "ssh.github.com";
+          #port = 443;
+          #user = "git";
+          #identityFile = ["~/.ssh/id_ed25519"];
+          #identitiesOnly = true;
+        #};
+      #};
+    #};
   };
 
   # XDG settings
