@@ -42,7 +42,7 @@ in {
     gh
     github-copilot-cli
     # Multimedia
-    mpv
+    celluloid
     qpwgraph
 
     # Theming
@@ -60,7 +60,8 @@ in {
     (caelestia-shell.packages.${system}.default.override {withCli = true;})
     better-control.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
-
+    # other things
+    google-chrome
     # Fonts (check if minecraftia exists in nixpkgs/overlay)
     minecraftia
   ];
@@ -149,9 +150,14 @@ in {
           favoriteEmojiFirst.enable = true;
           favoriteGifSearch.enable = true;
           iLoveSpam.enable = true;
-	  messageLogger.enable = true;
-	  imageZoom.enable = true;
+          messageLogger.enable = true;
+          imageZoom.enable = true;
         };
+        useQuickCss = true; # use out quickCSS
+        themeLinks = [
+          # or use an online theme
+          "https://capnkitten.github.io/BetterDiscord/Themes/Translucence/css/source.css"
+        ];
       };
     };
 
@@ -184,17 +190,17 @@ in {
     };
 
     #ssh = {
-      #enable = true;
-      #enableDefaultConfig = false; # silence the warning
-      #matchBlocks = {
-        #"github.com" = {
-          #host = "ssh.github.com";
-          #port = 443;
-          #user = "git";
-          #identityFile = ["~/.ssh/id_ed25519"];
-          #identitiesOnly = true;
-        #};
-      #};
+    #enable = true;
+    #enableDefaultConfig = false; # silence the warning
+    #matchBlocks = {
+    #"github.com" = {
+    #host = "ssh.github.com";
+    #port = 443;
+    #user = "git";
+    #identityFile = ["~/.ssh/id_ed25519"];
+    #identitiesOnly = true;
+    #};
+    #};
     #};
   };
 
