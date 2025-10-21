@@ -14,6 +14,7 @@
     qpwgraph
     home-manager
     wl-clipboard
+    ydotool
     gnomeExtensions.appindicator
     gnomeExtensions.just-perfection
     gnome-extensions-cli

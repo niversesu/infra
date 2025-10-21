@@ -8,7 +8,6 @@
     ./hardware-configuration.nix
     ./services.nix
     ./packages.nix
-    
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -25,7 +24,7 @@
   users.users.niver = {
     isNormalUser = true;
     description = "niver";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput"];
+    extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotoold"];
     packages = with pkgs; [];
   };
 
@@ -43,5 +42,18 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
-}
+  systemd.services.ydotoold = {
+    description = "Ydotool Daemon";
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.ydotool}/bin/ydotoold \
+        --socket-path=/run/ydotoold/ydotool_socket \
+        --socket-perm=0666";
+      Restart = "always";
+      User = "root";
+    };
+  };
 
+  environment.variables.YDOTOOL_SOCKET = "/run/ydotoold/ydotool_socket";
+}

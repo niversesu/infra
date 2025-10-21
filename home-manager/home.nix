@@ -51,6 +51,7 @@ in {
 
     # Fun
     prismlauncher
+    packwiz
     # Misc
     steam-run
     rclone

@@ -4,18 +4,6 @@
   ...
 }: {
   services = {
-    keyd = {
-      enable = true;
-      keyboards.default = {
-        ids = ["*"];
-        settings = {
-          main = {
-            leftalt = "leftmeta";
-            muhenkan = "leftalt";
-          };
-        };
-      };
-    };
 
     xserver.xkb = {
       layout = "us";
