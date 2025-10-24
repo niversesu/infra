@@ -25,7 +25,6 @@
     isNormalUser = true;
     description = "niver";
     extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotoold"];
-    packages = with pkgs; [];
   };
 
   # Create directories with full permissions
