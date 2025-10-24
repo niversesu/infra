@@ -4,6 +4,28 @@
   ...
 }: {
   services = {
+    keyd = {
+      enable = true;
+      keyboards.default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            muhenkan = "leftmeta";
+            shift = "layer(shift)";
+            katakanahiragana = "layer(katakanahiragana)";
+          };
+          shift = {
+            f = "g";
+            j = "h";
+	    f1 = "esc";
+	    down = "up";
+          };
+          katakanahiragana = {
+            semicolon = "apostrophe";
+          };
+        };
+      };
+    };
 
     xserver.xkb = {
       layout = "us";
@@ -17,12 +39,6 @@
     getty.autologinUser = "niver";
     flatpak.enable = true;
     upower.enable = true;
-
-    # Chrome Remote Desktop service
-    #chrome-remote-desktop = {
-      #enable = true;
-      #user = "niver";  # Updated to use your username instead of "sepiabrown"
-    #};
   };
 
   environment.gnome.excludePackages = with pkgs; [
@@ -48,4 +64,5 @@
     waydroid.enable = true;
   };
 }
+
 
