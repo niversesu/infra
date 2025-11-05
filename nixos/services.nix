@@ -33,8 +33,10 @@
     };
     xserver = {
       enable = true;
-        displayManager.gdm.enable = true;
         desktopManager.gnome.enable = true;
+        displayManager.sddm.enable = true;
+	displayManager.sddm.wayland.enable = true;
+  	desktopManager.plasma6.enable = true;
     };
     getty.autologinUser = "niver";
     flatpak.enable = true;
@@ -58,6 +60,7 @@
 	obs-composite-blur
       ];
     };
+    ssh.askPassword = pkgs.lib.mkForce "${pkgs.kdePackages.ksshaskpass.out}/bin/ksshaskpass";
   };
 
   virtualisation = {

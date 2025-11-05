@@ -41,6 +41,7 @@ in {
     cliphist
     gh
     github-copilot-cli
+    cloudflare-warp
     # Multimedia
     celluloid
     qpwgraph
@@ -56,6 +57,7 @@ in {
     steam-run
     rclone
     kitty
+    vesktop
 
     # Custom flakes
     (caelestia-shell.packages.${system}.default.override {withCli = true;})
@@ -63,7 +65,7 @@ in {
     nur.repos.ataraxiasjel.waydroid-script
     # other things
     google-chrome
-    # Fonts (check if minecraftia exists in nixpkgs/overlay)
+    # Fonts
     minecraftia
   ];
 
@@ -135,7 +137,7 @@ in {
     };
 
     nixcord = {
-      enable = true;
+      enable = false;
       vesktop.enable = true;
       config = {
         plugins = {
@@ -209,14 +211,20 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = "app.zen_browser.zen.desktop";
-      "x-scheme-handler/http" = "app.zen_browser.zen.desktop";
-      "x-scheme-handler/https" = "app.zen_browser.zen.desktop";
-      "x-scheme-handler/about" = "app.zen_browser.zen.desktop";
-      "x-scheme-handler/unknown" = "app.zen_browser.zen.desktop";
+      "text/html" = [ "com.google.Chrome.desktop" ];
+      "x-scheme-handler/http" = [ "com.google.Chrome.desktop" ];
+      "x-scheme-handler/https" = [ "com.google.Chrome.desktop" ];
+      "x-scheme-handler/about" = [ "com.google.Chrome.desktop" ];
+      "x-scheme-handler/unknown" = [ "com.google.Chrome.desktop" ];
     };
   };
 
   # Services
   services.kdeconnect.enable = true;
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [fcitx5-gtk fcitx5-rime rime-data];
+  };
+
 }
