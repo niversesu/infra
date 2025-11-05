@@ -61,10 +61,15 @@
       ];
     };
     ssh.askPassword = pkgs.lib.mkForce "${pkgs.kdePackages.ksshaskpass.out}/bin/ksshaskpass";
+    virt-manager.enable = true;
   };
 
   virtualisation = {
     waydroid.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+    };
   };
 }
 

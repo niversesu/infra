@@ -24,7 +24,7 @@
   users.users.niver = {
     isNormalUser = true;
     description = "niver";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotoold"];
+    extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotoold" "libvirtd" ];
     packages = with pkgs; [];
   };
 
