@@ -66,6 +66,10 @@
 
   virtualisation = {
     waydroid.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
     libvirtd = {
       enable = true;
       qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
