@@ -42,6 +42,7 @@ in {
     gh
     github-copilot-cli
     cloudflare-warp
+    motrix
     # Multimedia
     celluloid
     qpwgraph
