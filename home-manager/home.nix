@@ -59,6 +59,7 @@ in {
     rclone
     kitty
     vesktop
+    kdePackages.kdenlive
 
     # Custom flakes
     (caelestia-shell.packages.${system}.default.override {withCli = true;})

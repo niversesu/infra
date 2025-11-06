@@ -26,7 +26,7 @@
         };
       };
     };
-
+    cloudflare-warp.enable = true;
     xserver.xkb = {
       layout = "us";
       variant = "";

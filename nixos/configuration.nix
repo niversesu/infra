@@ -8,7 +8,7 @@
     ./hardware-configuration.nix
     ./services.nix
     ./packages.nix
-    ./proxy.nix
+    #./proxy.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
