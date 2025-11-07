@@ -21,6 +21,7 @@
     gnomeExtensions.pano
     chromium  # Added for Chrome Remote Desktop
     distrobox
+    gnome-boxes
   ];
 }
 

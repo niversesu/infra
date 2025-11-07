@@ -21,11 +21,6 @@ in {
   home.stateVersion = "25.05";
   nixpkgs.config.allowUnfree = true;
 
-  # File configurations
-  home.file.".config/hypr" = {
-    source = ./hypr;
-    recursive = true;
-  };
   # Packages
   home.packages = with pkgs; [
     # Tools
@@ -138,34 +133,6 @@ in {
       ];
     };
 
-    nixcord = {
-      enable = false;
-      vesktop.enable = true;
-      config = {
-        plugins = {
-          youtubeAdblock.enable = true;
-          whoReacted.enable = true;
-          betterFolders.enable = true;
-          betterSettings.enable = true;
-          callTimer.enable = true;
-          clearURLs.enable = true;
-          copyStickerLinks.enable = true;
-          customRPC.enable = true;
-          fakeNitro.enable = true;
-          favoriteEmojiFirst.enable = true;
-          favoriteGifSearch.enable = true;
-          iLoveSpam.enable = true;
-          messageLogger.enable = true;
-          imageZoom.enable = true;
-        };
-        useQuickCss = true; # use out quickCSS
-        themeLinks = [
-          # or use an online theme
-          "https://capnkitten.github.io/BetterDiscord/Themes/Translucence/css/source.css"
-        ];
-      };
-    };
-
     vscode = {
       enable = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [
@@ -193,31 +160,17 @@ in {
       ];
       theme = spicePkgs.themes.comfy;
     };
-
-    #ssh = {
-    #enable = true;
-    #enableDefaultConfig = false; # silence the warning
-    #matchBlocks = {
-    #"github.com" = {
-    #host = "ssh.github.com";
-    #port = 443;
-    #user = "git";
-    #identityFile = ["~/.ssh/id_ed25519"];
-    #identitiesOnly = true;
-    #};
-    #};
-    #};
   };
 
   # XDG settings
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = [ "com.google.Chrome.desktop" ];
-      "x-scheme-handler/http" = [ "com.google.Chrome.desktop" ];
-      "x-scheme-handler/https" = [ "com.google.Chrome.desktop" ];
-      "x-scheme-handler/about" = [ "com.google.Chrome.desktop" ];
-      "x-scheme-handler/unknown" = [ "com.google.Chrome.desktop" ];
+      "text/html" = ["com.google.Chrome.desktop"];
+      "x-scheme-handler/http" = ["com.google.Chrome.desktop"];
+      "x-scheme-handler/https" = ["com.google.Chrome.desktop"];
+      "x-scheme-handler/about" = ["com.google.Chrome.desktop"];
+      "x-scheme-handler/unknown" = ["com.google.Chrome.desktop"];
     };
   };
 
@@ -228,5 +181,4 @@ in {
     type = "fcitx5";
     fcitx5.addons = with pkgs; [fcitx5-gtk fcitx5-rime rime-data];
   };
-
 }
