@@ -13,6 +13,7 @@
             muhenkan = "leftmeta";
             shift = "layer(shift)";
             katakanahiragana = "layer(katakanahiragana)";
+	    rightcontrol = "leftalt"; 
           };
           shift = {
             f = "g";
