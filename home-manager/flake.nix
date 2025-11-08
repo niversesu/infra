@@ -23,6 +23,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gologin = {
+      url = "path:./gologin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -35,6 +39,7 @@
     nixvim,
     nixcord,
     nur,
+    gologin,
     ...
   }: let
     system = "x86_64-linux";
@@ -59,7 +64,7 @@
     homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit spicetify-nix caelestia-shell better-control nixvim nixcord;
+        inherit spicetify-nix caelestia-shell better-control nixvim nixcord gologin;
       };
       modules = [
         spicetify-nix.homeManagerModules.default

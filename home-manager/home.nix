@@ -6,6 +6,7 @@
   better-control,
   nixvim,
   nixcord,
+  gologin,
   ...
 }: let
   system = pkgs.stdenv.hostPlatform.system;
@@ -61,6 +62,7 @@ in {
     # Custom flakes
     better-control.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
+    gologin.packages.${system}.gologin
     # other things
     google-chrome
     # Fonts
