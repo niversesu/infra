@@ -34,7 +34,6 @@ in {
     fuzzel
     fzf
     kdePackages.filelight
-    cliphist
     gh
     github-copilot-cli
     cloudflare-warp
@@ -62,7 +61,7 @@ in {
     better-control.packages.${system}.default
     caelestia-shell.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
-    gologin.packages.${system}.gologin
+    #gologin.packages.${system}.gologin
     # other things
     google-chrome
     # Fonts
@@ -97,6 +96,15 @@ in {
 
   # Programs
   programs = {
+    bash = {
+      interactiveShellInit = ''
+        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+        then
+          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        fi
+      '';
+    };
     fish = {
       enable = true;
       shellAliases = {
