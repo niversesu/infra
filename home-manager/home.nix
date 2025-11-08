@@ -5,7 +5,6 @@
   caelestia-shell,
   better-control,
   nixvim,
-  nixcord,
   gologin,
   ...
 }: let
@@ -14,8 +13,8 @@
 in {
   imports = [
     nixvim.homeModules.nixvim
-    nixcord.homeModules.nixcord
-    caelestia-shell.homeModules.default
+    #caelestia-shell.homeModules.default
+    ./caelestia.nix
   ];
   # User
   home.username = "niver";
@@ -61,6 +60,7 @@ in {
 
     # Custom flakes
     better-control.packages.${system}.default
+    caelestia-shell.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
     gologin.packages.${system}.gologin
     # other things
