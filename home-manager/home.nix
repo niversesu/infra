@@ -14,6 +14,7 @@ in {
   imports = [
     nixvim.homeModules.nixvim
     nixcord.homeModules.nixcord
+    caelestia-shell.homeModules.default
   ];
   # User
   home.username = "niver";
@@ -38,6 +39,7 @@ in {
     github-copilot-cli
     cloudflare-warp
     motrix
+    python3
     # Multimedia
     celluloid
     qpwgraph
@@ -57,7 +59,6 @@ in {
     kdePackages.kdenlive
 
     # Custom flakes
-    (caelestia-shell.packages.${system}.default.override {withCli = true;})
     better-control.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
     # other things
@@ -142,9 +143,9 @@ in {
 
     git = {
       enable = true;
-      userName = "niversesu";
-      userEmail = "niversesu@gmail.com";
-      extraConfig = {
+      settings = {
+        user.name = "niversesu";
+        user.email = "niversesu@gmail.com";
         init.defaultBranch = "main";
       };
     };
@@ -159,6 +160,27 @@ in {
         bestMoment
       ];
       theme = spicePkgs.themes.comfy;
+    };
+
+    caelestia = {
+      enable = true;
+      systemd = {
+        enable = true; # if you prefer starting from your compositor
+        target = "graphical-session.target";
+        environment = [];
+      };
+      settings = {
+        bar.status = {
+          showBattery = true;
+        };
+        paths.wallpaperDir = "~/Pictures";
+      };
+      cli = {
+        enable = true; # Also add caelestia-cli to path
+        settings = {
+          theme.enableGtk = true;
+        };
+      };
     };
   };
 

@@ -12,17 +12,13 @@
           main = {
             muhenkan = "leftmeta";
             shift = "layer(shift)";
-            katakanahiragana = "layer(katakanahiragana)";
-	    rightcontrol = "leftalt"; 
+	    rightcontrol = "leftalt";
+	    pageup = "up"; 
           };
           shift = {
             f = "g";
             j = "h";
 	    f1 = "esc";
-	    down = "up";
-          };
-          katakanahiragana = {
-            semicolon = "apostrophe";
           };
         };
       };
