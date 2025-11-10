@@ -2,7 +2,6 @@
   config,
   pkgs,
   spicetify-nix,
-  caelestia-shell,
   better-control,
   nixvim,
   gologin,
