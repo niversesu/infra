@@ -12,21 +12,17 @@
           main = {
             muhenkan = "leftmeta";
             shift = "layer(shift)";
-	    rightcontrol = "leftalt";
-	    pageup = "up"; 
+            katakanahiragana = "apostrophe";
+            rightcontrol = "leftalt";
+            pageup = "up";
           };
           shift = {
             f = "g";
             j = "h";
-	    f1 = "esc";
+            f1 = "esc";
           };
         };
       };
-    };
-    cloudflare-warp.enable = true;
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
     };
     xserver = {
       enable = true;
@@ -34,7 +30,6 @@
     };
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
-    desktopManager.plasma6.enable = true;
     getty.autologinUser = "niver";
     flatpak.enable = true;
     upower.enable = true;
@@ -48,16 +43,10 @@
     obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [
-        wlrobs
         obs-backgroundremoval
         obs-pipewire-audio-capture
-        obs-vaapi
-        obs-gstreamer
-        obs-vkcapture
-	obs-composite-blur
       ];
     };
-    ssh.askPassword = pkgs.lib.mkForce "${pkgs.kdePackages.ksshaskpass.out}/bin/ksshaskpass";
     virt-manager.enable = true;
   };
 
@@ -69,9 +58,21 @@
     };
     libvirtd = {
       enable = true;
-      qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+      qemu.vhostUserPackages = with pkgs; [virtiofsd];
     };
   };
+  systemd.services.ydotoold = {
+    description = "Ydotool Daemon";
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.ydotool}/bin/ydotoold \
+        --socket-path=/run/ydotoold/ydotool_socket \
+        --socket-perm=0666";
+      Restart = "always";
+      User = "root";
+    };
+  };
+
+  environment.variables.YDOTOOL_SOCKET = "/run/ydotoold/ydotool_socket";
 }
-
-

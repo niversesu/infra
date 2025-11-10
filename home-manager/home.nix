@@ -13,8 +13,6 @@
 in {
   imports = [
     nixvim.homeModules.nixvim
-    #caelestia-shell.homeModules.default
-    #./caelestia.nix
   ];
   # User
   home.username = "niver";
@@ -25,16 +23,8 @@ in {
   # Packages
   home.packages = with pkgs; [
     # Tools
-    atool
-    httpie
-    eza
-    fastfetch
-    ripgrep
     cliphist
-    fuzzel
-    fzf
     kdePackages.filelight
-    gh
     github-copilot-cli
     cloudflare-warp
     motrix
@@ -59,10 +49,7 @@ in {
 
     # Custom flakes
     better-control.packages.${system}.default
-    caelestia-shell.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
-    #gologin.packages.${system}.gologin
-    # other things
     google-chrome
     # Fonts
     minecraftia
@@ -78,7 +65,6 @@ in {
     };
     iconTheme = {
       package = pkgs.dracula-icon-theme;
-      # make sure this name actually exists in the package
       name = "Dracula";
     };
     theme = {
@@ -96,15 +82,6 @@ in {
 
   # Programs
   programs = {
-    bash = {
-      interactiveShellInit = ''
-        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-        then
-          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-        fi
-      '';
-    };
     fish = {
       enable = true;
       shellAliases = {

@@ -3,6 +3,10 @@
 {
   environment.systemPackages = with pkgs; [
     keyd
+    httpie
+    eza
+    fastfetch
+    ripgrep
     pavucontrol
     lsd
     fcp
@@ -19,7 +23,6 @@
     gnomeExtensions.just-perfection
     gnome-extensions-cli
     gnomeExtensions.pano
-    chromium  # Added for Chrome Remote Desktop
     distrobox
     gnome-boxes
   ];
