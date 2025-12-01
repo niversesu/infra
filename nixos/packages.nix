@@ -7,6 +7,7 @@
     eza
     fastfetch
     ripgrep
+    ffmpeg
     pavucontrol
     lsd
     fcp
@@ -24,7 +25,10 @@
     gnome-extensions-cli
     gnomeExtensions.pano
     distrobox
+    waydroid-helper
     gnome-boxes
+    aria2
+    xxd
   ];
 }
 

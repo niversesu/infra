@@ -75,4 +75,12 @@
   };
 
   environment.variables.YDOTOOL_SOCKET = "/run/ydotoold/ydotool_socket";
+  systemd = {
+    packages = [pkgs.waydroid-helper];
+
+    services.waydroid-mount = {
+      wantedBy = ["multi-user.target"];
+      serviceConfig.ExecStart = "${pkgs.waydroid-helper}/bin/waydroid-helper --start-mount";
+    };
+  };
 }

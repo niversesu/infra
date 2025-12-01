@@ -4,7 +4,6 @@
   spicetify-nix,
   better-control,
   nixvim,
-  gologin,
   ...
 }: let
   system = pkgs.stdenv.hostPlatform.system;
@@ -21,36 +20,31 @@ in {
 
   # Packages
   home.packages = with pkgs; [
-    # Tools
     cliphist
     kdePackages.filelight
     github-copilot-cli
-    cloudflare-warp
     motrix
+
     python3
-    # Multimedia
     celluloid
     qpwgraph
 
-    # Theming
     gimp3-with-plugins
     nerd-fonts.jetbrains-mono
 
-    # Fun
     prismlauncher
     packwiz
-    # Misc
     steam-run
     rclone
+
     kitty
     vesktop
     kdePackages.kdenlive
 
-    # Custom flakes
     better-control.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
+
     google-chrome
-    # Fonts
     minecraftia
   ];
 
@@ -86,6 +80,8 @@ in {
       shellAliases = {
         nano = "nvim";
         ls = "eza";
+	snrs = "sudo nixos-rebuild switch";
+	hs = "home-manager switch";
       };
     };
     nixvim = {

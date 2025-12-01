@@ -13,6 +13,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 100;
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
