@@ -22,8 +22,6 @@
   time.timeZone = "Africa/Nairobi";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  programs.hyprland.enable = true;
-
   users.users.niver = {
     isNormalUser = true;
     description = "niver";
