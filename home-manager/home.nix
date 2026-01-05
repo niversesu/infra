@@ -23,6 +23,7 @@ in {
     cliphist
     kdePackages.filelight
     github-copilot-cli
+    gemini-cli-bin
     motrix
 
     python3
@@ -36,6 +37,7 @@ in {
     packwiz
     steam-run
     rclone
+    copyq
 
     kitty
     vesktop
@@ -80,8 +82,8 @@ in {
       shellAliases = {
         nano = "nvim";
         ls = "eza";
-	snrs = "sudo nixos-rebuild switch";
-	hs = "home-manager switch";
+        snrs = "sudo nixos-rebuild switch";
+        hs = "home-manager switch";
       };
     };
     nixvim = {
@@ -158,7 +160,6 @@ in {
   };
 
   # Services
-  services.kdeconnect.enable = true;
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";

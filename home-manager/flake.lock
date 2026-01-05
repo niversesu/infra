@@ -97,22 +97,6 @@
         "type": "github"
       }
     },
-    "gologin": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "path": "./gologin",
-        "type": "path"
-      },
-      "original": {
-        "path": "./gologin",
-        "type": "path"
-      },
-      "parent": []
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -293,7 +277,6 @@
     "root": {
       "inputs": {
         "better-control": "better-control",
-        "gologin": "gologin",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
