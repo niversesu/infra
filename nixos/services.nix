@@ -6,20 +6,34 @@
   services = {
     keyd = {
       enable = true;
-      keyboards.default = {
-        ids = ["*"];
+      keyboards.internal = {
+        ids = ["0001:0001:d651c513"];
         settings = {
           main = {
-            muhenkan = "leftmeta";
             shift = "layer(shift)";
+            leftcontrol = "layer(ctrl)";
             katakanahiragana = "apostrophe";
-            rightcontrol = "leftalt";
             pageup = "up";
           };
           shift = {
             f = "g";
             j = "h";
-            f1 = "esc";
+            f2 = "esc";
+            q = "w";
+            x = "s";
+            rightcontrol = "leftmeta";
+          };
+          ctrl = {
+            "1" = "2";
+          };
+        };
+      };
+      keyboards.external = {
+        ids = ["1a2c:0b2a:c4da6b8e"];
+        settings = {
+          main = {
+            numlock = "f11";
+            pause = "f12";
           };
         };
       };
@@ -28,11 +42,16 @@
       enable = true;
       desktopManager.gnome.enable = true;
     };
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+    #desktopManager.plasma6.enable = true;
     getty.autologinUser = "niver";
     flatpak.enable = true;
     upower.enable = true;
+    openssh.enable = true;
+    tailscale.enable = true;
   };
 
   environment.gnome.excludePackages = with pkgs; [
@@ -48,39 +67,22 @@
       ];
     };
     virt-manager.enable = true;
+    ydotool.enable = true;
+    kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
+    };
   };
+
+  environment.variables.YDOTOOL_SOCKET = pkgs.lib.mkForce "/run/user/1000/.ydotool_socket";
 
   virtualisation = {
     waydroid.enable = true;
-    podman = {
-      enable = true;
-      dockerCompat = true;
-    };
+    podman.enable = true;
+    docker.enable = false;
     libvirtd = {
       enable = true;
       qemu.vhostUserPackages = with pkgs; [virtiofsd];
-    };
-  };
-  systemd.services.ydotoold = {
-    description = "Ydotool Daemon";
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
-    serviceConfig = {
-      ExecStart = "${pkgs.ydotool}/bin/ydotoold \
-        --socket-path=/run/ydotoold/ydotool_socket \
-        --socket-perm=0666";
-      Restart = "always";
-      User = "root";
-    };
-  };
-
-  environment.variables.YDOTOOL_SOCKET = "/run/ydotoold/ydotool_socket";
-  systemd = {
-    packages = [pkgs.waydroid-helper];
-
-    services.waydroid-mount = {
-      wantedBy = ["multi-user.target"];
-      serviceConfig.ExecStart = "${pkgs.waydroid-helper}/bin/waydroid-helper --start-mount";
     };
   };
 }

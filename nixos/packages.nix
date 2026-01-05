@@ -4,7 +4,9 @@
   environment.systemPackages = with pkgs; [
     keyd
     httpie
+    nmap
     eza
+    xorg.xhost
     fastfetch
     ripgrep
     ffmpeg
