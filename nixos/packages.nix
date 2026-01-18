@@ -26,6 +26,7 @@
     gnomeExtensions.just-perfection
     gnome-extensions-cli
     gnomeExtensions.pano
+    gnomeExtensions."all-in-one-clipboard"
     distrobox
     waydroid-helper
     gnome-boxes
