@@ -4,6 +4,8 @@
   inputs = {
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     better-control.url = "github:rishabh5321/better-control-flake";
+    caelestia-shell.url = "github:caelestia-dots/shell";
+    caelestia-cli.url = "github:caelestia-dots/cli";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,6 +18,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    silentSDDM = {
+      url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -26,6 +32,9 @@
     better-control,
     nixvim,
     nur,
+    caelestia-shell,
+    caelestia-cli,
+    silentSDDM,
     ...
   }: let
     system = "x86_64-linux";
@@ -42,7 +51,7 @@
     nixosConfigurations.niver = nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
-      ./home.nix
+        ./home.nix
       ];
     };
 
@@ -50,13 +59,14 @@
     homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit spicetify-nix better-control nixvim;
+        inherit spicetify-nix better-control nixvim caelestia-shell caelestia-cli;
       };
       modules = [
         spicetify-nix.homeManagerModules.default
+	silentSDDM.nixosModules.default
         ./home.nix
+	./silent-sddm.nix
       ];
     };
   };
 }
-

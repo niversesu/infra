@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   services = {
@@ -39,6 +40,7 @@
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
+      theme = "sddm-sugar-dark";
     };
     #desktopManager.plasma6.enable = true;
     getty.autologinUser = "niver";

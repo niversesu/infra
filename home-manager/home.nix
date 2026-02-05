@@ -1,9 +1,12 @@
-{
+{ 
+  inputs,
   config,
   pkgs,
   spicetify-nix,
   better-control,
   nixvim,
+  caelestia-shell,
+  caelestia-cli,
   ...
 }: let
   system = pkgs.stdenv.hostPlatform.system;
@@ -25,7 +28,7 @@ in {
     github-copilot-cli
     gemini-cli-bin
     motrix
-
+    yt-dlp
     python3
     celluloid
     qpwgraph
@@ -39,11 +42,14 @@ in {
     rclone
     copyq
 
+    hyprland
     kitty
     vesktop
     kdePackages.kdenlive
 
     better-control.packages.${system}.default
+    caelestia-shell.packages.${system}.default
+    caelestia-cli.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
 
     google-chrome
@@ -85,6 +91,10 @@ in {
         snrs = "sudo nixos-rebuild switch";
         hs = "home-manager switch";
       };
+    };
+    starship = {
+      enable = true;
+      enableFishIntegration = true;
     };
     nixvim = {
       enable = true;
@@ -148,15 +158,21 @@ in {
   };
 
   # XDG settings
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = ["com.google.Chrome.desktop"];
-      "x-scheme-handler/http" = ["com.google.Chrome.desktop"];
-      "x-scheme-handler/https" = ["com.google.Chrome.desktop"];
-      "x-scheme-handler/about" = ["com.google.Chrome.desktop"];
-      "x-scheme-handler/unknown" = ["com.google.Chrome.desktop"];
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = ["com.google.Chrome.desktop"];
+        "x-scheme-handler/http" = ["com.google.Chrome.desktop"];
+        "x-scheme-handler/https" = ["com.google.Chrome.desktop"];
+        "x-scheme-handler/about" = ["com.google.Chrome.desktop"];
+        "x-scheme-handler/unknown" = ["com.google.Chrome.desktop"];
+      };
     };
+
+    autostart.entries = [
+      "/nix/store/savkg0rk6bskikz34nywiy27lq2p3vhz-google-chrome-142.0.7444.59/share/applications/google-chrome.desktop"
+    ];
   };
 
   # Services
