@@ -18,10 +18,6 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    silentSDDM = {
-      url = "github:uiriansan/SilentSDDM";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -34,7 +30,6 @@
     nur,
     caelestia-shell,
     caelestia-cli,
-    silentSDDM,
     ...
   }: let
     system = "x86_64-linux";
@@ -45,6 +40,13 @@
 
     pkgs = import nixpkgs {
       inherit system overlays;
+    };
+
+    kubectl-aliases = pkgs.fetchFromGitHub {
+      owner = "ahmetb";
+      repo = "kubectl-aliases";
+      rev = "master";
+      sha256 = "sha256-NkprSk55aRVHiq9JXduQl6AGZv5pBLHznRToOdm9OUw=";
     };
   in {
     # ✅ NixOS system configuration (for nixos-rebuild)
@@ -59,13 +61,12 @@
     homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit spicetify-nix better-control nixvim caelestia-shell caelestia-cli;
+        inherit spicetify-nix better-control nixvim caelestia-shell caelestia-cli kubectl-aliases;
+        inputs = self.inputs;
       };
       modules = [
         spicetify-nix.homeManagerModules.default
-	silentSDDM.nixosModules.default
         ./home.nix
-	./silent-sddm.nix
       ];
     };
   };

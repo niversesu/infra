@@ -8,6 +8,7 @@
     ffmpeg
     pavucontrol
     fcp
+    sassc
     alejandra
     unzip
     qpwgraph
@@ -23,8 +24,11 @@
     ydotool
     gnomeExtensions.appindicator
     gnomeExtensions.pano
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.user-themes
     distrobox
     waydroid-helper
+    podman-compose
   ];
 }
 

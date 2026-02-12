@@ -1,13 +1,11 @@
 { 
-  inputs,
   config,
   pkgs,
   spicetify-nix,
   better-control,
   nixvim,
   caelestia-shell,
-  caelestia-cli,
-  ...
+  caelestia-cli,  ...
 }: let
   system = pkgs.stdenv.hostPlatform.system;
   spicePkgs = spicetify-nix.legacyPackages.${system};
@@ -51,7 +49,7 @@ in {
     caelestia-shell.packages.${system}.default
     caelestia-cli.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
-
+    firefox
     google-chrome
     minecraftia
   ];
@@ -93,7 +91,7 @@ in {
       };
     };
     starship = {
-      enable = true;
+      enable = false;
       enableFishIntegration = true;
     };
     nixvim = {
@@ -169,6 +167,7 @@ in {
         "x-scheme-handler/unknown" = ["com.google.Chrome.desktop"];
       };
     };
+    configFile."mimeapps.list".force = true;
 
     autostart.entries = [
       "/nix/store/savkg0rk6bskikz34nywiy27lq2p3vhz-google-chrome-142.0.7444.59/share/applications/google-chrome.desktop"

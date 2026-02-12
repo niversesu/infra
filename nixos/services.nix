@@ -36,13 +36,10 @@
     xserver = {
       enable = true;
       desktopManager.gnome.enable = true;
-    };
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "sddm-sugar-dark";
+      displayManager.gdm.enable = true;
     };
     #desktopManager.plasma6.enable = true;
+    #displayManager.sddm.enable = true;
     getty.autologinUser = "niver";
     flatpak.enable = true;
     upower.enable = true;

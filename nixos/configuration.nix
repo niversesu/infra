@@ -27,7 +27,7 @@
   users.users.niver = {
     isNormalUser = true;
     description = "niver";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd"];
+    extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
