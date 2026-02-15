@@ -1,17 +1,19 @@
 { 
   config,
   pkgs,
-  spicetify-nix,
   better-control,
   nixvim,
   caelestia-shell,
   caelestia-cli,  ...
-}: let
-  system = pkgs.stdenv.hostPlatform.system;
-  spicePkgs = spicetify-nix.legacyPackages.${system};
-in {
+}: {
   imports = [
     nixvim.homeModules.nixvim
+    ./modules/fish.nix
+    ./modules/starship.nix
+    ./modules/nixvim.nix
+    ./modules/vscode.nix
+    ./modules/git.nix
+    ./modules/spicetify.nix
   ];
   # User
   home.username = "niver";
@@ -36,18 +38,12 @@ in {
 
     prismlauncher
     packwiz
-    steam-run
     rclone
-    copyq
 
-    hyprland
-    kitty
     vesktop
     kdePackages.kdenlive
 
     better-control.packages.${system}.default
-    caelestia-shell.packages.${system}.default
-    caelestia-cli.packages.${system}.default
     nur.repos.ataraxiasjel.waydroid-script
     firefox
     google-chrome
@@ -79,81 +75,7 @@ in {
     x11.enable = true;
   };
 
-  # Programs
-  programs = {
-    fish = {
-      enable = true;
-      shellAliases = {
-        nano = "nvim";
-        ls = "eza";
-        snrs = "sudo nixos-rebuild switch";
-        hs = "home-manager switch";
-      };
-    };
-    starship = {
-      enable = false;
-      enableFishIntegration = true;
-    };
-    nixvim = {
-      enable = true;
-      colorschemes.catppuccin = {
-        enable = true;
-        settings.style = "default";
-      };
 
-      plugins = {
-        lualine.enable = true;
-        cmp.enable = true;
-        vim-surround.enable = true;
-        treesitter.enable = true;
-        trouble.enable = true;
-        which-key.enable = true;
-        dashboard.enable = true;
-        noice.enable = true;
-        notify.enable = true;
-        web-devicons.enable = true;
-        neo-tree.enable = true;
-        telescope.enable = true;
-      };
-
-      keymaps = [
-        {
-          key = "<C-n>";
-          action = "<cmd>Neotree toggle<CR>";
-          mode = "n"; # normal mode
-          options.silent = true;
-        }
-      ];
-    };
-
-    vscode = {
-      enable = true;
-      profiles.default.extensions = with pkgs.vscode-extensions; [
-        dracula-theme.theme-dracula
-      ];
-    };
-
-    git = {
-      enable = true;
-      settings = {
-        user.name = "niversesu";
-        user.email = "niversesu@gmail.com";
-        init.defaultBranch = "main";
-      };
-    };
-
-    spicetify = {
-      enable = true;
-      enabledExtensions = with spicePkgs.extensions; [
-        adblock
-        hidePodcasts
-        shuffle
-        simpleBeautifulLyrics
-        bestMoment
-      ];
-      theme = spicePkgs.themes.comfy;
-    };
-  };
 
   # XDG settings
   xdg = {
@@ -168,11 +90,6 @@ in {
       };
     };
     configFile."mimeapps.list".force = true;
-
-    autostart.entries = [
-      "/nix/store/savkg0rk6bskikz34nywiy27lq2p3vhz-google-chrome-142.0.7444.59/share/applications/google-chrome.desktop"
-    ];
-  };
 
   # Services
   i18n.inputMethod = {

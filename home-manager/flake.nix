@@ -66,6 +66,7 @@
       };
       modules = [
         spicetify-nix.homeManagerModules.default
+        ./modules/spicetify.nix
         ./home.nix
       ];
     };
