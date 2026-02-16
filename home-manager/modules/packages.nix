@@ -37,6 +37,6 @@
 
     # Custom packages
     better-control.packages.${system}.default
-    nur.repos.ataraxiasjel.waydroid-script
+    pkgs.nur.repos.ataraxiasjel.waydroid-script
   ];
 }

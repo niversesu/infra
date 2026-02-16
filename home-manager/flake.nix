@@ -36,6 +36,7 @@
 
     pkgs = import nixpkgs {
       inherit system overlays;
+      config = { allowUnfree = true; };
     };
 
     kubectl-aliases = pkgs.fetchFromGitHub {
@@ -46,14 +47,14 @@
     };
 
     commonSpecialArgs = {
-      inherit spicetify-nix better-control nixvim caelestia-shell caelestia-cli kubectl-aliases system;
+      inherit spicetify-nix better-control nixvim caelestia-shell caelestia-cli kubectl-aliases system pkgs;
       inherit nur;
       inputs = self.inputs;
     };
   in {
     nixosConfigurations.niver = nixpkgs.lib.nixosSystem {
       inherit system;
-      modules = [./nixos/configuration.nix];
+      modules = [../nixos/configuration.nix];
     };
 
     homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
@@ -61,7 +62,7 @@
       extraSpecialArgs = commonSpecialArgs;
       modules = [
         spicetify-nix.homeManagerModules.default
-        ./home-manager/home.nix
+        ./home.nix
       ];
     };
   };
