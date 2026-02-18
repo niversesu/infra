@@ -8,4 +8,8 @@
       hs = "home-manager switch";
     };
   };
+
+  programs.fish.interactiveShellInit = ''
+    fish_config theme choose "Catppuccin Frappe"
+  '';
 }

@@ -7,6 +7,8 @@
     ./hardware-configuration.nix
     ./services.nix
     ./packages.nix
+    ./modules/obs.nix
+    ./modules/systemd.nix
   ];
 
   # Boot Configuration
@@ -35,16 +37,7 @@
   users.users.niver = {
     isNormalUser = true;
     description = "niver";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "input"
-      "uinput"
-      "ydotool"
-      "libvirtd"
-      "podman"
-    ];
-  };
+    extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];};
 
   # Nix Configuration
   nix.settings.experimental-features = ["nix-command" "flakes"];
