@@ -5,6 +5,12 @@
       user.name = "niversesu";
       user.email = "niversesu@gmail.com";
       init.defaultBranch = "main";
+
+      url."git@github.com:".insteadOf = [
+        "https://github.com/"
+        "git://github.com/"
+      ];
     };
   };
 }
+
