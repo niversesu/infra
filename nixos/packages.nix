@@ -10,6 +10,9 @@
     pavucontrol                 # PulseAudio/PipeWire volume control GUI
     fcp                         # Fast recursive copy tool with progress display
     sassc                       # Command-line SASS/SCSS compiler
+    gparted                     # disk management
+    libgda6                     # for copyous gnome extension
+    gsound                      # for copyous gnome extension too 
     alejandra                   # Nix code formatter
     unzip                       # Extract .zip archives
     qpwgraph                    # PipeWire graph patchbay and connection manager
