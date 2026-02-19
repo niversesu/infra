@@ -9,13 +9,13 @@
     };
     nixvim.url = "github:nix-community/nixvim";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    better-control.url = "github:rishabh5321/better-control-flake";
     caelestia-shell.url = "github:caelestia-dots/shell";
     caelestia-cli.url = "github:caelestia-dots/cli";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    import-tree.url = "github:vic/import-tree";
   };
 
   outputs = {
@@ -23,11 +23,11 @@
     nixpkgs,
     home-manager,
     spicetify-nix,
-    better-control,
     nixvim,
     nur,
     caelestia-shell,
     caelestia-cli,
+    import-tree,
     ...
   }: let
     system = "x86_64-linux";
@@ -47,8 +47,8 @@
     };
 
     commonSpecialArgs = {
-      inherit spicetify-nix better-control nixvim caelestia-shell caelestia-cli kubectl-aliases system pkgs;
-      inherit nur;
+      inherit spicetify-nix nixvim caelestia-shell caelestia-cli kubectl-aliases system pkgs;
+      inherit nur import-tree;
       inputs = self.inputs;
     };
   in {

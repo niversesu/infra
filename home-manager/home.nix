@@ -2,22 +2,15 @@
   config,
   pkgs,
   lib,
-  better-control,
   nixvim,
   caelestia-shell,
   caelestia-cli,
+  import-tree,
   ...
 }: {
   imports = [
     nixvim.homeModules.nixvim
-    ./modules/fish.nix
-    ./modules/starship.nix
-    ./modules/nixvim.nix
-    ./modules/vscode.nix
-    ./modules/git.nix
-    ./modules/spicetify.nix
-    ./modules/theming.nix
-    ./modules/packages.nix
+    (import-tree ./modules)
   ];
 
   # User Configuration
