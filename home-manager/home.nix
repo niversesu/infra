@@ -3,8 +3,6 @@
   pkgs,
   lib,
   nixvim,
-  caelestia-shell,
-  caelestia-cli,
   import-tree,
   ...
 }: {

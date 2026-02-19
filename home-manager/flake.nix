@@ -9,8 +9,6 @@
     };
     nixvim.url = "github:nix-community/nixvim";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    caelestia-shell.url = "github:caelestia-dots/shell";
-    caelestia-cli.url = "github:caelestia-dots/cli";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,8 +23,6 @@
     spicetify-nix,
     nixvim,
     nur,
-    caelestia-shell,
-    caelestia-cli,
     import-tree,
     ...
   }: let
@@ -47,7 +43,7 @@
     };
 
     commonSpecialArgs = {
-      inherit spicetify-nix nixvim caelestia-shell caelestia-cli kubectl-aliases system pkgs;
+      inherit spicetify-nix nixvim kubectl-aliases system pkgs;
       inherit nur import-tree;
       inputs = self.inputs;
     };
