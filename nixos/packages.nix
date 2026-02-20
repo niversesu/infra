@@ -15,7 +15,7 @@
     gsound                      # for copyous gnome extension too 
     alejandra                   # Nix code formatter
     unzip                       # Extract .zip archives
-    qpwgraph                    # PipeWire graph patchbay and connection manager
+    helvum                      # PipeWire graph patchbay and connection manager
     keyd                        # Low-level keyboard remapping daemon
     httpie                      # Human-friendly HTTP client (curl alternative)
     nmap                        # Network scanner and port discovery tool
