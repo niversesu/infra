@@ -4,5 +4,6 @@
     github-copilot-cli
     gemini-cli-bin
     yt-dlp
+    waveterm
   ];
 }

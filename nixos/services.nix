@@ -39,4 +39,5 @@
       qemu.vhostUserPackages = with pkgs; [virtiofsd];
     };
   };
+  networking.nftables.enable = false;
 }

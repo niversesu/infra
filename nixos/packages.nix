@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     xhost                       # X11 access control utility (allow/deny display access)
     ntfs3g                      # NTFS filesystem driver for mounting Windows drives
+    #python3
     fastfetch                   # Fast system info display tool (like neofetch)
     ripgrep                     # Very fast recursive text search tool (rg)
     ffmpeg                      # Audio/video conversion and processing toolkit
@@ -32,6 +33,7 @@
     distrobox                   # Run other Linux distros inside containers
     waydroid-helper             # Helper tools for managing Waydroid Android container
     podman-compose              # Docker-compose-like tool for Podman
+    antigravity-fhs
   ];
 }
 
