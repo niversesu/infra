@@ -15,6 +15,7 @@
       "video/mp4" = ["io.github.celluloid_player.Celluloid.desktop"];
       "video/x-matroska" = ["io.github.celluloid_player.Celluloid.desktop"]; # .mkv
       "video/webm" = ["io.github.celluloid_player.Celluloid.desktop"];
+      "audio/wav" = ["io.github.celluloid_player.Celluloid.desktop"];
     };
   };
 
