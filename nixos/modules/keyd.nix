@@ -2,7 +2,7 @@
   services.keyd = {
     enable = true;
     keyboards.internal = {
-      ids = ["0001:0001:d651c513"];
+      ids = ["0001:0001:3c78431b"];
       settings = {
         main = {
           a = "noop"; b = "noop"; c = "noop"; d = "noop"; e = "noop"; f = "noop"; g = "noop"; h = "noop"; i = "noop"; j = "noop"; k = "noop"; l = "noop"; m = "noop"; n = "noop"; o = "noop"; p = "noop"; q = "noop"; r = "noop"; s = "noop"; t = "noop"; u = "noop"; v = "noop"; w = "noop"; x = "noop"; y = "noop"; z = "noop";
@@ -18,7 +18,7 @@
       };
     };
     keyboards.external = {
-      ids = ["1a2c:0b2a:c4da6b8e"];
+      ids = ["0fac:0ade:bea394c0"];
       settings = {
         main = {
           numlock = "f11";
