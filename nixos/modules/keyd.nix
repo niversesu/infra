@@ -18,7 +18,7 @@
       };
     };
     keyboards.external = {
-      ids = ["0fac:0ade:bea394c0"];
+      ids = ["1a2c:0b2a:c4da6b8e"];
       settings = {
         main = {
           numlock = "f11";
