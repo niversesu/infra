@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    remmina
     xhost                       # X11 access control utility (allow/deny display access)
     ntfs3g                      # NTFS filesystem driver for mounting Windows drives
     #python3
@@ -28,7 +29,7 @@
     wl-clipboard                # Clipboard utilities for Wayland (wl-copy/wl-paste)
     ydotool                     # Wayland-compatible input automation tool
     gnomeExtensions.appindicator # GNOME extension for legacy tray icons
-    gnomeExtensions.copyous      # GNOME clipboard manager extension
+    gnomeExtensions.pano  # GNOME clipboard manager extension
     gnomeExtensions.blur-my-shell # GNOME blur/transparency effects extension
     distrobox                   # Run other Linux distros inside containers
     waydroid-helper             # Helper tools for managing Waydroid Android container
