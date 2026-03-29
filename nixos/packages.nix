@@ -4,7 +4,6 @@
   environment.systemPackages = with pkgs; [
     fastfetch                   # Fast system info display tool (like neofetch)
     ripgrep                     # Very fast recursive text search tool (rg)
-    fcp                         # Fast recursive copy tool with progress display
     gparted                     # disk management 
     alejandra                   # Nix code formatter
     unzip                       # Extract .zip archives
