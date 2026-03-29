@@ -7,27 +7,20 @@
   imports = [./modules/keyd.nix];
 
   services = {
-    xserver.enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
     getty.autologinUser = "niver";
     flatpak.enable = true;
     upower.enable = true;
     openssh.enable = true;
     tailscale.enable = true;
   };
-
-  environment.gnome.excludePackages = with pkgs; [epiphany];
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.config.common.default = "*";
 
   programs = {
     virt-manager.enable = true;
     ydotool.enable = true;
-    kdeconnect = {
-      enable = true;
-      package = pkgs.gnomeExtensions.gsconnect;
-    };
   };
-
   environment.variables.YDOTOOL_SOCKET = lib.mkForce "/run/user/1000/.ydotool_socket";
 
   virtualisation = {

@@ -48,7 +48,7 @@
       inputs = self.inputs;
     };
   in {
-    nixosConfigurations.niver = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [../nixos/configuration.nix];
     };

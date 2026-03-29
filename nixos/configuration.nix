@@ -9,6 +9,7 @@
     ./packages.nix
     ./modules/obs.nix
     ./modules/systemd.nix
+    ../variety/gnome.nix
   ];
 
   # Boot Configuration
