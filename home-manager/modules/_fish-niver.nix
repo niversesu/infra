@@ -5,7 +5,6 @@
       nano = "nvim";
       ls = "eza";
       snrs = "sudo nixos-rebuild switch --flake ~/infra/home-manager#niver";
-      hs = "home-manager switch --flake ~/infra/home-manager#niver";
     };
   };
 

@@ -9,9 +9,9 @@
 }: {
   imports = [
     nixvim.homeModules.nixvim
-    (import-tree ./modules)
-    ./modules/_fish-niver.nix
-    ./modules/packages/_niver-tools.nix
+    (import-tree ../modules)
+    ../modules/_fish-niver.nix
+    ../modules/packages/_niver-tools.nix
   ];
   # User Configuration
   home = {

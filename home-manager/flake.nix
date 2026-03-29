@@ -56,7 +56,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = commonSpecialArgs;
-          home-manager.users.niver = import ./home-manager/users/niver.nix;
+          home-manager.users.niver = import ./users/niver.nix;
           home-manager.sharedModules = [
             spicetify-nix.homeManagerModules.default
           ];
@@ -73,7 +73,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = commonSpecialArgs;
-	  home-manager.users.faith = import ./home-manager/users/faith.nix;
+	  home-manager.users.faith = import ./users/faith.nix;
 	  home-manager.sharedModules = [
             spicetify-nix.homeManagerModules.default
           ];

@@ -9,8 +9,8 @@
 }: {
   imports = [
     nixvim.homeModules.nixvim
-    (import-tree ./modules)
-    ./modules/_fish-faith.nix
+    (import-tree ../modules)
+    ../modules/_fish-faith.nix
   ];
   # User Configuration
   home = {
