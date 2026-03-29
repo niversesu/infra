@@ -1,6 +1,4 @@
 {
-  description = "Home Manager + NixOS configuration of niver";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -32,7 +30,7 @@
 
     pkgs = import nixpkgs {
       inherit system overlays;
-      config = { allowUnfree = true; };
+      config = {allowUnfree = true;};
     };
 
     kubectl-aliases = pkgs.fetchFromGitHub {
@@ -50,15 +48,34 @@
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
-      modules = [../nixos/configuration.nix];
+      modules = [../hosts/niver.nix];
     };
-
-    homeConfigurations."niver" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = commonSpecialArgs;
+    nixosConfigurations."niver" = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = commonSpecialArgs;
       modules = [
-        spicetify-nix.homeManagerModules.default
-        ./home.nix
+        home-manager.nixosModules.home-manager
+        ./hosts/niver.nix
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = commonSpecialArgs;
+          home-manager.users.niver = import ./home.nix;
+        }
+      ];
+    };
+    nixosConfigurations."faith" = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = commonSpecialArgs;
+      modules = [
+        home-manager.nixosModules.home-manager
+        ./hosts/faith.nix
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = commonSpecialArgs;
+          home-manager.users.faith = import ./home.nix;
+        }
       ];
     };
   };

@@ -4,8 +4,8 @@
     shellAliases = {
       nano = "nvim";
       ls = "eza";
-      snrs = "sudo nixos-rebuild switch --flake ~/infra/home-manager#nixos";
-      hs = "home-manager switch --flake ~/infra/home-manager#niver";
+      snrs = "sudo nixos-rebuild switch --flake ~/infra/home-manager";
+      hs = "home-manager switch --flake ~/infra/home-manager";
     };
   };
 
