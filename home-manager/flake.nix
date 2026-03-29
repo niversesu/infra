@@ -46,21 +46,20 @@
       inputs = self.inputs;
     };
   in {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [../hosts/niver.nix];
-    };
     nixosConfigurations."niver" = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = commonSpecialArgs;
       modules = [
         home-manager.nixosModules.home-manager
-        ./hosts/niver.nix
+        ../hosts/niver.nix
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = commonSpecialArgs;
-          home-manager.users.niver = import ./home.nix;
+          home-manager.users.niver = import ./home-manager/users/niver.nix;
+          home-manager.sharedModules = [
+            spicetify-nix.homeManagerModules.default
+          ];
         }
       ];
     };
@@ -69,12 +68,15 @@
       specialArgs = commonSpecialArgs;
       modules = [
         home-manager.nixosModules.home-manager
-        ./hosts/faith.nix
+        ../hosts/faith.nix
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = commonSpecialArgs;
-          home-manager.users.faith = import ./home.nix;
+	  home-manager.users.faith = import ./home-manager/users/faith.nix;
+	  home-manager.sharedModules = [
+            spicetify-nix.homeManagerModules.default
+          ];
         }
       ];
     };
