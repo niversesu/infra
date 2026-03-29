@@ -11,6 +11,7 @@
     nixvim.homeModules.nixvim
     (import-tree ../modules)
     ../modules/_fish-faith.nix
+    ../modules/_theming-faith.nix
   ];
   # User Configuration
   home = {

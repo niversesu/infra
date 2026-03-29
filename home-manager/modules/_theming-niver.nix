@@ -1,0 +1,20 @@
+{pkgs, ...}: {
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.dracula-icon-theme;
+      name = "Dracula";
+    };
+    theme = {
+      package = pkgs.adw-gtk3;
+      name = "adw-gtk3-dark";
+    };
+  };
+
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 24;
+    x11.enable = true;
+  };
+}

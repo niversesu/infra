@@ -12,6 +12,7 @@
     (import-tree ../modules)
     ../modules/_fish-niver.nix
     ../modules/packages/_niver-tools.nix
+    ../modules/_theming-niver.nix
   ];
   # User Configuration
   home = {

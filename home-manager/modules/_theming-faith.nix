@@ -3,7 +3,7 @@
     enable = true;
     cursorTheme = {
       package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
+      name = "Bibata-Modern-Amber";
       size = 24;
     };
     iconTheme = {
@@ -18,7 +18,7 @@
 
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
+    name = "Bibata-Modern-Amber";
     size = 24;
     x11.enable = true;
   };

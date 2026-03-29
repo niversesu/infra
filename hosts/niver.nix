@@ -3,7 +3,7 @@
   imports = [
     ../nixos/configuration.nix
     ../variety/gnome.nix
-    ../nixos/modules/systemd.nix
+    ../nixos/modules/keyd.nix
   ];
   networking.hostName = "niver";
 }
