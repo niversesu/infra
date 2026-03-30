@@ -1,8 +1,9 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
+    ./faith-hardware.nix
     ../nixos/configuration.nix
-    ../variety/plasma.nix
+    ../variety/gnome.nix
   ];
   networking.hostName = "faith";
     users.users.faith = {
