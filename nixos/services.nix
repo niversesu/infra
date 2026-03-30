@@ -16,20 +16,4 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   xdg.portal.config.common.default = "*";
-
-  programs = {
-    virt-manager.enable = true;
-    ydotool.enable = true;
-  };
-  environment.variables.YDOTOOL_SOCKET = lib.mkForce "/run/user/1000/.ydotool_socket";
-
-  virtualisation = {
-    waydroid.enable = true;
-    podman.enable = true;
-    libvirtd = {
-      enable = true;
-      qemu.vhostUserPackages = with pkgs; [virtiofsd];
-    };
-  };
-  networking.nftables.enable = false;
 }
