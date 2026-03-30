@@ -2,7 +2,7 @@
 {
   imports = [
     ../nixos/configuration.nix
-    ../variety/plasma.nix
+    ../variety/gnome.nix
   ];
   networking.hostName = "faith";
     users.users.faith = {
