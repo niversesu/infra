@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
     ./services.nix
     ./packages.nix
     ./modules/obs.nix
