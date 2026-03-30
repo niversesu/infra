@@ -36,16 +36,15 @@
   nixpkgs.config.allowUnfree = true;
 
   # Shell Integration
-  programs.bash.interactiveShellInit = ''
-    # Only start Fish if parent isn't Fish and not a single-command bash
-    if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z "$BASH_EXECUTION_STRING" ]]; then
-      shopt -q login_shell && LOGIN_OPTION="--login" || LOGIN_OPTION=""
-      # Use Home Manager's Fish from the user's profile
-      if [ -x "$HOME/.nix-profile/bin/fish" ]; then
-        exec "$HOME/.nix-profile/bin/fish" $LOGIN_OPTION
+  programs.bash = {
+    interactiveShellInit = ''
+      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${config.programs.fish.package}/bin/fish $LOGIN_OPTION
       fi
-    fi
-  '';
+    '';
+  };
 
   system.stateVersion = "26.05";
 }
