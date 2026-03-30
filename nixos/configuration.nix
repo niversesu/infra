@@ -31,12 +31,6 @@
   time.timeZone = "Africa/Nairobi";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # User Configuration
-  users.users.niver = {
-    isNormalUser = true;
-    description = "niver";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];};
-
   # Nix Configuration
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;

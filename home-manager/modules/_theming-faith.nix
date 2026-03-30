@@ -15,11 +15,4 @@
       name = "adw-gtk3-dark";
     };
   };
-
-  home.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Amber";
-    size = 24;
-    x11.enable = true;
-  };
 }
