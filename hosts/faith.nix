@@ -3,6 +3,7 @@
   imports = [
     ./faith-hardware.nix
     ../nixos/configuration.nix
+    #../variety/illogical-base.nix
     ../variety/gnome.nix
   ];
   networking.hostName = "faith";

@@ -32,6 +32,7 @@
 
   # Nix Configuration
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   nixpkgs.config.allowUnfree = true;
 
   # Shell Integration

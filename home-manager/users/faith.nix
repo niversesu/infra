@@ -12,6 +12,7 @@
     (import-tree ../modules)
     ../modules/_fish-faith.nix
     ../modules/_theming-faith.nix
+    #../modules/_illogical.nix
   ];
   # User Configuration
   home = {

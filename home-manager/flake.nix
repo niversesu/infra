@@ -12,8 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+    illogical-flake = {
+      url = "github:soymou/illogical-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-
   outputs = {
     self,
     nixpkgs,
@@ -22,29 +25,30 @@
     nixvim,
     nur,
     import-tree,
+    illogical-flake,
     ...
   }: let
     system = "x86_64-linux";
-
     overlays = [nur.overlays.default];
-
     pkgs = import nixpkgs {
       inherit system overlays;
       config = {allowUnfree = true;};
     };
-
     kubectl-aliases = pkgs.fetchFromGitHub {
       owner = "ahmetb";
       repo = "kubectl-aliases";
       rev = "master";
       sha256 = "sha256-NkprSk55aRVHiq9JXduQl6AGZv5pBLHznRToOdm9OUw=";
     };
-
     commonSpecialArgs = {
       inherit spicetify-nix nixvim kubectl-aliases system pkgs;
       inherit nur import-tree;
       inputs = self.inputs;
     };
+    commonSharedModules = [
+      spicetify-nix.homeManagerModules.default
+      illogical-flake.homeManagerModules.default 
+    ];
   in {
     nixosConfigurations."niver" = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -57,9 +61,7 @@
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = commonSpecialArgs;
           home-manager.users.niver = import ./users/niver.nix;
-          home-manager.sharedModules = [
-            spicetify-nix.homeManagerModules.default
-          ];
+          home-manager.sharedModules = commonSharedModules;
         }
       ];
     };
@@ -73,10 +75,8 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = commonSpecialArgs;
-	  home-manager.users.faith = import ./users/faith.nix;
-	  home-manager.sharedModules = [
-            spicetify-nix.homeManagerModules.default
-          ];
+          home-manager.users.faith = import ./users/faith.nix;
+          home-manager.sharedModules = commonSharedModules;
         }
       ];
     };
