@@ -14,6 +14,7 @@
     home-manager                # Declarative per-user Nix configuration manager
     wl-clipboard                # Clipboard utilities for Wayland (wl-copy/wl-paste)
     waydroid-helper             # Helper tools for managing Waydroid Android container
+    cpx
   ];
 }
 
