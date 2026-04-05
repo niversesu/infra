@@ -1,9 +1,7 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.starship = {
-  enable = true;
-  programs.starship.enableFishIntegration = true;
-  programs.starship.enableInteractive = true;
+    enable = true;
+    enableFishIntegration = true;
+    enableInteractive = true;
   };
 }
-
-
