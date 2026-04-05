@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./faith-hardware.nix
+    ./nomi-hardware.nix
     ../nixos/configuration.nix
     #../variety/illogical-base.nix
     ../variety/gnome.nix

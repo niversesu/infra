@@ -50,12 +50,12 @@
       illogical-flake.homeManagerModules.default 
     ];
   in {
-    nixosConfigurations."niver" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."kale" = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = commonSpecialArgs;
       modules = [
         home-manager.nixosModules.home-manager
-        ../hosts/niver.nix
+        ../hosts/kale.nix
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -65,12 +65,12 @@
         }
       ];
     };
-    nixosConfigurations."faith" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."nomi" = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = commonSpecialArgs;
       modules = [
         home-manager.nixosModules.home-manager
-        ../hosts/faith.nix
+        ../hosts/nomi.nix
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;

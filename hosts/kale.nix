@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./niver-hardware.nix
+    ./kale-hardware.nix
     ../nixos/configuration.nix
     ../variety/gnome.nix
     ../nixos/modules/keyd.nix
