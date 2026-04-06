@@ -1,6 +1,8 @@
 {
   config,
+  inputs,
   pkgs,
+  hyprland-plugins,
   ...
 }: {
   programs.illogical-impulse = {
@@ -13,9 +15,8 @@
       starship.enable = true; # Starship prompt
     };
     hyprland.plugins = [
-      #pkgs.hyprlandPlugins.hyprbars
-      #pkgs.hyprlandPlugins.hyprexpo
-      # Add any other plugins available in nixpkgs
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
     ];
     
   };

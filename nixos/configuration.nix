@@ -32,6 +32,8 @@
     substituters = [
       "https://cache.nixos.org"
       "https://niversesu.cachix.org"
+      "https://hyprland.cachix.org"
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="

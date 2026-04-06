@@ -16,6 +16,13 @@
       url = "github:soymou/illogical-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.54.2";  # pin to exactly what you're running
+    };
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
   outputs = {
     self,
@@ -26,6 +33,7 @@
     nur,
     import-tree,
     illogical-flake,
+    hyprland-plugins,
     ...
   }: let
     system = "x86_64-linux";
@@ -47,7 +55,7 @@
     };
     commonSharedModules = [
       spicetify-nix.homeManagerModules.default
-      illogical-flake.homeManagerModules.default 
+      illogical-flake.homeManagerModules.default
     ];
   in {
     nixosConfigurations."kale" = nixpkgs.lib.nixosSystem {
