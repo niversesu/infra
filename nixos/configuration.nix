@@ -8,33 +8,43 @@
     ./packages.nix
     ./modules/obs.nix
   ];
-
   # Boot Configuration
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-
   # Memory Management
   zramSwap = {
     enable = true;
     memoryPercent = 100;
   };
-
   # Network Configuration
   networking = {
     networkmanager.enable = true;
   };
-
   # Time & Locale
   time.timeZone = "Africa/Nairobi";
   i18n.defaultLocale = "en_US.UTF-8";
-
   # Nix Configuration
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    trusted-users = ["root" "faith" "niver"];
+    substituters = [
+      "https://cache.nixos.org"
+      "https://niversesu.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "niversesu.cachix.org-1:d/IqQ2LR79Cq4/iK3qmCgKe1mxUi8uPSKhkEjhI/SOc="
+    ];
+    post-build-hook = pkgs.writeShellScript "cachix-push" ''
+      set -euf
+      export HOME=/root
+      exec ${pkgs.cachix}/bin/cachix push niversesu $OUT_PATHS
+    '';
+  };
   boot.kernelPackages = pkgs.linuxPackages_zen;
   nixpkgs.config.allowUnfree = true;
-
   # Shell Integration
   programs.bash = {
     interactiveShellInit = ''
@@ -45,6 +55,5 @@
       fi
     '';
   };
-
   system.stateVersion = "26.05";
 }
