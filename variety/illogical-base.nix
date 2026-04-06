@@ -21,6 +21,7 @@
     qt6.qt5compat
     qt6.qtpositioning
     kdePackages.syntax-highlighting
+    kdePackages.dolphin
   ];
   fonts.packages = with pkgs; [
     rubik
