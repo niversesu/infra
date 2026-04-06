@@ -3,8 +3,8 @@
   imports = [
     ./nomi-hardware.nix
     ../nixos/configuration.nix
-    ../variety/illogical-base.nix
-    #../variety/gnome.nix
+    #../variety/illogical-base.nix
+    ../variety/gnome.nix
   ];
   networking.hostName = "faith";
     users.users.faith = {
