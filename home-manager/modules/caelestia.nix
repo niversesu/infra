@@ -8,6 +8,7 @@
   ...
 }: {
   config = lib.mkIf (osConfig.mySystem.caelestia.enable or false) {
+    programs.kitty.enable = true;
     programs.caelestia-shell = {
       enable = true;
       systemd = {
