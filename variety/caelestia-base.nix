@@ -5,9 +5,9 @@
   lib,
   ...
 }: {
-  options.mySystem.illogical.enable = lib.mkEnableOption "illogical impulse";
+  options.mySystem.illogical.enable = lib.mkEnableOption "caelestia";
 
-  config = lib.mkIf config.mySystem.illogical.enable {
+  config = lib.mkIf config.mySystem.caelestia.enable {
     programs.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -20,11 +20,5 @@
       enable = true;
       wayland.enable = true;
     };
-    environment.systemPackages = with pkgs; [
-      qt5.qtgraphicaleffects
-      qt6.qt5compat
-      qt6.qtpositioning
-      kdePackages.syntax-highlighting
-    ];
   };
 }

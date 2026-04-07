@@ -17,11 +17,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.54.2";  # pin to exactly what you're running
+      url = "github:hyprwm/Hyprland/v0.54.2"; 
     };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
+    };
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = {
@@ -34,6 +38,7 @@
     import-tree,
     illogical-flake,
     hyprland-plugins,
+    caelestia-shell,
     ...
   }: let
     system = "x86_64-linux";
@@ -56,6 +61,7 @@
     commonSharedModules = [
       spicetify-nix.homeManagerModules.default
       illogical-flake.homeManagerModules.default
+      caelestia-shell.homeManagerModules.default
     ];
   in {
     nixosConfigurations."kale" = nixpkgs.lib.nixosSystem {

@@ -3,7 +3,9 @@
   imports = [
     ./nomi-hardware.nix
     ../nixos/configuration.nix
-    #../variety/illogical-base.nix
+    ../variety/illogical-base.nix
+    ../variety/caelestia-base.nix
+    ../vriety/plasma.nix
     ../variety/gnome.nix
   ];
   networking.hostName = "faith";
