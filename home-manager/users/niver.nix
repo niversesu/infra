@@ -13,6 +13,7 @@
     ../modules/_fish-niver.nix
     ../modules/packages/_niver-tools.nix
     ../modules/_theming-niver.nix
+    #../modules/_illogical.nix
   ];
   # User Configuration
   home = {

@@ -12,6 +12,7 @@
     gnomeExtensions.appindicator
     gnomeExtensions.copyous
     gnomeExtensions.blur-my-shell
+    gnome-remote-desktop
   ];
   programs.kdeconnect = {
     enable = true;

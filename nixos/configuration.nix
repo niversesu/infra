@@ -29,15 +29,13 @@
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
     trusted-users = ["root" "faith" "niver"];
-    substituters = [
-      "https://cache.nixos.org"
-      "https://niversesu.cachix.org"
-      "https://hyprland.cachix.org"
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    substituters = [    
+    "https://cache.nixos.org"
+    "https://hyprland.cachix.org"
     ];
-    trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "niversesu.cachix.org-1:d/IqQ2LR79Cq4/iK3qmCgKe1mxUi8uPSKhkEjhI/SOc="
+    trusted-public-keys = [    
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
     post-build-hook = pkgs.writeShellScript "cachix-push" ''
       set -euf
