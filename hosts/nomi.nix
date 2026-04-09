@@ -4,7 +4,7 @@
     ./nomi-hardware.nix
     ../nixos/configuration.nix
     ../variety/illogical-base.nix
-    ../variety/caelestia-base.nix
+    #../variety/caelestia-base.nix
     ../variety/plasma.nix
     ../variety/gnome.nix
   ];

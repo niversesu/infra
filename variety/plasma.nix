@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  options.mySystem.illogical.enable = lib.mkEnableOption "plasma";
+  options.mySystem.plasma.enable = lib.mkEnableOption "plasma";
 
   config = lib.mkIf config.mySystem.plasma.enable {
     # Enable Plasma
