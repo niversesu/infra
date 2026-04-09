@@ -3,8 +3,10 @@
   imports = [
     ./kale-hardware.nix
     ../nixos/configuration.nix
+    #../variety/illogical-base.nix
     ../variety/gnome.nix
     ../nixos/modules/keyd.nix
+    ../nixos/modules/virt-ydot.nix
   ];
   networking.hostName = "niver";
     users.users.niver = {
