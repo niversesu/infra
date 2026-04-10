@@ -4,8 +4,16 @@
   lib,
   ...
 }: {
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services = {
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    gnome.gnome-remote-desktop.enable = true;
+
+    xrdp.enable = true;
+    xrdp.defaultWindowManager = "${pkgs.gnome-session}/bin/gnome-session";
+    xrdp.openFirewall = true;
+  };
+
   environment.gnome.excludePackages = with pkgs; [epiphany];
   environment.systemPackages = with pkgs; [
     gnomeExtensions.appindicator
