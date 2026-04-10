@@ -10,6 +10,9 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
         ../hosts/kale.nix
+        ({ pkgs, ... }: {
+          nixpkgs.overlays = [ inputs.nur.overlays.default ];
+        })
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -37,6 +40,9 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
         ../hosts/nomi.nix
+        ({ pkgs, ... }: {
+          nixpkgs.overlays = [ inputs.nur.overlays.default ];
+        })
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
