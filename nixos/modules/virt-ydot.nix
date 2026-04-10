@@ -1,23 +1,19 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  programs = {
-    virt-manager.enable = true;
-    ydotool.enable = true;
-  };
-  environment.variables.YDOTOOL_SOCKET = lib.mkForce "/run/user/1000/.ydotool_socket";
-
-  virtualisation = {
-    waydroid.enable = true;
-    podman.enable = true;
-    libvirtd = {
-      enable = true;
-      qemu.vhostUserPackages = with pkgs; [virtiofsd];
+{ ... }: {
+  flake.nixosModules.virt-ydot = { config, pkgs, lib, ... }: {
+    programs = {
+      virt-manager.enable = true;
+      ydotool.enable = true;
     };
-  };
-  networking.nftables.enable = false;
-}
+    environment.variables.YDOTOOL_SOCKET = lib.mkForce "/run/user/1000/.ydotool_socket";
 
+    virtualisation = {
+      waydroid.enable = true;
+      podman.enable = true;
+      libvirtd = {
+        enable = true;
+        qemu.vhostUserPackages = with pkgs; [virtiofsd];
+      };
+    };
+    networking.nftables.enable = false;
+  };
+}

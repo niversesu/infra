@@ -1,18 +1,19 @@
-{ config, pkgs, lib, ... }:
-{
-  imports = [
-    ./kale-hardware.nix
-    ../nixos/configuration.nix
-    #../variety/illogical-base.nix
-    ../variety/gnome.nix
-    ../nixos/modules/keyd.nix
-    ../nixos/modules/virt-ydot.nix
-  ];
-  networking.hostName = "niver";
+{ self, ... }: {
+  flake.nixosModules.host-kale = { config, pkgs, lib, ... }: {
+    imports = [
+      self.nixosModules.host-kale-hw
+      self.nixosModules.configuration
+      # self.nixosModules.illogical-base
+      self.nixosModules.gnome
+      self.nixosModules.keyd
+      self.nixosModules.virt-ydot
+    ];
+    networking.hostName = "niver";
     users.users.niver = {
-    isNormalUser = true;
-    description = "niver";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
+      isNormalUser = true;
+      description = "niver";
+      extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
+    };
+    services.getty.autologinUser = "niver";
   };
-  services.getty.autologinUser = "niver";
 }

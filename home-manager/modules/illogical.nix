@@ -1,27 +1,24 @@
-{
-  config,
-  inputs,
-  pkgs,
-  hyprland-plugins,
-  lib,
-  osConfig,
-  ...
-}: {
-  config = lib.mkIf (osConfig.mySystem.illogical.enable or false) {
-    programs.illogical-impulse = {
-      enable = true;
-      dotfiles = {
-        fish.enable = true;
-        kitty.enable = true;
-        starship.enable = true;
+{ self, inputs, ... }: {
+  flake.homeModules.illogical = { config, pkgs, lib, osConfig, ... }: {
+    imports = [
+      inputs.illogical-flake.homeManagerModules.default
+    ];
+    config = lib.mkIf (osConfig.mySystem.illogical.enable or false) {
+      programs.illogical-impulse = {
+        enable = true;
+        dotfiles = {
+          fish.enable = true;
+          kitty.enable = true;
+          starship.enable = true;
+        };
+        hyprland.plugins = [
+          inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+          inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+        ];
       };
-      hyprland.plugins = [
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      home.packages = with pkgs; [
+        kdePackages.dolphin
       ];
     };
-    home.packages = with pkgs; [
-      kdePackages.dolphin
-    ];
   };
 }

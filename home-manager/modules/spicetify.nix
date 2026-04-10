@@ -1,16 +1,21 @@
-{ spicetify-nix, pkgs, ... }: let
-  system = pkgs.stdenv.hostPlatform.system;
-  spicePkgs = spicetify-nix.legacyPackages.${system};
-in {
-  programs.spicetify = {
-    enable = true;
-    enabledExtensions = with spicePkgs.extensions; [
-      adblock
-      hidePodcasts
-      shuffle
-      simpleBeautifulLyrics
-      bestMoment
+{ self, inputs, ... }: {
+  flake.homeModules.spicetify = { config, pkgs, ... }: 
+  let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  in {
+    imports = [
+      inputs.spicetify-nix.homeManagerModules.default
     ];
-    theme = spicePkgs.themes.comfy;
+    programs.spicetify = {
+      enable = true;
+      enabledExtensions = with spicePkgs.extensions; [
+        adblock
+        hidePodcasts
+        shuffle
+        simpleBeautifulLyrics
+        bestMoment
+      ];
+      theme = spicePkgs.themes.comfy;
+    };
   };
 }

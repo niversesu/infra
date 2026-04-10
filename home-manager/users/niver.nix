@@ -1,31 +1,48 @@
-{ 
-  inputs,
-  config,
-  pkgs,
-  lib,
-  nixvim,
-  import-tree,
-  ...
-}: {
-  imports = [
-    nixvim.homeModules.nixvim
-    (import-tree ../modules)
-    (import ../modules/_fish.nix { flakeTarget = "kale"; theme = "catppuccin-mocha"; })
-    (import ../modules/_theming.nix {cursorName = "Bibata-Modern-Ice"; })
-    ../modules/packages/_niver-tools.nix
-    #../modules/_illogical.nix
-  ];
-  # User Configuration
-  home = {
-    username = "niver";
-    homeDirectory = "/home/niver";
-    stateVersion = "25.05";
-  };
-  nixpkgs.config.allowUnfree = true;
-  # Input Method Configuration
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.addons = with pkgs; [fcitx5-gtk fcitx5-rime rime-data];
+{ self, ... }: {
+  flake.homeModules.user-niver = { config, pkgs, lib, ... }: {
+    imports = [
+      self.homeModules.nixvim
+      self.homeModules.fish
+      self.homeModules.theming
+      self.homeModules.starship
+      self.homeModules.git
+      self.homeModules.vscode
+      self.homeModules.xdg
+      self.homeModules.caelestia
+      self.homeModules.illogical
+      self.homeModules.spicetify
+      self.homeModules.pkg-niver-tools
+      self.homeModules.pkg-browsers
+      self.homeModules.pkg-cli-utilities
+      self.homeModules.pkg-communication
+      self.homeModules.pkg-creative
+      self.homeModules.pkg-file-management
+      self.homeModules.pkg-fonts
+      self.homeModules.pkg-gaming
+      self.homeModules.pkg-media
+      self.homeModules.pkg-misc
+    ];
+
+    myHome.fish = {
+      enable = true;
+      flakeTarget = "kale";
+      theme = "catppuccin-mocha";
+    };
+    myHome.theming = {
+      enable = true;
+      cursorName = "Bibata-Modern-Ice";
+    };
+
+    home = {
+      username = "niver";
+      homeDirectory = "/home/niver";
+      stateVersion = "25.05";
+    };
+    nixpkgs.config.allowUnfree = true;
+    i18n.inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5.addons = with pkgs; [fcitx5-gtk fcitx5-rime rime-data];
+    };
   };
 }

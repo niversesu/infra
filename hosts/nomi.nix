@@ -1,19 +1,19 @@
-{ config, pkgs, lib, ... }:
-{
-  imports = [
-    ./nomi-hardware.nix
-    ../nixos/configuration.nix
-    ../variety/illogical-base.nix
-    #../variety/caelestia-base.nix
-    ../variety/plasma.nix
-    ../variety/gnome.nix
-  ];
-  networking.hostName = "faith";
+{ self, ... }: {
+  flake.nixosModules.host-nomi = { config, pkgs, lib, ... }: {
+    imports = [
+      self.nixosModules.host-nomi-hw
+      self.nixosModules.configuration
+      self.nixosModules.illogical-base
+      # self.nixosModules.caelestia-base
+      self.nixosModules.plasma
+      self.nixosModules.gnome
+    ];
+    networking.hostName = "faith";
     users.users.faith = {
-    isNormalUser = true;
-    description = "faith";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "podman"];
+      isNormalUser = true;
+      description = "faith";
+      extraGroups = ["networkmanager" "wheel" "input" "uinput" "podman"];
+    };
+    services.getty.autologinUser = "faith";
   };
-  services.getty.autologinUser = "faith";
 }
-

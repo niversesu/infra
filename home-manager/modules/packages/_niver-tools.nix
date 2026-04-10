@@ -1,5 +1,5 @@
-{ pkgs, ... }:
-{
+{ self, ... }: {
+  flake.homeModules.pkg-niver-tools = { pkgs, ... }: {
   home.packages = with pkgs; [
     remmina
     ntfs3g
@@ -8,4 +8,5 @@
     distrobox
     podman-compose
   ];
+};
 }

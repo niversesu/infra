@@ -34,6 +34,15 @@
       systems = [ "x86_64-linux" ];
       imports = [
         (inputs.import-tree ./parts)
+        (inputs.import-tree ./nixos/modules)
+        ./nixos/configuration.nix
+        ./nixos/packages.nix
+        ./nixos/services.nix
+        (inputs.import-tree ./home-manager/modules)
+        (inputs.import-tree ./home-manager/users)
+        (inputs.import-tree ./variety)
+        ./hosts/kale.nix
+        ./hosts/nomi.nix
       ];
     };
 }

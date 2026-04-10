@@ -1,63 +1,43 @@
-{ inputs, ... }: {
+{ self, inputs, ... }: {
   flake.nixosConfigurations = {
     kale = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        inherit inputs;
-        inherit (inputs) nixvim spicetify-nix nur import-tree;
-        system = "x86_64-linux";
+        inherit inputs self;
       };
       modules = [
         inputs.home-manager.nixosModules.home-manager
-        ../hosts/kale.nix
+        self.nixosModules.host-kale
+        ../nixos/hardware-configuration.nix # Plain import as it is root owned
         ({ pkgs, ... }: {
           nixpkgs.overlays = [ inputs.nur.overlays.default ];
-        })
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {
-             inherit (inputs) nixvim spicetify-nix nur import-tree;
-             inputs = inputs;
-             system = "x86_64-linux";
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs self; };
+            users.niver = self.homeModules.user-niver;
           };
-          home-manager.users.niver = import ../home-manager/users/niver.nix;
-          home-manager.sharedModules = [
-            inputs.spicetify-nix.homeManagerModules.default
-            inputs.illogical-flake.homeManagerModules.default
-            inputs.caelestia-shell.homeManagerModules.default
-          ];
-        }
+        })
       ];
     };
     nomi = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        inherit inputs;
-        inherit (inputs) nixvim spicetify-nix nur import-tree;
-        system = "x86_64-linux";
+        inherit inputs self;
       };
       modules = [
         inputs.home-manager.nixosModules.home-manager
-        ../hosts/nomi.nix
+        self.nixosModules.host-nomi
+        ../hosts/nomi-hardware.nix # Plain import as it is root owned
         ({ pkgs, ... }: {
           nixpkgs.overlays = [ inputs.nur.overlays.default ];
-        })
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {
-             inherit (inputs) nixvim spicetify-nix nur import-tree;
-             inputs = inputs;
-             system = "x86_64-linux";
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs self; };
+            users.faith = self.homeModules.user-faith;
           };
-          home-manager.users.faith = import ../home-manager/users/faith.nix;
-          home-manager.sharedModules = [
-            inputs.spicetify-nix.homeManagerModules.default
-            inputs.illogical-flake.homeManagerModules.default
-            inputs.caelestia-shell.homeManagerModules.default
-          ];
-        }
+        })
       ];
     };
   };

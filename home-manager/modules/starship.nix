@@ -1,7 +1,9 @@
-{pkgs, ...}: {
-  programs.starship = {
-    enable = true;
-    enableFishIntegration = true;
-    enableInteractive = true;
+{ self, ... }: {
+  flake.homeModules.starship = { config, pkgs, lib, ... }: {
+    programs.starship = {
+      enable = true;
+      enableFishIntegration = true;
+      enableInteractive = true;
+    };
   };
 }
