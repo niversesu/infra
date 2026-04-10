@@ -1,8 +1,8 @@
 { self, ... }: {
-  flake.homeModules.pkg-faith-tools = { pkgs, ... }: {
-  home.packages = with pkgs; [
-    remmina
-    ntfs3g
-  ];
-};
+  flake.homeModules.pkg-faithtools = {
+    description = "Development tools for Faith: gh, python";
+    imports = [ ({ pkgs, ... }: {
+      home.packages = with pkgs; [ gh python3 ];
+    }) ];
+  };
 }

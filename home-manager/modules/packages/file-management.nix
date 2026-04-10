@@ -1,8 +1,8 @@
 { self, ... }: {
-  flake.homeModules.pkg-file-management = { pkgs, ... }: {
-  home.packages = with pkgs; [
-    kdePackages.filelight
-    rclone
-  ];
-};
+  flake.homeModules.pkg-filemanagement = {
+    description = "File management tools: Ranger, PCManFM";
+    imports = [ ({ pkgs, ... }: {
+      home.packages = with pkgs; [ ranger pcmanfm ];
+    }) ];
+  };
 }

@@ -1,9 +1,8 @@
 { self, ... }: {
-  flake.homeModules.pkg-creative = { pkgs, ... }: {
-  home.packages = with pkgs; [
-    krita
-    gimp3-with-plugins
-    kdePackages.kdenlive
-  ];
-};
+  flake.homeModules.pkg-creative = {
+    description = "Creative tools: GIMP, Inkscape, OBS Studio";
+    imports = [ ({ pkgs, ... }: {
+      home.packages = with pkgs; [ gimp inkscape obs-studio ];
+    }) ];
+  };
 }

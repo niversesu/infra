@@ -1,7 +1,8 @@
 { self, ... }: {
-  flake.homeModules.pkg-communication = { pkgs, ... }: {
-  home.packages = with pkgs; [
-    vesktop
-  ];
-};
+  flake.homeModules.pkg-communication = {
+    description = "Communication tools: Discord, Slack";
+    imports = [ ({ pkgs, ... }: {
+      home.packages = with pkgs; [ discord slack ];
+    }) ];
+  };
 }

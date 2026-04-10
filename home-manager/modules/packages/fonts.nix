@@ -1,10 +1,8 @@
 { self, ... }: {
-  flake.homeModules.pkg-fonts = { pkgs, ... }: {
-  home.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    meslo-lgs-nf
-    minecraftia
-    montserrat
-  ];
-};
+  flake.homeModules.pkg-fonts = {
+    description = "Personal font collection: JetBrains Mono, Nerdfonts";
+    imports = [ ({ pkgs, ... }: {
+      home.packages = with pkgs; [ jetbrains-mono (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
+    }) ];
+  };
 }
