@@ -1,9 +1,9 @@
-{pkgs, ...}: {
+{ cursorName, ...}: { pkgs, ... }: {
   gtk = {
     enable = true;
     cursorTheme = {
       package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Amber";
+      name = cursorName;
       size = 24;
     };
     iconTheme = {

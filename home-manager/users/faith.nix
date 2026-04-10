@@ -10,8 +10,8 @@
   imports = [
     nixvim.homeModules.nixvim
     (import-tree ../modules)
-    ../modules/_fish-faith.nix
-    ../modules/_theming-faith.nix
+    (import ../modules/_fish.nix { flakeTarget = "nomi"; theme = "catppuccin-frappe"; })
+    (import ../modules/_theming.nix {cursorName = "Bibata-Modern-Amber"; })
     ../modules/packages/_faith-tools.nix
     #../modules/_illogical.nix
   ];

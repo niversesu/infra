@@ -10,9 +10,9 @@
   imports = [
     nixvim.homeModules.nixvim
     (import-tree ../modules)
-    ../modules/_fish-niver.nix
+    (import ../modules/_fish.nix { flakeTarget = "kale"; theme = "catppuccin-mocha"; })
+    (import ../modules/_theming.nix {cursorName = "Bibata-Modern-Ice"; })
     ../modules/packages/_niver-tools.nix
-    ../modules/_theming-niver.nix
     #../modules/_illogical.nix
   ];
   # User Configuration
