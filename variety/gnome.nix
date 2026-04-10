@@ -1,6 +1,5 @@
 { self, ... }: {
   flake.nixosModules.gnome = {
-    description = "Enables GNOME Desktop Environment and related services";
     imports = [
       ({ config, pkgs, lib, ... }: {
         services = {

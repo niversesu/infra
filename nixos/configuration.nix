@@ -1,6 +1,5 @@
 { self, ... }: {
   flake.nixosModules.configuration = {
-    description = "Core NixOS configuration including boot, networking, and system settings";
     imports = [
       ({ config, pkgs, ... }: {
         imports = [

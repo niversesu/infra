@@ -38,11 +38,10 @@
         ./nixos/configuration.nix
         ./nixos/packages.nix
         ./nixos/services.nix
+	(inputs.import-tree ./hosts)
         (inputs.import-tree ./home-manager/modules)
         (inputs.import-tree ./home-manager/users)
         (inputs.import-tree ./variety)
-        ./hosts/kale.nix
-        ./hosts/nomi.nix
       ];
     };
 }

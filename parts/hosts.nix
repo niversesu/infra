@@ -8,7 +8,6 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
         self.nixosModules.host-kale
-        ../nixos/hardware-configuration.nix # Plain import as it is root owned
         ({ pkgs, ... }: {
           nixpkgs.overlays = [ inputs.nur.overlays.default ];
           home-manager = {
