@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  options.mySystem.illogical.enable = lib.mkEnableOption "caelestia";
+  options.mySystem.caelestia.enable = lib.mkEnableOption "caelestia";
 
   config = lib.mkIf config.mySystem.caelestia.enable {
     programs.hyprland = {

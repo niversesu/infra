@@ -14,5 +14,6 @@
     description = "faith";
     extraGroups = ["networkmanager" "wheel" "input" "uinput" "podman"];
   };
+  services.getty.autologinUser = "faith";
 }
 

@@ -14,4 +14,5 @@
     description = "niver";
     extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
   };
+  services.getty.autologinUser = "niver";
 }

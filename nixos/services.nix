@@ -6,8 +6,7 @@
 }: {
   imports = [./modules/keyd.nix];
 
-  services = {
-    getty.autologinUser = "niver";
+  services = { 
     flatpak.enable = true;
     upower.enable = true;
     openssh.enable = true;
