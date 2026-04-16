@@ -3,11 +3,18 @@
     imports = [
       self.nixosModules.host-kale-hw
       self.nixosModules.configuration
-      # self.nixosModules.illogical-base
       self.nixosModules.gnome
       self.nixosModules.keyd
-      self.nixosModules.virt-ydot
+      self.nixosModules.virt
+      self.nixosModules.podman
+      self.nixosModules.libvirt
+      self.nixosModules.ydotool
     ];
+
+    mySystem.virt.podman.enable = true;
+    mySystem.virt.libvirt.enable = true;
+    mySystem.virt.ydotool.enable = true;
+
     networking.hostName = "niver";
     users.users.niver = {
       isNormalUser = true;

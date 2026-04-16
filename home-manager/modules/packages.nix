@@ -39,7 +39,7 @@
           ++ (lib.optionals cfg.communication.enable [
             vesktop
           ])
-          ++ (lib.optionals (osConfig.mySystem.virt-ydot.waydroid.enable or false) [
+          ++ (lib.optionals (osConfig.mySystem.virt.waydroid.enable or false) [
             pkgs.nur.repos.ataraxiasjel.waydroid-script
             waydroid-helper
           ])
