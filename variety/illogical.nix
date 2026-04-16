@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.nixosModules.illogical-base = { config, pkgs, inputs, lib, ... }: {
+{ self, inputs, ... }: {
+  flake.nixosModules.illogical = { config, pkgs, lib, ... }: {
     options.mySystem.illogical.enable = lib.mkEnableOption "illogical impulse";
 
     config = lib.mkIf config.mySystem.illogical.enable {
@@ -20,6 +20,29 @@
         qt6.qt5compat
         qt6.qtpositioning
         kdePackages.syntax-highlighting
+      ];
+    };
+  };
+
+  flake.homeModules.illogical = { config, pkgs, lib, osConfig, ... }: {
+    imports = [
+      inputs.illogical-flake.homeManagerModules.default
+    ];
+    config = lib.mkIf (osConfig.mySystem.illogical.enable or false) {
+      programs.illogical-impulse = {
+        enable = true;
+        dotfiles = {
+          fish.enable = true;
+          kitty.enable = true;
+          starship.enable = true;
+        };
+        hyprland.plugins = [
+          inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+          inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+        ];
+      };
+      home.packages = with pkgs; [
+        kdePackages.dolphin
       ];
     };
   };

@@ -3,7 +3,7 @@
     imports = [
       self.nixosModules.host-nomi-hw
       self.nixosModules.configuration
-      self.nixosModules.illogical-base
+      self.nixosModules.illogical
       self.nixosModules.plasma
       self.nixosModules.gnome
       self.nixosModules.virt
