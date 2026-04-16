@@ -1,4 +1,4 @@
-{ self, inputs, ... }: {
+{ inputs, ... }: {
   flake.nixosModules.illogical = { config, pkgs, lib, ... }: {
     options.mySystem.illogical.enable = lib.mkEnableOption "illogical impulse";
 
@@ -24,7 +24,7 @@
     };
   };
 
-  flake.homeModules.illogical = { config, pkgs, lib, osConfig, ... }: {
+  flake.homeModules.illogical = { pkgs, lib, osConfig, ... }: {
     imports = [
       inputs.illogical-flake.homeManagerModules.default
     ];

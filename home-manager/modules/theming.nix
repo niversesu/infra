@@ -1,4 +1,4 @@
-{ self, ... }: {
+{ ... }: {
   flake.homeModules.theming = { config, pkgs, lib, ... }: {
     options.myHome.theming = {
       enable = lib.mkEnableOption "theming";

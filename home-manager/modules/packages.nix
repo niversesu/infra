@@ -1,4 +1,4 @@
-{ self, lib, ... }: {
+{ ... }: {
   flake.homeModules.packages = { pkgs, lib, config, osConfig, ... }:
     let
       cfg = config.my.packages;

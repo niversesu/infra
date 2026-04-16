@@ -8,7 +8,7 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
         self.nixosModules.host-kale
-        ({ pkgs, ... }: {
+        ({ ... }: {
           nixpkgs.overlays = [ inputs.nur.overlays.default ];
           home-manager = {
             useGlobalPkgs = true;
@@ -27,7 +27,7 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
         self.nixosModules.host-nomi
-        ({ pkgs, ... }: {
+        ({ ... }: {
           nixpkgs.overlays = [ inputs.nur.overlays.default ];
           home-manager = {
             useGlobalPkgs = true;

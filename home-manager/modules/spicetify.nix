@@ -1,5 +1,5 @@
-{ self, inputs, ... }: {
-  flake.homeModules.spicetify = { config, pkgs, ... }: 
+{ inputs, ... }: {
+  flake.homeModules.spicetify = { pkgs, ... }:
   let
     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
   in {

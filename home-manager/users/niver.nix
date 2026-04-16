@@ -1,5 +1,5 @@
 { self, ... }: {
-  flake.homeModules.user-niver = { config, pkgs, lib, ... }: {
+  flake.homeModules.user-niver = { pkgs, ... }: {
     imports = [
       self.homeModules.nixvim
       self.homeModules.fish

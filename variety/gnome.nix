@@ -1,7 +1,7 @@
-{ self, ... }: {
+{ ... }: {
   flake.nixosModules.gnome = {
     imports = [
-      ({ config, pkgs, lib, ... }: {
+      ({ pkgs, ... }: {
         services = {
           displayManager.gdm.enable = true;
           desktopManager.gnome.enable = true;

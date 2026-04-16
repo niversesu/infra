@@ -18,14 +18,16 @@
       url = "github:soymou/illogical-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland/v0.54.2";
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.54.2";
+    };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
   };
 
-  outputs = inputs@{ self, flake-parts, ... }:
+  outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
       imports = [
@@ -35,7 +37,7 @@
         ./nixos/configuration.nix
         ./nixos/packages.nix
         ./nixos/services.nix
-	(inputs.import-tree ./hosts)
+        (inputs.import-tree ./hosts)
         (inputs.import-tree ./home-manager/modules)
         (inputs.import-tree ./home-manager/users)
         (inputs.import-tree ./variety)

@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.homeModules.xdg = { config, pkgs, lib, ... }: {
+{ ... }: {
+  flake.homeModules.xdg = { ... }: {
     # XDG / MIME Configuration
     xdg.mimeApps = {
       enable = true;

@@ -1,5 +1,5 @@
 { ... }: {
-  flake.nixosModules.keyd = { pkgs, lib, ... }: {
+  flake.nixosModules.keyd = { ... }: {
     services.keyd = {
       enable = true;
       keyboards.internal = {

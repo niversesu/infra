@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.nixosModules.host-kale-hw = { config, lib, pkgs, modulesPath, ... }: {
+{ ... }: {
+  flake.nixosModules.host-kale-hw = { config, lib, modulesPath, ... }: {
     imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
     boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" "rtsx_pci_sdmmc" ];

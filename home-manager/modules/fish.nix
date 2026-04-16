@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.homeModules.fish = { config, pkgs, lib, ... }: {
+{ ... }: {
+  flake.homeModules.fish = { config, lib, ... }: {
     options.myHome.fish = {
       enable = lib.mkEnableOption "fish";
       flakeTarget = lib.mkOption {

@@ -1,5 +1,5 @@
 { ... }: {
-  flake.nixosModules.services = { config, pkgs, lib, ... }: {
+  flake.nixosModules.services = { pkgs, ... }: {
     services = { 
       flatpak.enable = true;
       upower.enable = true;

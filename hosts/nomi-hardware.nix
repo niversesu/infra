@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.nixosModules.host-nomi-hw = { config, lib, pkgs, modulesPath, ... }: {
+{ ... }: {
+  flake.nixosModules.host-nomi-hw = { config, lib, modulesPath, ... }: {
     imports = [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

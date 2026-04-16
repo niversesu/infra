@@ -1,5 +1,5 @@
 { self, ... }: {
-  flake.nixosModules.host-kale = { config, pkgs, lib, ... }: {
+  flake.nixosModules.host-kale = { ... }: {
     imports = [
       self.nixosModules.host-kale-hw
       self.nixosModules.configuration
