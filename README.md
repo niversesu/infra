@@ -1,7 +1,7 @@
 # 🏠 Infrastructure
 
-> **NixOS dotfiles powered by flakes, flake-parts, and home-manager**  
-> Two machines, one declarative truth.
+> **NixOS dotfiles powered by flakes, flake-parts, and home-manager using the dendritic pattern**  
+> Two machines, for now...
 
 <!-- Badges -->
 ![NixOS](https://img.shields.io/badge/NixOS-Unstable-blue?style=flat-square&logo=NixOS&logoColor=white)
@@ -523,6 +523,15 @@ sudo nixos-rebuild dry-run --flake .#<host>
 ```
 
 </details>
+
+---
+
+## 🙏 Shoutouts
+
+| Project | Description |
+|---------|-------------|
+| [flake-parts](https://github.com/hercules-ci/flake-parts) | The module system that makes this all possible |
+| [dendritic](https://github.com/mightyiam/dendritic) | The amazing NixOS host pattern (beginners don't use) |
 
 ---
 
