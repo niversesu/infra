@@ -57,6 +57,7 @@
             ++ (lib.optionals cfg.cliutilities.enable [
               gemini-cli-bin
               claude-code
+	      opencode
             ])
             ++ (lib.optionals cfg.creative.enable [
               krita
