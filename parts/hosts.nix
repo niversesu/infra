@@ -27,7 +27,6 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
         self.nixosModules.host-nomi
-        ../hosts/nomi-hardware.nix # Plain import as it is root owned
         ({ pkgs, ... }: {
           nixpkgs.overlays = [ inputs.nur.overlays.default ];
           home-manager = {

@@ -11,16 +11,7 @@
       self.homeModules.caelestia
       self.homeModules.illogical
       self.homeModules.spicetify
-      self.homeModules.pkg-niver-tools
-      self.homeModules.pkg-browsers
-      self.homeModules.pkg-cli-utilities
-      self.homeModules.pkg-communication
-      self.homeModules.pkg-creative
-      self.homeModules.pkg-file-management
-      self.homeModules.pkg-fonts
-      self.homeModules.pkg-gaming
-      self.homeModules.pkg-media
-      self.homeModules.pkg-misc
+      self.homeModules.packages
     ];
 
     myHome.fish = {
