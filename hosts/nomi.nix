@@ -4,10 +4,14 @@
       self.nixosModules.host-nomi-hw
       self.nixosModules.configuration
       self.nixosModules.illogical-base
-      # self.nixosModules.caelestia-base
       self.nixosModules.plasma
       self.nixosModules.gnome
+      self.nixosModules.virt
+      self.nixosModules.waydroid
     ];
+
+    mySystem.virt.waydroid.enable = true;
+
     networking.hostName = "faith";
     users.users.faith = {
       isNormalUser = true;
