@@ -8,7 +8,6 @@
       self.homeModules.git
       self.homeModules.vscode
       self.homeModules.xdg
-      self.homeModules.caelestia
       self.homeModules.illogical
       self.homeModules.spicetify
       self.homeModules.packages

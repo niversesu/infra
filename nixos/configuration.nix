@@ -5,7 +5,6 @@
         imports = [
           self.nixosModules.services
           self.nixosModules.packages
-          self.nixosModules.obs
         ];
         # Boot Configuration
         boot.loader = {
