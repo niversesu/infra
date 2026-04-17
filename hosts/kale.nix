@@ -10,6 +10,7 @@
       self.nixosModules.libvirt
       self.nixosModules.ydotool
       self.nixosModules.waydroid
+      self.nixosModules.winboat
     ];
 
     mySystem.virt.podman.enable = true;
