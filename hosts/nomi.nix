@@ -16,7 +16,7 @@
     users.users.faith = {
       isNormalUser = true;
       description = "faith";
-      extraGroups = ["networkmanager" "wheel" "input" "uinput" "podman"];
+      extraGroups = ["networkmanager" "wheel" "input" "uinput" "podman" "docker"];
     };
     services.getty.autologinUser = "faith";
   };

@@ -16,11 +16,12 @@
     mySystem.virt.libvirt.enable = true;
     mySystem.virt.ydotool.enable = true;
     mySystem.virt.waydroid.enable = true;
+    mySystem.virt.winboat.enable = true;
 
     networking.hostName = "niver";
     users.users.niver = {
       isNormalUser = true;
-      extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
+      extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman" "docker"];
     };
     services.getty.autologinUser = "niver";
   };
