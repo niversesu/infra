@@ -25,7 +25,6 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-    winapps.url = "github:winapps-org/winapps";
   };
 
   outputs = inputs@{ flake-parts, ... }:
