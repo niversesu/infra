@@ -15,7 +15,7 @@
 
     mySystem.virt.podman.enable = true;
     mySystem.virt.libvirt.enable = true;
-    mySystem.virt.ydotool.enable = true;
+    mySystem.virt.ydotool.enable = false;
     mySystem.virt.waydroid.enable = true;
 
     networking.hostName = "niver";
