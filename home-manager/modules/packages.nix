@@ -40,7 +40,6 @@
         ++ (lib.optionals cfg.browsers.enable [
           firefox
           google-chrome
-          inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
         ])
         ++ (lib.optionals cfg.communication.enable [
           vesktop

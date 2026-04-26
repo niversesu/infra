@@ -23,6 +23,7 @@
           nano = "nvim";
           ls = "eza --all --icons --color=auto --time-style=iso --classify";
           snrs = "sudo nixos-rebuild switch --flake ~/infra#${config.myHome.fish.flakeTarget}";
+          cachix-push = "cachix push niversesu $(nix path-info .#nixosConfigurations.#${config.myHome.fish.flakeTarget}.config.system.build.toplevel)";
         };
         interactiveShellInit = ''
           fish_config theme choose ${config.myHome.fish.theme}

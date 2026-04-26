@@ -28,7 +28,7 @@
     home = {
       username = "niver";
       homeDirectory = "/home/niver";
-      stateVersion = "25.05";
+      stateVersion = "26.05";
     };
     nixpkgs.config.allowUnfree = true;
     i18n.inputMethod = {
