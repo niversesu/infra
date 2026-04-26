@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.homeModules.user-niver = { pkgs, ... }: {
+{self, ...}: {
+  flake.homeModules.user-niver = {pkgs, ...}: {
     imports = [
       self.homeModules.nixvim
       self.homeModules.fish
@@ -22,6 +22,8 @@
       enable = true;
       cursorName = "Bibata-Modern-Ice";
     };
+    my.packages.gaming.enable = true;
+    my.packages.tech-tools.enable = true;
 
     home = {
       username = "niver";

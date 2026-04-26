@@ -1,5 +1,10 @@
-{ ... }: {
-  flake.homeModules.theming = { config, pkgs, lib, ... }: {
+{...}: {
+  flake.homeModules.theming = {
+    config,
+    pkgs,
+    lib,
+    ...
+  }: {
     options.myHome.theming = {
       enable = lib.mkEnableOption "theming";
       cursorName = lib.mkOption {

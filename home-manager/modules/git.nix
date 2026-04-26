@@ -1,5 +1,5 @@
-{ ... }: {
-  flake.homeModules.git = { ... }: {
+{...}: {
+  flake.homeModules.git = {pkgs, ...}: {
     programs.git = {
       enable = true;
       settings = {
@@ -13,5 +13,6 @@
         ];
       };
     };
+    home.packages = with pkgs; [git-lfs];
   };
 }

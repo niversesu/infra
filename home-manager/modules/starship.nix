@@ -1,5 +1,5 @@
-{ ... }: {
-  flake.homeModules.starship = { ... }: {
+{...}: {
+  flake.homeModules.starship = {...}: {
     programs.starship = {
       enable = true;
       enableFishIntegration = true;

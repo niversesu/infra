@@ -1,5 +1,10 @@
-{ inputs, ... }: {
-  flake.nixosModules.illogical = { config, pkgs, lib, ... }: {
+{inputs, ...}: {
+  flake.nixosModules.illogical = {
+    config,
+    pkgs,
+    lib,
+    ...
+  }: {
     options.mySystem.illogical.enable = lib.mkEnableOption "illogical impulse";
 
     config = lib.mkIf config.mySystem.illogical.enable {
@@ -24,7 +29,12 @@
     };
   };
 
-  flake.homeModules.illogical = { pkgs, lib, osConfig, ... }: {
+  flake.homeModules.illogical = {
+    pkgs,
+    lib,
+    osConfig,
+    ...
+  }: {
     imports = [
       inputs.illogical-flake.homeManagerModules.default
     ];

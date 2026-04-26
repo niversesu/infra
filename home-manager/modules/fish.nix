@@ -1,5 +1,9 @@
-{ ... }: {
-  flake.homeModules.fish = { config, lib, ... }: {
+{...}: {
+  flake.homeModules.fish = {
+    config,
+    lib,
+    ...
+  }: {
     options.myHome.fish = {
       enable = lib.mkEnableOption "fish";
       flakeTarget = lib.mkOption {
@@ -18,7 +22,7 @@
         shellAliases = {
           nano = "nvim";
           ls = "eza --all --icons --color=auto --time-style=iso --classify";
-          snrs = "sudo nixos-rebuild switch --flake .#${config.myHome.fish.flakeTarget}";
+          snrs = "sudo nixos-rebuild switch --flake ~/infra#${config.myHome.fish.flakeTarget}";
         };
         interactiveShellInit = ''
           fish_config theme choose ${config.myHome.fish.theme}

@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.nixosModules.host-nomi = { ... }: {
+{self, ...}: {
+  flake.nixosModules.host-nomi = {...}: {
     imports = [
       self.nixosModules.host-nomi-hw
       self.nixosModules.configuration

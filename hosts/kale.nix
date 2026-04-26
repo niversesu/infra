@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.nixosModules.host-kale = { ... }: {
+{self, ...}: {
+  flake.nixosModules.host-kale = {...}: {
     imports = [
       self.nixosModules.host-kale-hw
       self.nixosModules.configuration
@@ -10,6 +10,7 @@
       self.nixosModules.libvirt
       self.nixosModules.ydotool
       self.nixosModules.waydroid
+      self.nixosModules.nix-flatpak
     ];
 
     mySystem.virt.podman.enable = true;

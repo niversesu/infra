@@ -1,4 +1,8 @@
-{ self, inputs, ... }: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.nixosConfigurations = {
     kale = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -8,12 +12,12 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
         self.nixosModules.host-kale
-        ({ ... }: {
-          nixpkgs.overlays = [ inputs.nur.overlays.default ];
+        ({...}: {
+          nixpkgs.overlays = [inputs.nur.overlays.default];
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs self; };
+            extraSpecialArgs = {inherit inputs self;};
             users.niver = self.homeModules.user-niver;
           };
         })
@@ -27,12 +31,12 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
         self.nixosModules.host-nomi
-        ({ ... }: {
-          nixpkgs.overlays = [ inputs.nur.overlays.default ];
+        ({...}: {
+          nixpkgs.overlays = [inputs.nur.overlays.default];
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs self; };
+            extraSpecialArgs = {inherit inputs self;};
             users.faith = self.homeModules.user-faith;
           };
         })

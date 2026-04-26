@@ -1,5 +1,9 @@
-{ ... }: {
-  flake.nixosModules.plasma = { config, lib, ... }: {
+{...}: {
+  flake.nixosModules.plasma = {
+    config,
+    lib,
+    ...
+  }: {
     options.mySystem.plasma.enable = lib.mkEnableOption "plasma";
 
     config = lib.mkIf config.mySystem.plasma.enable {

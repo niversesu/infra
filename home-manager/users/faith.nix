@@ -1,5 +1,5 @@
-{ self, ... }: {
-  flake.homeModules.user-faith = { ... }: {
+{self, ...}: {
+  flake.homeModules.user-faith = {...}: {
     imports = [
       self.homeModules.nixvim
       self.homeModules.fish

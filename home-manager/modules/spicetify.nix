@@ -1,6 +1,5 @@
-{ inputs, ... }: {
-  flake.homeModules.spicetify = { pkgs, ... }:
-  let
+{inputs, ...}: {
+  flake.homeModules.spicetify = {pkgs, ...}: let
     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
   in {
     imports = [
