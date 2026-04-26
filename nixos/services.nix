@@ -1,7 +1,11 @@
 {...}: {
   flake.nixosModules.services = {pkgs, ...}: {
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
     services = {
-      #flatpak.enable = true;
       upower.enable = true;
       openssh.enable = true;
       tailscale.enable = true;
