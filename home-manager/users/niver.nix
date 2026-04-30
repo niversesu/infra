@@ -7,7 +7,6 @@
       self.homeModules.starship
       self.homeModules.git
       self.homeModules.vscode
-      self.homeModules.xdg
       self.homeModules.illogical
       self.homeModules.spicetify
       self.homeModules.packages

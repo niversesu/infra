@@ -1,10 +1,10 @@
 {lib, ...}: {
   flake.nixosModules.virt = {...}: {
-    options.mySystem.virt = {
-      waydroid.enable = lib.mkEnableOption "waydroid";
-      podman.enable = lib.mkEnableOption "podman";
-      libvirt.enable = lib.mkEnableOption "libvirt and virt-manager";
-      ydotool.enable = lib.mkEnableOption "ydotool";
+    options = {
+      mySystem.podman = lib.mkEnableOption "podman";
+      mySystem.libvirt = lib.mkEnableOption "libvirt and virt-manager";
+      mySystem.ydotool = lib.mkEnableOption "ydotool";
+      mySystem.waydroid = lib.mkEnableOption "waydroid";
     };
 
     config = {

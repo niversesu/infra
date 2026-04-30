@@ -1,27 +1,33 @@
 {...}: {
   flake.nixosModules.gnome = {
     imports = [
-      ({pkgs, ...}: {
-        services = {
-          displayManager.gdm.enable = true;
-          desktopManager.gnome.enable = true;
-          gnome.gnome-remote-desktop.enable = true;
+      ({pkgs, lib, config, ...}: {
+        options.mySystem.gnome.enable = lib.mkEnableOption "gnome";
 
-          xrdp.enable = true;
-          xrdp.defaultWindowManager = "${pkgs.gnome-session}/bin/gnome-session";
-          xrdp.openFirewall = true;
-        };
+        config = lib.mkIf config.mySystem.gnome.enable {
+          services = {
+            displayManager.gdm.enable = true;
+            desktopManager.gnome.enable = true;
+            gnome.gnome-remote-desktop.enable = true;
 
-        environment.gnome.excludePackages = with pkgs; [epiphany];
-        environment.systemPackages = with pkgs; [
-          gnomeExtensions.appindicator
-          gnomeExtensions.copyous
-          gnomeExtensions.blur-my-shell
-          gnome-remote-desktop
-        ];
-        programs.kdeconnect = {
-          enable = true;
-          package = pkgs.gnomeExtensions.gsconnect;
+            xrdp.enable = true;
+            xrdp.defaultWindowManager = "${pkgs.gnome-session}/bin/gnome-session";
+            xrdp.openFirewall = true;
+          };
+
+          environment.gnome.excludePackages = with pkgs; [epiphany];
+          environment.systemPackages = with pkgs; [
+            gnomeExtensions.appindicator
+            gnomeExtensions.copyous
+            gnomeExtensions.blur-my-shell
+            gnomeExtensions.kiwi-is-not-apple
+            gnomeExtensions.kiwi-menu
+            gnome-remote-desktop
+          ];
+          programs.kdeconnect = {
+            enable = true;
+            package = pkgs.gnomeExtensions.gsconnect;
+          };
         };
       })
     ];
