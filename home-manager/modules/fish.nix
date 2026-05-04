@@ -20,9 +20,10 @@
       programs.fish = {
         enable = true;
         shellAliases = {
-          nano = "nvim";
           ls = "eza --all --icons --color=auto --time-style=iso --classify";
           snrs = "sudo nixos-rebuild switch --flake ~/infra#${config.myHome.fish.flakeTarget}";
+          docker = "podman";
+          nano = "nvim";
           cachix-push = "cachix push niversesu $(nix path-info .#nixosConfigurations.#${config.myHome.fish.flakeTarget}.config.system.build.toplevel)";
         };
         interactiveShellInit = ''

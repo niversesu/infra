@@ -2,45 +2,40 @@
   self,
   inputs,
   ...
-}: {
-  flake.nixosConfigurations = {
-    kale = inputs.nixpkgs.lib.nixosSystem {
+}: let
+  mkHost = {
+    module,
+    user,
+    homeModule,
+  }:
+    inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs self;
-      };
+      specialArgs = {inherit inputs self;};
       modules = [
         inputs.home-manager.nixosModules.home-manager
-        self.nixosModules.host-kale
+        module
         ({...}: {
           nixpkgs.overlays = [inputs.nur.overlays.default];
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = {inherit inputs self;};
-            users.niver = self.homeModules.user-niver;
+            users.${user} = homeModule;
           };
         })
       ];
     };
-    nomi = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs self;
-      };
-      modules = [
-        inputs.home-manager.nixosModules.home-manager
-        self.nixosModules.host-nomi
-        ({...}: {
-          nixpkgs.overlays = [inputs.nur.overlays.default];
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = {inherit inputs self;};
-            users.faith = self.homeModules.user-faith;
-          };
-        })
-      ];
+in {
+  flake.nixosConfigurations = {
+    kale = mkHost {
+      module = self.nixosModules.host-kale;
+      user = "niver";
+      homeModule = self.homeModules.user-niver;
+    };
+    nomi = mkHost {
+      module = self.nixosModules.host-nomi;
+      user = "faith";
+      homeModule = self.homeModules.user-faith;
     };
   };
 }
