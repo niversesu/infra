@@ -16,9 +16,9 @@
       communication.enable = lib.mkEnableOption "Communication tools (Vesktop)";
       media.enable = lib.mkEnableOption "Media tools (Celluloid, FFmpeg, yt-dlp)" // {default = true;};
       filemanagement.enable = lib.mkEnableOption "File management (Filelight, Rclone)" // {default = true;};
-      cliutilities.enable = lib.mkEnableOption "CLI utilities (gemini-cli, claude-code)" // {default = true;};
+      cliutilities.enable = lib.mkEnableOption "CLI utilities (gemini-cli, claude-code, opencode)" // {default = true;};
       creative.enable = lib.mkEnableOption "Creative tools (Krita, GIMP3, Kdenlive)";
-      tech-tools.enable = lib.mkEnableOption "Tech tools (keyd, ydotool, distrobox, podman-compose)";
+      tech-tools.enable = lib.mkEnableOption "Tech tools (keyd, ydotool, distrobox)";
     };
 
     config = {
@@ -71,7 +71,6 @@
           keyd
           ydotool
           distrobox
-          podman-compose
           nixos-container
         ]);
     };

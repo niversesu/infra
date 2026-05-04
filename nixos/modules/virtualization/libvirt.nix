@@ -1,14 +1,18 @@
-{...}: {
+{lib, ...}: {
   flake.nixosModules.libvirt = {
     config,
     pkgs,
     lib,
     ...
   }: {
-    programs.virt-manager.enable = lib.mkIf config.mySystem.libvirt true;
-    virtualisation.libvirtd = lib.mkIf config.mySystem.libvirt {
-      enable = true;
-      qemu.vhostUserPackages = with pkgs; [virtiofsd];
+    options.mySystem.libvirt.enable = lib.mkEnableOption "libvirt";
+
+    config = lib.mkIf config.mySystem.libvirt.enable {
+      programs.virt-manager.enable = true;
+      virtualisation.libvirtd = {
+        enable = true;
+        qemu.vhostUserPackages = with pkgs; [virtiofsd];
+      };
     };
   };
 }

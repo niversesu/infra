@@ -1,5 +1,7 @@
 {...}: {
-  flake.homeModules.git = {pkgs, ...}: {
+  flake.homeModules.git = {pkgs, lib, config, ...}: {
+    options.myHome.git.enable = lib.mkEnableOption "git";
+    config = lib.mkIf config.myHome.git.enable {
     programs.git = {
       enable = true;
       settings = {
@@ -14,5 +16,6 @@
       };
     };
     home.packages = with pkgs; [git-lfs];
+    };
   };
 }

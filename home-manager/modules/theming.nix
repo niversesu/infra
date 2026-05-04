@@ -26,8 +26,8 @@
           name = "Dracula";
         };
         theme = {
-          package = pkgs.adw-gtk3;
-          name = "adw-gtk3-dark";
+          package = pkgs.dracula-theme;
+          name = "Dracula";
         };
       };
     };

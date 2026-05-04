@@ -7,8 +7,8 @@
         config,
         ...
       }: {
-        options.mySystem.packages = lib.mkEnableOption "packages";
-        config = lib.mkIf config.mySystem.packages {
+        options.mySystem.packages.enable = lib.mkEnableOption "packages";
+        config = lib.mkIf config.mySystem.packages.enable {
           environment.systemPackages = with pkgs; [
             fastfetch
             ripgrep

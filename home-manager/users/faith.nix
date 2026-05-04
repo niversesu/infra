@@ -21,12 +21,5 @@
       enable = true;
       cursorName = "Bibata-Modern-Amber";
     };
-
-    home = {
-      username = "faith";
-      homeDirectory = "/home/faith";
-      stateVersion = "26.05";
-    };
-    nixpkgs.config.allowUnfree = true;
   };
 }

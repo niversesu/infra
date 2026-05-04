@@ -1,8 +1,10 @@
 {lib, ...}: {
   flake.nixosModules.ydotool = {config, ...}: {
-    programs.ydotool.enable = lib.mkIf config.mySystem.ydotool true;
-    environment.variables.YDOTOOL_SOCKET =
-      lib.mkIf config.mySystem.ydotool
-      (lib.mkForce "/run/user/1000/.ydotool_socket");
+    options.mySystem.ydotool.enable = lib.mkEnableOption "ydotool";
+    config = lib.mkIf config.mySystem.ydotool.enable {
+      programs.ydotool.enable = true;
+      environment.variables.YDOTOOL_SOCKET =
+        lib.mkForce "/run/user/1000/.ydotool_socket";
+    };
   };
 }

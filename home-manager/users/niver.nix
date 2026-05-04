@@ -1,17 +1,8 @@
 {self, ...}: {
   flake.homeModules.user-niver = {pkgs, ...}: {
     imports = [
-      self.homeModules.nixvim
-      self.homeModules.fish
-      self.homeModules.theming
-      self.homeModules.starship
-      self.homeModules.git
-      self.homeModules.vscode
-      self.homeModules.illogical
-      self.homeModules.spicetify
-      self.homeModules.packages
+      self.homeModules.shared
     ];
-
     myHome.fish = {
       enable = true;
       flakeTarget = "kale";
@@ -22,14 +13,9 @@
       cursorName = "Bibata-Modern-Ice";
     };
     my.packages.gaming.enable = true;
+    my.packages.creative.enable = true;
     my.packages.tech-tools.enable = true;
 
-    home = {
-      username = "niver";
-      homeDirectory = "/home/niver";
-      stateVersion = "26.05";
-    };
-    nixpkgs.config.allowUnfree = true;
     i18n.inputMethod = {
       enable = true;
       type = "fcitx5";
