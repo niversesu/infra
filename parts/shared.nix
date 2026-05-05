@@ -28,7 +28,17 @@
       self.nixosModules.waydroid
       self.nixosModules.nix-flatpak
     ];
-    options.mySystem.shared.enable = lib.mkEnableOption "shared";
+    options.mySystem.shared = {
+      enable = lib.mkEnableOption "shared";
+      host = lib.mkOption {
+        type = lib.types.str;
+        default = "kale";
+      };
+      user = lib.mkOption {
+        type = lib.types.str;
+        default = "kale";
+      };
+    };
     config = lib.mkIf config.mySystem.shared.enable {
       mySystem.host-kale-hw.enable = lib.mkDefault false;
       mySystem.host-nomi-hw.enable = lib.mkDefault false;
@@ -45,12 +55,12 @@
       mySystem.waydroid.enable = lib.mkDefault true;
       mySystem.nix-flatpak.enable = lib.mkDefault true;
 
-      networking.hostName = "${config.mySystem.host}";
-      users.users.${config.mySystem.user} = {
+      networking.hostName = "${config.mySystem.shared.host}";
+      users.users.${config.mySystem.shared.user} = {
         isNormalUser = true;
         extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
       };
-      services.getty.autologinUser = config.mySystem.user;
+      services.getty.autologinUser = config.mySystem.shared.user;
     };
   };
 
@@ -72,23 +82,20 @@
       self.homeModules.packages
     ];
     config = lib.mkIf osConfig.mySystem.shared.enable {
+      #myHome.fish.enable = lib.mkDefault true;
+      myHome.git.enable = lib.mkDefault true;
+      myHome.nixvim.enable = lib.mkDefault true;
+      myHome.packages.enable = lib.mkDefault true;
+      myHome.spicetify.enable = lib.mkDefault true;
+      myHome.starship.enable = lib.mkDefault true;
+      #myHome.theming.enable = lib.lmkDefault true;
+      myHome.vscode.enable = lib.mkDefault true;
       nixpkgs.config.allowUnfree = true;
       home = {
-        username = osConfig.mySystem.user;
-        homeDirectory = "/home/${osConfig.mySystem.user}";
+        username = osConfig.mySystem.shared.user;
+        homeDirectory = "/home/${osConfig.mySystem.shared.user}";
         stateVersion = "26.05";
       };
-
-    };
-  };
-  options.mySystem = {
-    host = lib.mkOption {
-      type = lib.types.str;
-      default = "kale";
-    };
-    user = lib.mkOption {
-      type = lib.types.str;
-      default = "niver";
     };
   };
 }

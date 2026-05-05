@@ -6,9 +6,10 @@
     osConfig,
     ...
   }: let
-    cfg = config.my.packages;
+    cfg = config.myHome.packages;
   in {
-    options.my.packages = {
+    options.myHome.packages = {
+      enable = lib.mkEnableOption "packages";
       remotetools.enable = lib.mkEnableOption "Remote & filesystem tools (remmina, ntfs3g)" // {default = true;};
       fonts.enable = lib.mkEnableOption "Personal font collection (JetBrains Mono, Meslo, Minecraftia, Montserrat)" // {default = true;};
       gaming.enable = lib.mkEnableOption "Gaming tools (Prism Launcher, Packwiz)";
@@ -21,7 +22,7 @@
       tech-tools.enable = lib.mkEnableOption "Tech tools (keyd, ydotool, distrobox)";
     };
 
-    config = {
+    config = lib.mkIf config.myHome.packages.enable {
       home.packages = with pkgs;
         (lib.optionals cfg.remotetools.enable [
           remmina

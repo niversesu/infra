@@ -12,9 +12,9 @@
       enable = true;
       cursorName = "Bibata-Modern-Ice";
     };
-    my.packages.gaming.enable = true;
-    my.packages.creative.enable = true;
-    my.packages.tech-tools.enable = true;
+    myHome.packages.gaming.enable = true;
+    myHome.packages.creative.enable = true;
+    myHome.packages.tech-tools.enable = true;
 
     i18n.inputMethod = {
       enable = true;
