@@ -11,7 +11,7 @@
     };
 
     mySystem.host-dream-hw.enable = true;
-
+    mySystem.gnome.enble = false;
     mySystem.plasma.enable = true;
     programs.steam.enable = true;
   };
