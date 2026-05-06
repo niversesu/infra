@@ -11,5 +11,6 @@
     };
 
     mySystem.plasma.enable = true;
+    programs.steam.enable = true;
   };
 }

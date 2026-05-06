@@ -517,6 +517,14 @@
             options.silent = true;
           }
 
+          # ── Clipboard ──────────────────────────────────────────────────
+          {
+            key = "<C-S-c>";
+            action = '"+y';
+            mode = "v";
+            options.silent = true;
+          }
+
           # ── Save / quit ─────────────────────────────────────────────────
           {
             key = "<C-s>";
@@ -582,7 +590,7 @@
           } # manually check for file changes
           {
             key = "<leader>a";
-            action = "<cmd>!alejandra %<CR><CR><cmd>e<CR>";
+            action = "<cmd>w<CR><cmd>!alejandra %<CR><CR><cmd>e<CR>";
             mode = "n";
             options.silent = true;
           } # format with alejandra and reload

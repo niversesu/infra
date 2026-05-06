@@ -8,6 +8,7 @@
         user.name = "niversesu";
         user.email = "niversesu@gmail.com";
         init.defaultBranch = "main";
+        pull.rebase = true;
 
         url."git@github.com:".insteadOf = [
           "https://github.com/"
