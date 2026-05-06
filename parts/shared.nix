@@ -28,6 +28,7 @@
       self.nixosModules.ydotool
       self.nixosModules.waydroid
       self.nixosModules.nix-flatpak
+      self.nixosModules.obs-studio
     ];
     options.mySystem.shared = {
       enable = lib.mkEnableOption "shared";
@@ -47,7 +48,7 @@
       mySystem.gnome.enable = lib.mkDefault true;
       mySystem.waydroid.enable = lib.mkDefault true;
       mySystem.nix-flatpak.enable = lib.mkDefault true;
-
+      mySystem.obs-studio.enable = lib.mkDefault true;
       networking.hostName = "${config.mySystem.shared.host}";
       users.users.${config.mySystem.shared.user} = {
         isNormalUser = true;
