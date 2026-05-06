@@ -16,7 +16,7 @@
           enable = true;
           device = "/dev/sda";
         };
-        systemd-boot.enable = false;
+        systemd-boot.enable = lib.mkForce false;
       };
 
       fileSystems."/" = {
