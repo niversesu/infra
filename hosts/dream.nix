@@ -10,6 +10,8 @@
       host = "dream";
     };
 
+    mySystem.host-dream-hw.enable = true;
+
     mySystem.plasma.enable = true;
     programs.steam.enable = true;
   };
