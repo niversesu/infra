@@ -37,5 +37,10 @@ in {
       user = "faith";
       homeModule = self.homeModules.user-faith;
     };
+    dream = mkHost {
+      module = self.nixosModules.host-dream;
+      user = "amani";
+      homeModule = self.homeModules.user-amani;
+    };
   };
 }

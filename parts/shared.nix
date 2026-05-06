@@ -11,6 +11,7 @@
     imports = [
       self.nixosModules.host-kale-hw
       self.nixosModules.host-nomi-hw
+      self.nixosModules.host-dream-hw
 
       self.nixosModules.configuration
       self.nixosModules.packages
@@ -40,18 +41,10 @@
       };
     };
     config = lib.mkIf config.mySystem.shared.enable {
-      mySystem.host-kale-hw.enable = lib.mkDefault false;
-      mySystem.host-nomi-hw.enable = lib.mkDefault false;
       mySystem.configuration.enable = lib.mkDefault true;
       mySystem.packages.enable = lib.mkDefault true;
       mySystem.services.enable = lib.mkDefault true;
       mySystem.gnome.enable = lib.mkDefault true;
-      mySystem.plasma.enable = lib.mkDefault false;
-      mySystem.illogical.enable = lib.mkDefault false;
-      mySystem.keyd.enable = lib.mkDefault false;
-      mySystem.podman.enable = lib.mkDefault false;
-      mySystem.libvirt.enable = lib.mkDefault false;
-      mySystem.ydotool.enable = lib.mkDefault false;
       mySystem.waydroid.enable = lib.mkDefault true;
       mySystem.nix-flatpak.enable = lib.mkDefault true;
 
