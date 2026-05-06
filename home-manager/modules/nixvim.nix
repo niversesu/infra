@@ -520,7 +520,7 @@
           # ── Clipboard ──────────────────────────────────────────────────
           {
             key = "<C-S-c>";
-            action = '"+y';
+            action = "\"+y";
             mode = "v";
             options.silent = true;
           }
