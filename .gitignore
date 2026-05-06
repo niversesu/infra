@@ -1,1 +1,4 @@
-result
+devshells/pyautogui-wayland/*
+!devshells/pyautogui-wayland/flake.nix
+!devshells/pyautogui-wayland/flake.lock
+!devshells/pyautogui-wayland/test.py
