@@ -4,7 +4,7 @@
     config = lib.mkIf config.mySystem.ydotool.enable {
       programs.ydotool.enable = true;
       #environment.variables.YDOTOOL_SOCKET =
-        #lib.mkForce "/run/user/1000/.ydotool_socket";
+      #lib.mkForce "/run/user/1000/.ydotool_socket";
     };
   };
 }

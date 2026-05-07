@@ -43,7 +43,7 @@
             ];
             auto-optimise-store = true;
           };
-          boot.kernelPackages = pkgs.linuxPackages_zen;
+          boot.kernelPackages = pkgs.linuxPackages_latest;
           nixpkgs.config.allowUnfree = true;
           # Shell Integration
           security.sudo-rs.enable = true;

@@ -1,7 +1,12 @@
 {...}: {
   flake.nixosModules.gnome = {
     imports = [
-      ({pkgs, lib, config, ...}: {
+      ({
+        pkgs,
+        lib,
+        config,
+        ...
+      }: {
         options.mySystem.gnome.enable = lib.mkEnableOption "gnome";
 
         config = lib.mkIf config.mySystem.gnome.enable {

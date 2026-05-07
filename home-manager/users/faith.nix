@@ -1,15 +1,7 @@
 {self, ...}: {
   flake.homeModules.user-faith = {...}: {
     imports = [
-      self.homeModules.nixvim
-      self.homeModules.fish
-      self.homeModules.theming
-      self.homeModules.starship
-      self.homeModules.git
-      self.homeModules.vscode
-      self.homeModules.illogical
-      self.homeModules.spicetify
-      self.homeModules.packages
+      self.homeModules.shared
     ];
 
     myHome.fish = {
@@ -21,5 +13,6 @@
       enable = true;
       cursorName = "Bibata-Modern-Amber";
     };
+    myHome.packages.tech-tools.enable = true;
   };
 }
