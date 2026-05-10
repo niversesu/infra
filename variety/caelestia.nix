@@ -14,6 +14,7 @@
         package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
       };
+      programs.thunar.enable = true;
       services.geoclue2.enable = true;
       networking.networkmanager.enable = true;
       services.upower.enable = true;
@@ -68,17 +69,13 @@
           paths.wallpaperDir = "~/Pictures/wallpapers";
         };
         cli = {
-          enable = false;
+          enable = true;
           settings = {
             theme.enableGtk = true;
           };
         };
       };
       programs.foot.enable = true;
-      home.packages = with pkgs; [
-        inputs.caelestia-cli.packages.x86_64-linux.default
-        kdePackages.dolphin
-      ];
     };
   };
 }

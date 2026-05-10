@@ -49,10 +49,6 @@
     caelestia-shell = {
       url = "github:caelestia-dots/shell";
     };
-    caelestia-cli = {
-      url = "github:caelestia-dots/cli";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
