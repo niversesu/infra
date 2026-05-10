@@ -3,13 +3,19 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim.url = "github:nix-community/nixvim";
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,20 +37,24 @@
       inputs.hyprland.follows = "hyprland";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    dotfiles = {
+    hjem.url = "github:feel-co/hjem";
+    illogical-dotfiles = {
       url = "git+https://github.com/end-4/dots-hyprland?submodules=1";
+      flake = false;
+    };
+    caelestia-dotfiles = {
+      url = "git+https://github.com/niversesu/caelestia?submodules=1&rev=d42469a84ed5ee8037cff75d257c9eb6441e4ba4";
       flake = false;
     };
     caelestia-shell = {
       url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
     caelestia-cli = {
       url = "github:caelestia-dots/cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];

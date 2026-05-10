@@ -22,6 +22,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = {inherit inputs self;};
+              sharedModules = [];
               users.${user} = homeModule;
             };
           })

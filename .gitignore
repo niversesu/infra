@@ -1,4 +1,6 @@
 result
+*.qcow2
+*.zst
 devshells/pyautogui-wayland/*
 !devshells/pyautogui-wayland/flake.nix
 !devshells/pyautogui-wayland/flake.lock

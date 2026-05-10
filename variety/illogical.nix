@@ -91,7 +91,7 @@ in {
       flakeSrc = "${inputs.illogical-flake}";
       subInputs = {
         inherit (inputs) nur;
-        dotfiles = inputs.dotfiles;
+        dotfiles = inputs.illogical-dotfiles;
         quickshell = inputs.quickshell;
       };
     in [
