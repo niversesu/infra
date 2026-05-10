@@ -47,6 +47,10 @@
           nixpkgs.config.allowUnfree = true;
           # Shell Integration
           security.sudo-rs.enable = true;
+          environment.sessionVariables.XDG_DATA_DIRS = [
+            "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+            "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+          ];
           programs.bash = {
             interactiveShellInit = ''
               if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]

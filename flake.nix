@@ -17,6 +17,11 @@
     illogical-flake = {
       url = "github:soymou/illogical-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";
+    };
+    quickshell = {
+      url = "github:quickshell-mirror/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
       url = "github:hyprwm/Hyprland/v0.54.2";
@@ -26,6 +31,18 @@
       inputs.hyprland.follows = "hyprland";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    dotfiles = {
+      url = "git+https://github.com/end-4/dots-hyprland?submodules=1";
+      flake = false;
+    };
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    caelestia-cli = {
+      url = "github:caelestia-dots/cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:

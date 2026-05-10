@@ -11,7 +11,8 @@
     };
     mySystem.host-kale-hw.enable = true;
 
-    mySystem.gnome.enable = true;
+    mySystem.gnome.enable = false;
+    mySystem.caelestia.enable = true;
 
     mySystem.keyd.enable = true;
     mySystem.podman.enable = true;

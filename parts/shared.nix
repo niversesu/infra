@@ -20,6 +20,7 @@
       self.nixosModules.gnome
       self.nixosModules.plasma
       self.nixosModules.illogical
+      self.nixosModules.caelestia
 
       self.nixosModules.keyd
 
@@ -72,6 +73,7 @@
       self.homeModules.git
       self.homeModules.vscode
       self.homeModules.illogical
+      self.homeModules.caelestia
       self.homeModules.spicetify
       self.homeModules.packages
     ];
@@ -82,7 +84,7 @@
       myHome.packages.enable = lib.mkDefault true;
       myHome.spicetify.enable = lib.mkDefault true;
       myHome.starship.enable = lib.mkDefault true;
-      #myHome.theming.enable = lib.lmkDefault true;
+      #myHome.theming.enable = lib.mkDefault true;
       myHome.vscode.enable = lib.mkDefault true;
       nixpkgs.config.allowUnfree = true;
       home = {
