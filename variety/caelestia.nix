@@ -14,7 +14,6 @@
         package = inputs.hyprland.packages.${pkgs.system}.hyprland;
         portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
       };
-      programs.thunar.enable = true;
       services.geoclue2.enable = true;
       networking.networkmanager.enable = true;
       services.upower.enable = true;
@@ -26,24 +25,29 @@
         enable = true;
         directory = "/home/${config.mySystem.shared.user}";
         files = let
-          dotDir = "${inputs.caelestia-dotfiles}/hypr";
-          collectFiles = prefix: dir:
-            lib.concatMapAttrs (name: type: let
-              relPath = if prefix == "" then name else "${prefix}/${name}";
-              absPath = "${dir}/${name}";
-            in
-              if type == "regular"
-              then {".config/hypr/${relPath}".source = absPath;}
-              else if type == "directory"
-              then collectFiles relPath absPath
-              else {}
+          collectFiles = configDir: prefix: dir:
+            lib.concatMapAttrs (
+              name: type: let
+                relPath =
+                  if prefix == ""
+                  then name
+                  else "${prefix}/${name}";
+                absPath = "${dir}/${name}";
+              in
+                if type == "regular"
+                then {".config/${configDir}/${relPath}".source = absPath;}
+                else if type == "directory"
+                then collectFiles configDir relPath absPath
+                else {}
             ) (builtins.readDir dir);
+          dotfiles = inputs.caelestia-dotfiles;
         in
-          collectFiles "" dotDir;
+          collectFiles "hypr" "" "${dotfiles}/hypr"
+          // collectFiles "btop" "" "${dotfiles}/btop"
+          // collectFiles "foot" "" "${dotfiles}/foot";
       };
     };
   };
-
   flake.homeModules.caelestia = {
     config,
     lib,
@@ -76,6 +80,10 @@
         };
       };
       programs.foot.enable = true;
+      home.packages = with pkgs; [
+        nautilus
+        hyprsunset
+      ];
     };
   };
 }
