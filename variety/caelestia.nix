@@ -74,7 +74,7 @@
           };
         };
       };
-      programs.kitty.enable = true;
+      programs.foot.enable = true;
       home.packages = with pkgs; [
         inputs.caelestia-cli.packages.x86_64-linux.default
         kdePackages.dolphin
