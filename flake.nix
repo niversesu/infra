@@ -43,12 +43,11 @@
       flake = false;
     };
     caelestia-dotfiles = {
-      url = "git+https://github.com/niversesu/caelestia?submodules=1&rev=d42469a84ed5ee8037cff75d257c9eb6441e4ba4";
+      url = "git+https://github.com/niversesu/caelestia?submodules=1";
       flake = false;
     };
     caelestia-shell = {
       url = "github:caelestia-dots/shell";
-      #inputs.nixpkgs.follows = "nixpkgs";
     };
     caelestia-cli = {
       url = "github:caelestia-dots/cli";
