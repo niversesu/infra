@@ -695,6 +695,26 @@
         "type": "github"
       }
     },
+    "nix-packages": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778468556,
+        "narHash": "sha256-/O0JLvmKDUY9tALT6vhbfixRCv+ydeBYHAkOLOy/e/8=",
+        "owner": "niversesu",
+        "repo": "nix-packages",
+        "rev": "46c58304d3a49acd764380489ace890ecbbfd6a4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "niversesu",
+        "repo": "nix-packages",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1777954456,
@@ -915,6 +935,7 @@
         "illogical-flake": "illogical-flake",
         "import-tree": "import-tree",
         "nix-flatpak": "nix-flatpak",
+        "nix-packages": "nix-packages",
         "nixpkgs": "nixpkgs_4",
         "nixvim": "nixvim",
         "nur": "nur_2",

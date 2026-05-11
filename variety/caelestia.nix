@@ -83,6 +83,7 @@
       home.packages = with pkgs; [
         nautilus
         hyprsunset
+        cliphist
       ];
     };
   };
