@@ -70,6 +70,11 @@
           bar.status = {
             showBattery = true;
           };
+          idle = {
+            lockBeforeSleep = false;
+            inhibitWhenAudio = false;
+            timeouts = [ ];
+          };
           paths.wallpaperDir = "~/Pictures/wallpapers";
         };
         cli = {
