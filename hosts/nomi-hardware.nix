@@ -15,11 +15,7 @@
         device = "/dev/disk/by-uuid/0b3fbab4-a5df-4e80-b18d-f29e8837ebe3";
         fsType = "ext4";
       };
-      fileSystems."/nix/store" = {
-        device = "/nix/store";
-        fsType = "none";
-        options = ["bind"];
-      };
+
       fileSystems."/boot" = {
         device = "/dev/disk/by-uuid/CA20-216D";
         fsType = "vfat";
