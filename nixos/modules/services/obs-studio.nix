@@ -12,6 +12,7 @@
         enableVirtualCamera = true;
         plugins = with pkgs.obs-studio-plugins; [
           obs-pipewire-audio-capture
+          inputs.nix-packages.packages.${pkgs.system}.obs-pwvideo
         ];
       };
       boot.extraModulePackages = with config.boot.kernelPackages; [
