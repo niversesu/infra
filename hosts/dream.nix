@@ -16,7 +16,8 @@
     };
     mySystem.host-dream-hw.enable = true;
     mySystem.gnome.enable = false;
-    mySystem.plasma.enable = true;
+    mySystem.plasma.enable = false;
+    mySystem.caelestia.enable = true;
     programs.steam.enable = true;
   };
 }

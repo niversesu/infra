@@ -17,6 +17,8 @@
     };
 
     config = lib.mkIf config.myHome.fish.enable {
+      xdg.configFile."fish/config.fish".force = true;
+
       programs.fish = {
         enable = true;
         shellAliases = {

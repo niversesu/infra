@@ -16,6 +16,7 @@
     config = lib.mkIf config.myHome.theming.enable {
       gtk = {
         enable = true;
+        gtk2.force = true;
         cursorTheme = {
           package = pkgs.bibata-cursors;
           name = config.myHome.theming.cursorName;
@@ -30,6 +31,9 @@
           name = "Dracula";
         };
       };
+
+      xdg.configFile."gtk-3.0/settings.ini".force = true;
+      xdg.configFile."gtk-4.0/settings.ini".force = true;
 
       qt = {
         enable = true;
