@@ -2,6 +2,7 @@
   flake.homeModules.starship = {
     config,
     lib,
+    inputs,
     ...
   }: {
     options.myHome.starship.enable = lib.mkEnableOption "starship";
@@ -10,6 +11,9 @@
         enable = true;
         enableFishIntegration = true;
         enableInteractive = true;
+      };
+      home.file = {
+        "starship.toml".source = "${inputs.caelestia-dotfiles}/starship.toml";
       };
     };
   };
