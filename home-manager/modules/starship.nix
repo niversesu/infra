@@ -13,7 +13,7 @@
         enableInteractive = true;
       };
       home.file = {
-        "starship.toml".source = "${inputs.caelestia-dotfiles}/starship.toml";
+        ".config/starship.toml".source = "${inputs.caelestia-dotfiles}/starship.toml";
       };
     };
   };
