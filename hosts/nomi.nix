@@ -10,5 +10,6 @@
       host = "nomi";
     };
     mySystem.host-nomi-hw.enable = true;
+    mySystem.gnome.enable = true;
   };
 }
