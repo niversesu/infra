@@ -1,5 +1,5 @@
-{self, inputs, pkgs, ...}: {
-  flake.homeModules.user-amani = {...}: {
+{self, inputs, ...}: {
+  flake.homeModules.user-amani = {pkgs, ...}: {
     imports = [
       self.homeModules.shared
     ];
