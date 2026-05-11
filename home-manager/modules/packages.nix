@@ -40,7 +40,6 @@
         ])
         ++ (lib.optionals cfg.browsers.enable [
           firefox
-          google-chrome
         ])
         ++ (lib.optionals cfg.communication.enable [
           vesktop
