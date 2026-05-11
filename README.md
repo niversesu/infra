@@ -1,7 +1,7 @@
 # 🏠 Infrastructure
 
-> **NixOS dotfiles powered by flakes, flake-parts, and home-manager using the dendritic pattern**  
-> Two machines, for now...
+> **NixOS dotfiles powered by flakes, flake-parts, and home-manager using the shared module pattern**  
+> Three machines, for now...
 
 <!-- Badges -->
 ![NixOS](https://img.shields.io/badge/NixOS-Unstable-blue?style=flat-square&logo=NixOS&logoColor=white)
@@ -25,26 +25,31 @@
 
 | Host | User | Desktop Environment | Special Config |
 |------|------|---------------------|---------------|
-| `nomi` | faith | Plasma + GNOME | waydroid |
-| `kale` | niver | GNOME | keyd, libvirt, podman, ydotool |
+| `nomi` | faith | GNOME | waydroid |
+| `kale` | niver | Caelestia (Hyprland) | keyd, libvirt, podman, ydotool |
+| `dream` | amani | Caelestia (Hyprland) + Plasma | steam |
 
 ### Project Stats
 ```
-29 .nix files  ·  2 NixOS hosts  ·  9 home-manager modules
-3 DE configs   ·  5 virtualization modules
+34 .nix files  ·  3 NixOS hosts  ·  8 home-manager modules
+4 DE configs   ·  4 virtualization modules
 ```
 
 ### File Structure
 ```
 infra/
 ├── flake.nix              # Flake entry point
-├── parts/hosts.nix        # Host configurations
+├── dotfiles/              # Shared dotfiles (starship, hypr)
+├── parts/
+│   ├── hosts.nix         # Host configurations
+│   └── shared.nix        # Shared module pattern
 ├── hosts/                 # Host-specific modules
 │   ├── nomi/            # faith's machine
-│   └── kale/            # niver's machine
+│   ├── kale/            # niver's machine
+│   └── dream/           # amani's machine
 ├── nixos/               # System-level modules
 │   ├── modules/
-│   │   ├── services/    # keyd
+│   │   ├── services/    # keyd, nix-flatpak, obs-studio
 │   │   └── virtualization/  # waydroid, podman, libvirt, ydotool
 │   ├── configuration.nix # Base system config
 │   ├── packages.nix     # System packages
@@ -52,7 +57,7 @@ infra/
 ├── home-manager/        # User environment
 │   ├── modules/         # Reusable modules (fish, nixvim, etc)
 │   └── users/           # Per-user configs
-└── variety/             # DE-specific configs (gnome, plasma, illogical)
+└── variety/             # DE-specific configs (gnome, plasma, illogical, caelestia)
 ```
 
 ---
@@ -68,9 +73,14 @@ flowchart TB
         it["import-tree"]
     end
 
+    subgraph parts["parts/"]
+        hosts["hosts.nix"]
+        shared["shared.nix"]
+    end
+
     subgraph nixos["NixOS Configuration"]
         subgraph nixos-modules["nixos/modules/"]
-            sm["services/keyd"]
+            sm["services/"]
             vm["virtualization/"]
         end
         config["configuration.nix"]
@@ -78,15 +88,17 @@ flowchart TB
         svc["services.nix"]
     end
 
-    subgraph hosts["hosts/"]
+    subgraph hosts_dir["hosts/"]
         nomi["host-nomi"]
         kale["host-kale"]
+        dream["host-dream"]
     end
 
     subgraph variety["variety/"]
         gnome["gnome"]
         plasma["plasma"]
         illogical["illogical"]
+        caelestia["caelestia"]
     end
 
     subgraph hm["home-manager"]
@@ -96,7 +108,6 @@ flowchart TB
             git["git"]
             starship["starship"]
             vscode["vscode"]
-            xdg["xdg"]
             spicetify["spicetify"]
             theming["theming"]
             packages["packages"]
@@ -104,22 +115,29 @@ flowchart TB
         subgraph hm-users["home-manager/users/"]
             faith["user-faith"]
             niver["user-niver"]
+            amani["user-amani"]
         end
     end
 
     fp --> it
+    it --> parts
     it --> nixos-modules
-    it --> hosts
+    it --> hosts_dir
     it --> hm-modules
     it --> hm-users
     it --> variety
 
-    hosts --> nixos-modules
-    hosts --> config
-    hosts --> variety
+    shared --> nixos-modules
+    shared --> config
+    shared --> pkgs
+    shared --> svc
+    shared --> variety
+
+    hosts_dir --> shared
 
     nomi --> hm-users
     kale --> hm-users
+    dream --> hm-users
 ```
 
 ### Data Flow
@@ -129,6 +147,7 @@ sequenceDiagram
     participant U as User
     participant N as nixos-rebuild
     participant F as flake.nix
+    participant S as shared.nix
     participant H as Host Config
     participant M as Modules
     participant HM as Home Manager
@@ -137,8 +156,8 @@ sequenceDiagram
     N->>F: Evaluate flake
     F->>F: Load flake-parts + import-tree
     F->>H: Get host-nomi config
-    H->>M: Import modules
-    M->>M: Apply system config
+    H->>S: Enable shared module (sets host/user)
+    S->>M: Import all modules (conditionally enabled)
     H->>HM: Get user-faith config
     HM->>HM: Apply user config
     N->>U: System activated
@@ -150,34 +169,47 @@ sequenceDiagram
 
 ### nomi
 
-faith's daily driver.
+faith's daily driver — GNOME with Waydroid.
 
 ```nix
-# Imported modules
-- host-nomi-hw        # Hardware config
-- configuration       # Base system
-- illogical           # Hyprland DE
-- plasma             # KDE Plasma
-- gnome              # GNOME
-- virt               # Virtualization base
-- waydroid           # Android emulation
+# Configured via shared module
+mySystem.shared = {
+  enable = true;
+  user = "faith";
+  host = "nomi";
+};
+mySystem.gnome.enable = true;
 ```
 
 ### kale
 
-niver's powerhouse.
+niver's powerhouse — Caelestia (Hyprland) with full virtualization stack.
 
 ```nix
-# Imported modules
-- host-kale-hw       # Hardware config
-- configuration      # Base system
-- gnome              # GNOME
-- keyd               # Keyboard remapping
-- virt               # Virtualization base
-- podman             # Container runtime
-- libvirt            # VM management
-- ydotool            # Input automation
-- waydroid           # Android emulation
+mySystem.shared = {
+  enable = true;
+  user = "niver";
+  host = "kale";
+};
+mySystem.caelestia.enable = true;
+mySystem.keyd.enable = true;
+mySystem.podman.enable = true;
+mySystem.libvirt.enable = true;
+mySystem.ydotool.enable = true;
+```
+
+### dream
+
+amani's machine — Caelestia (Hyprland) with Plasma fallback, Steam gaming.
+
+```nix
+mySystem.shared = {
+  enable = true;
+  user = "amani";
+  host = "dream";
+};
+mySystem.caelestia.enable = true;
+programs.steam.enable = true;
 ```
 
 ---
@@ -190,11 +222,12 @@ niver's powerhouse.
 | Module | Purpose |
 |--------|---------|
 | `keyd` | Keyboard remapping (disables laptop keyboard) |
+| `nix-flatpak` | Flatpak integration via nix-flatpak |
+| `obs-studio` | OBS Studio with virtual camera support |
 
 #### `nixos/modules/virtualization/`
 | Module | Purpose |
 |--------|---------|
-| `virt` | Base options + disables nftables |
 | `waydroid` | Android emulation via Waydroid |
 | `podman` | Rootless container runtime |
 | `libvirt` | VM hypervisor + virt-manager |
@@ -209,11 +242,9 @@ niver's powerhouse.
 | `git` | Git config with GitHub SSH rewrite |
 | `starship` | Rust-powered shell prompt |
 | `vscode` | VSCode FHS environment |
-| `xdg` | XDG defaults + Chrome as default browser |
 | `spicetify` | Spotify theming |
 | `theming` | GTK, cursor, icon themes |
 | `packages` | Unified package management |
-| `illogical` | illogical-impulse dotfiles integration |
 
 ### Variety (DE Configs)
 
@@ -222,6 +253,7 @@ niver's powerhouse.
 | `gnome` | GNOME | GDM, extensions, xrdp |
 | `plasma` | KDE Plasma 6 | SDDM, kdeconnect |
 | `illogical` | Hyprland | SDDM, hyprland + illogical-impulse |
+| `caelestia` | Hyprland | SDDM, caelestia dotfiles, hjem |
 
 ---
 
@@ -243,9 +275,9 @@ niver's powerhouse.
    }
    ```
 
-3. Import it in a user config:
+3. Import it in the shared module or a user config:
    ```nix
-   # home-manager/users/faith.nix
+   # parts/shared.nix or home-manager/users/faith.nix
    imports = [
      self.homeModules.my-module  # Add this
      # ... existing imports
@@ -275,9 +307,8 @@ niver's powerhouse.
    }
    ```
 
-3. Import it in a host:
+3. Import it in `parts/shared.nix`:
    ```nix
-   # hosts/nomi.nix or hosts/kale.nix
    imports = [
      self.nixosModules.my-module  # Add this
      # ... existing imports
@@ -298,21 +329,10 @@ niver's powerhouse.
 
 3. Register in `parts/hosts.nix`:
    ```nix
-   myhost = inputs.nixpkgs.lib.nixosSystem {
-     system = "x86_64-linux";
-     specialArgs = { inherit inputs self; };
-     modules = [
-       inputs.home-manager.nixosModules.home-manager
-       self.nixosModules.host-myhost
-       ({ ... }: {
-         home-manager = {
-           useGlobalPkgs = true;
-           useUserPackages = true;
-           extraSpecialArgs = { inherit inputs self; };
-           users.myuser = self.homeModules.user-myuser;
-         };
-       })
-     ];
+   myhost = mkHost {
+     module = self.nixosModules.host-myhost;
+     user = "myuser";
+     homeModule = self.homeModules.user-myuser;
    };
    ```
 
@@ -366,9 +386,31 @@ Modules export themselves via `flake.nixosModules.<name>` or `flake.homeModules.
 # └── gnome.nix      → flake.nixosModules.gnome
 # └── plasma.nix     → flake.nixosModules.plasma
 # └── illogical.nix  → flake.nixosModules.illogical + flake.homeModules.illogical
+# └── caelestia.nix  → flake.nixosModules.caelestia + flake.homeModules.caelestia
 ```
 
 The filename becomes the module name, directory is just for organization.
+
+</details>
+
+<details>
+<summary><b>🏠 The Shared Module Pattern</b></summary>
+
+Instead of each host duplicating imports, `parts/shared.nix` defines a **shared module** that all hosts use:
+
+```nix
+# In hosts/nomi.nix
+imports = [ self.nixosModules.shared ];
+
+mySystem.shared = {
+  enable = true;
+  user = "faith";
+  host = "nomi";
+};
+mySystem.gnome.enable = true;
+```
+
+The shared module conditionally enables modules based on host-specific options. Each host only sets what's different from defaults.
 
 </details>
 
@@ -386,13 +428,13 @@ modules = [
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      users.faith = self.homeModules.user-faith;  # User config
+      users.faith = self.homeModules.user-faith;
     };
   })
 ];
 ```
 
-Users are defined in `home-manager.users.<username>`, and each user imports from `self.homeModules.*`.
+Users import `self.homeModules.shared` which provides common modules (nixvim, fish, git, etc.), then override per-user options.
 
 </details>
 
@@ -402,9 +444,9 @@ Users are defined in `home-manager.users.<username>`, and each user imports from
 Modules can reference each other via `self.homeModules.*` or `self.nixosModules.*`:
 
 ```nix
-# In home-manager/users/faith.nix
+# In parts/shared.nix (homeModules.shared)
 imports = [
-  self.homeModules.nixvim   # References the nixvim module
+  self.homeModules.nixvim
   self.homeModules.fish
   # ...
 ];
@@ -413,11 +455,11 @@ imports = [
 The `mySystem` option namespace is used for system-level toggles:
 
 ```nix
-# In variety/illogical.nix
-options.mySystem.illogical.enable = lib.mkEnableOption "illogical impulse";
+# In variety/caelestia.nix
+options.mySystem.caelestia.enable = lib.mkEnableOption "caelestia";
 
-# In hosts/nomi.nix
-mySystem.illogical.enable = true;  # Enable it
+# In hosts/dream.nix
+mySystem.caelestia.enable = true;
 ```
 
 </details>
@@ -429,11 +471,10 @@ The virtualization modules are split for composability:
 
 | Module | What it does |
 |--------|-------------|
-| `virt` | Defines options, disables nftables (required for libvirt) |
+| `waydroid` | Enables Waydroid service |
 | `podman` | Enables podman.socket + podman-compose |
 | `libvirt` | Starts libvirtd, enables virt-manager |
 | `ydotool` | Enables ydotool daemon, sets socket path |
-| `waydroid` | Enables Waydroid service |
 
 Each can be enabled/disabled independently via `mySystem.virt.<module>.enable`.
 
