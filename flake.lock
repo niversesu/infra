@@ -702,11 +702,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778468556,
-        "narHash": "sha256-/O0JLvmKDUY9tALT6vhbfixRCv+ydeBYHAkOLOy/e/8=",
+        "lastModified": 1778469385,
+        "narHash": "sha256-REDhcn7qwrL7HIENifMG2XiE+FRJ9d+LisjqhtI6q0M=",
         "owner": "niversesu",
         "repo": "nix-packages",
-        "rev": "46c58304d3a49acd764380489ace890ecbbfd6a4",
+        "rev": "04db0c6eddaf12487c83bb9c96499800e57def76",
         "type": "github"
       },
       "original": {
