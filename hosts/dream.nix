@@ -1,5 +1,5 @@
 {self, ...}: {
-  flake.nixosModules.host-dream = {...}: {
+  flake.nixosModules.host-dream = {lib, ...}: {
     imports = [
       self.nixosModules.shared
     ];
@@ -10,6 +10,10 @@
       host = "dream";
     };
 
+    boot.loader = {
+      systemd-boot.enable = lib.mkForce false;
+      grub.enable = lib.mkForce true;
+    };
     mySystem.host-dream-hw.enable = true;
     mySystem.gnome.enable = false;
     mySystem.plasma.enable = true;

@@ -80,13 +80,13 @@
       self.homeModules.packages
     ];
     config = lib.mkIf osConfig.mySystem.shared.enable {
-      #myHome.fish.enable = lib.mkDefault true;
+      myHome.fish.enable = lib.mkDefault false;
       myHome.git.enable = lib.mkDefault true;
       myHome.nixvim.enable = lib.mkDefault true;
       myHome.packages.enable = lib.mkDefault true;
       myHome.spicetify.enable = lib.mkDefault true;
       myHome.starship.enable = lib.mkDefault true;
-      #myHome.theming.enable = lib.mkDefault true;
+      myHome.theming.enable = lib.mkDefault false;
       myHome.vscode.enable = lib.mkDefault true;
       nixpkgs.config.allowUnfree = true;
       home = {
