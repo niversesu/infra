@@ -82,6 +82,7 @@
       programs.foot.enable = true;
       home.packages = with pkgs; [
         nautilus
+        loupe
         hyprsunset
         cliphist
       ];

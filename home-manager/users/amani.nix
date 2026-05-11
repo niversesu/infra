@@ -17,6 +17,7 @@
     myHome.packages.tech-tools.enable = true;
     home.packages = [
       pkgs.easyeffects
+      pkgs.noisetorch
       inputs.nix-packages.packages.${pkgs.system}.veadotube-mini
     ];
   };
