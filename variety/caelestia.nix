@@ -73,7 +73,7 @@
           idle = {
             lockBeforeSleep = false;
             inhibitWhenAudio = false;
-            timeouts = [ ];
+            timeouts = [];
           };
           paths.wallpaperDir = "~/Pictures/wallpapers";
         };
@@ -82,6 +82,10 @@
           settings = {
             theme.enableGtk = true;
           };
+        };
+        utilities = {
+          enabled = true;
+          maxToasts = 1;
         };
       };
       programs.foot.enable = true;

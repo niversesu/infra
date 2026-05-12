@@ -15,6 +15,10 @@
             efi.canTouchEfiVariables = true;
           };
           hardware.enableRedistributableFirmware = true;
+          hardware.bluetooth = {
+            enable = true;
+            powerOnBoot = true;
+          };
           # Memory Management
           zramSwap = {
             enable = true;
