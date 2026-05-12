@@ -1,5 +1,9 @@
 {self, ...}: {
-  flake.homeModules.user-niver = {pkgs, ...}: {
+  flake.homeModules.user-niver = {
+    pkgs,
+    inputs,
+    ...
+  }: {
     imports = [
       self.homeModules.shared
     ];
@@ -15,6 +19,9 @@
     myHome.packages.gaming.enable = true;
     myHome.packages.creative.enable = true;
     myHome.packages.tech-tools.enable = true;
+    home.packages = [
+      inputs.nix-packages.packages.${pkgs.system}.veadotube-mini
+    ];
 
     i18n.inputMethod = {
       enable = true;

@@ -16,7 +16,6 @@
     myHome.packages.creative.enable = true;
     myHome.packages.tech-tools.enable = true;
     home.packages = [
-      pkgs.easyeffects
       inputs.nix-packages.packages.${pkgs.system}.veadotube-mini
     ];
   };
