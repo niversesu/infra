@@ -9,15 +9,13 @@
       user = "niver";
       host = "kale";
     };
+    mySystem.profiles.desktop.enable = true;
+    mySystem.profiles.virtualization.enable = true;
     mySystem.host-kale-hw.enable = true;
 
     mySystem.gnome.enable = false;
     mySystem.caelestia.enable = true;
 
-    mySystem.keyd.enable = true;
-    mySystem.podman.enable = true;
-    mySystem.libvirt.enable = true;
-    mySystem.ydotool.enable = true;
     programs.steam.enable = true;
   };
 }

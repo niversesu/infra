@@ -9,7 +9,7 @@
       user = "faith";
       host = "nomi";
     };
+    mySystem.profiles.desktop.enable = true;
     mySystem.host-nomi-hw.enable = true;
-    mySystem.gnome.enable = true;
   };
 }

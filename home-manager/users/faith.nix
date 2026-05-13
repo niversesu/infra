@@ -4,9 +4,9 @@
       self.homeModules.shared
     ];
 
+    myHome.profiles.full.enable = true;
     myHome.fish = {
       enable = true;
-      flakeTarget = "nomi";
       theme = "catppuccin-frappe";
     };
     myHome.theming = {

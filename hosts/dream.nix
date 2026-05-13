@@ -9,6 +9,7 @@
       user = "amani";
       host = "dream";
     };
+    mySystem.profiles.desktop.enable = true;
     mySystem.host-dream-hw.enable = true;
     mySystem.gnome.enable = false;
     mySystem.plasma.enable = false;

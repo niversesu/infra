@@ -7,9 +7,10 @@
     imports = [
       self.homeModules.shared
     ];
+    myHome.profiles.full.enable = true;
+    myHome.profiles.creative.enable = true;
     myHome.fish = {
       enable = true;
-      flakeTarget = "kale";
       theme = "catppuccin-mocha";
     };
     myHome.theming = {
@@ -17,7 +18,6 @@
       cursorName = "Bibata-Modern-Ice";
     };
     myHome.packages.gaming.enable = true;
-    myHome.packages.creative.enable = true;
     myHome.packages.tech-tools.enable = true;
     home.packages = [
       inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.veadotube-mini
