@@ -33,7 +33,7 @@
             bat
             fd
             tealdeer
-            du-dust
+            dust
             wl-clipboard
             cpx
             cachix
