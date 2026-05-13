@@ -78,6 +78,7 @@
       self.homeModules.qol
       self.homeModules.spicetify
       self.homeModules.packages
+      self.homeModules.wallpapers
     ];
     config = lib.mkIf osConfig.mySystem.shared.enable {
       myHome.fish.enable = lib.mkDefault false;
@@ -86,6 +87,7 @@
       myHome.packages.enable = lib.mkDefault true;
       myHome.spicetify.enable = lib.mkDefault true;
       myHome.starship.enable = lib.mkDefault true;
+      myHome.wallpapers.enable = lib.mkDefault true;
       myHome.theming.enable = lib.mkDefault false;
       myHome.vscode.enable = lib.mkDefault true;
       home = {

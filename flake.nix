@@ -56,6 +56,10 @@
       url = "github:niversesu/nix-packages";
       inputs.nixpkgs.follows = "nixpkgs"; 
     };
+    wallpapers = {
+      url = "github:niversesu/wallpapers";
+      flake = false;
+    };
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
