@@ -1,7 +1,8 @@
-result
-*.qcow2
-*.zst
-devshells/pyautogui-wayland/*
-!devshells/pyautogui-wayland/flake.nix
-!devshells/pyautogui-wayland/flake.lock
-!devshells/pyautogui-wayland/test.py
+/*
+!/.gitignore
+!/flake.nix
+!/flake.lock
+!/README.md
+!/modules/
+!/parts/
+!/devshells/

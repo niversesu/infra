@@ -49,8 +49,13 @@
       url = "git+https://github.com/niversesu/caelestia?submodules=1";
       flake = false;
     };
+    caelestia-cli = {
+      url = "github:caelestia-dots/cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     caelestia-shell = {
       url = "github:caelestia-dots/shell";
+      inputs.caelestia-cli.follows = "caelestia-cli";
     };
     nix-packages = {
       url = "github:niversesu/nix-packages";

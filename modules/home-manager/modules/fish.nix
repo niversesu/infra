@@ -79,7 +79,7 @@
 
       (lib.mkIf (osConfig.mySystem.caelestia.enable or false) {
         programs.fish.interactiveShellInit = ''          if type -q caelestia
-            caelestia scheme set -n shadotheme
+            caelestia scheme set -n dynamic
           end
         '';
       })

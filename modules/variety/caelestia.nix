@@ -57,7 +57,7 @@
             paths.wallpaperDir = "${config.home.homeDirectory}/Pictures/wallpapers";
           };
           cli = {
-            enable = true;
+            enable = false;
             settings.theme.enableGtk = true;
           };
         };
@@ -70,7 +70,7 @@
           loupe
           hyprsunset
           cliphist
-        ];
+        ] ++ [inputs.caelestia-cli.packages.${pkgs.system}.default];
       }
 
       {
