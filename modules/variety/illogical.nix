@@ -8,15 +8,9 @@
     system = pkgs.stdenv.hostPlatform.system;
     qsPackage = inputs.quickshell.packages.${system}.default;
     fixedQuickshell = qsPackage.unwrapped.overrideAttrs (old: {
-      cmakeFlags = (old.cmakeFlags or []) ++ [
-        "-DNO_PCH=ON"
-      ];
-
+      cmakeFlags = (old.cmakeFlags or []) ++ ["-DNO_PCH=ON"];
       preBuild = ''
         export NIX_BUILD_CORES=1
-        # Qt6 generates _qmltyperegistrations.cpp at build time but the ninja
-        # dependencies are missing. We generate empty stubs here so compilation
-        # doesn't fail; Qt's qmltyperegistrar will overwrite them later.
         if [ -f build/build.ninja ]; then
           sed -n 's/.*:.* \([^ ]*_qmltyperegistrations\.cpp\)$/\1/p' build/build.ninja \
             | sort -u | while read src; do
@@ -29,25 +23,29 @@
   in {
     options.mySystem.illogical.enable = lib.mkEnableOption "illogical impulse";
 
-    config = lib.mkIf config.mySystem.illogical.enable {
-      programs.hyprland = {
-        enable = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-      };
-      services.geoclue2.enable = true;
-      services.displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-      };
-      environment.systemPackages = with pkgs; [
-        qt5.qtgraphicaleffects
-        qt6.qt5compat
-        qt6.qtpositioning
-        kdePackages.syntax-highlighting
-        fixedQuickshell
-      ];
-    };
+    config = lib.mkIf config.mySystem.illogical.enable (lib.mkMerge [
+      {
+        programs.hyprland = {
+          enable = true;
+          package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+          portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        };
+        services.geoclue2.enable = true;
+        services.displayManager.sddm = {
+          enable = true;
+          wayland.enable = true;
+        };
+      }
+      {
+        environment.systemPackages = with pkgs; [
+          qt5.qtgraphicaleffects
+          qt6.qt5compat
+          qt6.qtpositioning
+          kdePackages.syntax-highlighting
+          fixedQuickshell
+        ];
+      }
+    ]);
   };
 
   flake.homeModules.illogical = {
@@ -62,9 +60,7 @@
     system = pkgs.stdenv.hostPlatform.system;
     qsPackage = inputs.quickshell.packages.${system}.default;
     fixedQuickshell = qsPackage.unwrapped.overrideAttrs (old: {
-      cmakeFlags = (old.cmakeFlags or []) ++ [
-        "-DNO_PCH=ON"
-      ];
+      cmakeFlags = (old.cmakeFlags or []) ++ ["-DNO_PCH=ON"];
       preBuild = ''
         export NIX_BUILD_CORES=1
         if [ -f build/build.ninja ]; then
@@ -94,7 +90,6 @@
       ps.opencv4
     ]);
   in {
-    # Import illogical-flake submodules except qt.nix (which uses unfixed quickshell)
     imports = let
       flakeSrc = "${inputs.illogical-flake}";
       subInputs = {
@@ -109,41 +104,42 @@
       (import "${flakeSrc}/home-modules/dotfiles.nix" subInputs)
     ];
 
-    # Define option that is normally defined in home-module.nix
     options.programs.illogical-impulse.enable = lib.mkEnableOption "Enable the Illogical Impulse Hyprland configuration";
 
-    config = lib.mkIf (cfg.enable or false) {
-      programs.illogical-impulse = {
-        enable = true;
-        dotfiles = {
-          fish.enable = true;
-          kitty.enable = true;
-          starship.enable = true;
+    config = lib.mkIf (cfg.enable or false) (lib.mkMerge [
+      {
+        programs.illogical-impulse = {
+          enable = true;
+          dotfiles = {
+            fish.enable = true;
+            kitty.enable = true;
+            starship.enable = true;
+          };
+          hyprland.plugins = [
+            inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+            inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+          ];
         };
-        hyprland.plugins = [
-          inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-          inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      }
+      {
+        home.packages = [
+          (pkgs.writeShellScriptBin "qs" ''
+            export QT_PLUGIN_PATH="${lib.makeSearchPath "lib/qt-6/plugins" qtImports}:${lib.makeSearchPath "lib/qt6/plugins" qtImports}:${lib.makeSearchPath "lib/plugins" qtImports}"
+            export QML2_IMPORT_PATH="${lib.makeSearchPath "lib/qt-6/qml" qtImports}"
+            export XDG_DATA_DIRS="${lib.makeSearchPath "share" [
+              pkgs.adwaita-icon-theme pkgs.hicolor-icon-theme pkgs.papirus-icon-theme
+              customPkgs.illogical-impulse-oneui4-icons pkgs.gnome-icon-theme
+              pkgs.kdePackages.breeze-icons pkgs.lxqt.pavucontrol-qt pkgs.pavucontrol
+            ]}:$HOME/.nix-profile/share:$HOME/.local/share:/etc/profiles/per-user/$USER/share:/run/current-system/sw/share:/usr/share:$XDG_DATA_DIRS"
+            export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+            export QT_QPA_PLATFORMTHEME=gtk3
+            exec ${fixedQuickshell}/bin/qs "$@"
+          '')
+        ] ++ qtImports ++ [
+          pkgs.qt6Packages.qt6ct
+          pythonEnv
         ];
-      };
-
-      # qs wrapper with fixed quickshell (replaces the one from qt.nix which we don't import)
-      home.packages = [
-        (pkgs.writeShellScriptBin "qs" ''
-          export QT_PLUGIN_PATH="${lib.makeSearchPath "lib/qt-6/plugins" qtImports}:${lib.makeSearchPath "lib/qt6/plugins" qtImports}:${lib.makeSearchPath "lib/plugins" qtImports}"
-          export QML2_IMPORT_PATH="${lib.makeSearchPath "lib/qt-6/qml" qtImports}"
-          export XDG_DATA_DIRS="${lib.makeSearchPath "share" [
-            pkgs.adwaita-icon-theme pkgs.hicolor-icon-theme pkgs.papirus-icon-theme
-            customPkgs.illogical-impulse-oneui4-icons pkgs.gnome-icon-theme
-            pkgs.kdePackages.breeze-icons pkgs.lxqt.pavucontrol-qt pkgs.pavucontrol
-          ]}:$HOME/.nix-profile/share:$HOME/.local/share:/etc/profiles/per-user/$USER/share:/run/current-system/sw/share:/usr/share:$XDG_DATA_DIRS"
-          export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-          export QT_QPA_PLATFORMTHEME=gtk3
-          exec ${fixedQuickshell}/bin/qs "$@"
-        '')
-      ] ++ qtImports ++ [
-        pkgs.qt6Packages.qt6ct
-        pythonEnv
-      ];
-    };
+      }
+    ]);
   };
 }

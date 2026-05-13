@@ -10,69 +10,60 @@
   in {
     options.myHome.packages = {
       enable = lib.mkEnableOption "packages";
-      remotetools.enable = lib.mkEnableOption "Remote & filesystem tools (remmina, ntfs3g)" // {default = true;};
-      fonts.enable = lib.mkEnableOption "Personal font collection (JetBrains Mono, Meslo, Minecraftia, Montserrat)" // {default = true;};
-      gaming.enable = lib.mkEnableOption "Gaming tools (Prism Launcher, Packwiz)";
-      browsers.enable = lib.mkEnableOption "Web browsers (Firefox, Google Chrome)" // {default = true;};
-      communication.enable = lib.mkEnableOption "Communication tools (Vesktop)";
-      media.enable = lib.mkEnableOption "Media tools (Celluloid, FFmpeg, yt-dlp)" // {default = true;};
-      filemanagement.enable = lib.mkEnableOption "File management (Filelight, Rclone)" // {default = true;};
-      cliutilities.enable = lib.mkEnableOption "CLI utilities (gemini-cli, claude-code, opencode)" // {default = true;};
-      creative.enable = lib.mkEnableOption "Creative tools (Krita, GIMP3, Kdenlive)";
-      tech-tools.enable = lib.mkEnableOption "Tech tools (keyd, ydotool, distrobox)";
+      remotetools.enable = lib.mkEnableOption "Remote & filesystem tools" // {default = true;};
+      fonts.enable = lib.mkEnableOption "Personal font collection" // {default = true;};
+      gaming.enable = lib.mkEnableOption "Gaming tools";
+      browsers.enable = lib.mkEnableOption "Web browsers" // {default = true;};
+      communication.enable = lib.mkEnableOption "Communication tools";
+      media.enable = lib.mkEnableOption "Media tools" // {default = true;};
+      filemanagement.enable = lib.mkEnableOption "File management" // {default = true;};
+      cliutilities.enable = lib.mkEnableOption "CLI utilities" // {default = true;};
+      creative.enable = lib.mkEnableOption "Creative tools";
+      tech-tools.enable = lib.mkEnableOption "Tech tools";
     };
 
-    config = lib.mkIf config.myHome.packages.enable {
-      home.packages = with pkgs;
-        (lib.optionals cfg.remotetools.enable [
-          remmina
-          ntfs3g
-        ])
-        ++ (lib.optionals cfg.fonts.enable [
+    config = lib.mkIf cfg.enable (lib.mkMerge [
+      (lib.mkIf cfg.remotetools.enable {
+        home.packages = [pkgs.remmina pkgs.ntfs3g];
+      })
+      (lib.mkIf cfg.fonts.enable {
+        home.packages = with pkgs; [
           nerd-fonts.jetbrains-mono
           meslo-lgs-nf
           minecraftia
           montserrat
-        ])
-        ++ (lib.optionals cfg.gaming.enable [
-          prismlauncher
-          packwiz
-        ])
-        ++ (lib.optionals cfg.browsers.enable [
-          firefox
-        ])
-        ++ (lib.optionals cfg.communication.enable [
-          vesktop
-        ])
-        ++ (lib.optionals (osConfig.mySystem.waydroid.enable or false) [
+        ];
+      })
+      (lib.mkIf cfg.gaming.enable {
+        home.packages = [pkgs.prismlauncher pkgs.packwiz];
+      })
+      (lib.mkIf cfg.browsers.enable {
+        home.packages = [pkgs.firefox];
+      })
+      (lib.mkIf cfg.communication.enable {
+        home.packages = [pkgs.vesktop];
+      })
+      (lib.mkIf (osConfig.mySystem.waydroid.enable or false) {
+        home.packages = [
           pkgs.nur.repos.ataraxiasjel.waydroid-script
-          waydroid-helper
-        ])
-        ++ (lib.optionals cfg.media.enable [
-          celluloid
-          ffmpeg
-          yt-dlp
-        ])
-        ++ (lib.optionals cfg.filemanagement.enable [
-          kdePackages.filelight
-          rclone
-        ])
-        ++ (lib.optionals cfg.cliutilities.enable [
-          gemini-cli-bin
-          claude-code
-          opencode
-        ])
-        ++ (lib.optionals cfg.creative.enable [
-          krita
-          gimp3-with-plugins
-          kdePackages.kdenlive
-        ])
-        ++ (lib.optionals cfg."tech-tools".enable [
-          keyd
-          ydotool
-          distrobox
-          nixos-container
-        ]);
-    };
+          pkgs.waydroid-helper
+        ];
+      })
+      (lib.mkIf cfg.media.enable {
+        home.packages = with pkgs; [celluloid ffmpeg yt-dlp];
+      })
+      (lib.mkIf cfg.filemanagement.enable {
+        home.packages = [pkgs.kdePackages.filelight pkgs.rclone];
+      })
+      (lib.mkIf cfg.cliutilities.enable {
+        home.packages = with pkgs; [gemini-cli-bin claude-code opencode];
+      })
+      (lib.mkIf cfg.creative.enable {
+        home.packages = with pkgs; [krita gimp3-with-plugins kdePackages.kdenlive];
+      })
+      (lib.mkIf cfg.tech-tools.enable {
+        home.packages = with pkgs; [keyd ydotool distrobox nixos-container];
+      })
+    ]);
   };
 }

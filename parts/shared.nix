@@ -61,42 +61,43 @@
       };
     };
 
-    config = lib.mkIf config.mySystem.shared.enable {
-      # Baseline - Always on for all hosts
-      mySystem.core.boot.enable = lib.mkDefault true;
-      mySystem.core.nix.enable = lib.mkDefault true;
-      mySystem.core.locale.enable = lib.mkDefault true;
-      mySystem.core.network.enable = lib.mkDefault true;
-      mySystem.core.hardware.enable = lib.mkDefault true;
-      mySystem.core.shell.enable = lib.mkDefault true;
+    config = lib.mkIf config.mySystem.shared.enable (lib.mkMerge [
+      # Baseline - Essential system services
+      {
+        mySystem.core.boot.enable = lib.mkDefault true;
+        mySystem.core.nix.enable = lib.mkDefault true;
+        mySystem.core.locale.enable = lib.mkDefault true;
+        mySystem.core.network.enable = lib.mkDefault true;
+        mySystem.core.hardware.enable = lib.mkDefault true;
+        mySystem.core.shell.enable = lib.mkDefault true;
 
-      mySystem.packages.enable = lib.mkDefault true;
-      mySystem.services.enable = lib.mkDefault true;
-      mySystem.keyd.enable = lib.mkDefault true;
+        mySystem.packages.enable = lib.mkDefault true;
+        mySystem.services.enable = lib.mkDefault true;
+        mySystem.keyd.enable = lib.mkDefault true;
 
-      # Profile: Desktop (Plumbing & Default DE)
-      mySystem.gnome.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
-      mySystem.nix-flatpak.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
-      mySystem.obs-studio.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
-      
-      # Desktop Alternatives (Explicitly OFF by default, even with Desktop Profile)
-      mySystem.plasma.enable = lib.mkDefault false;
-      mySystem.caelestia.enable = lib.mkDefault false;
-      mySystem.illogical.enable = lib.mkDefault false;
+        networking.hostName = lib.mkDefault config.mySystem.shared.host;
+        users.users.${config.mySystem.shared.user} = {
+          isNormalUser = true;
+          extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
+        };
+        services.getty.autologinUser = lib.mkDefault config.mySystem.shared.user;
+      }
 
-      # Profile: Virtualization (Infrastructure)
-      mySystem.waydroid.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
-      mySystem.podman.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
-      mySystem.libvirt.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
-      mySystem.ydotool.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
+      # Desktop Profile
+      (lib.mkIf config.mySystem.profiles.desktop.enable {
+        mySystem.gnome.enable = lib.mkDefault true;
+        mySystem.nix-flatpak.enable = lib.mkDefault true;
+        mySystem.obs-studio.enable = lib.mkDefault true;
+      })
 
-      networking.hostName = "${config.mySystem.shared.host}";
-      users.users.${config.mySystem.shared.user} = {
-        isNormalUser = true;
-        extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
-      };
-      services.getty.autologinUser = config.mySystem.shared.user;
-    };
+      # Virtualization Profile
+      (lib.mkIf config.mySystem.profiles.virtualization.enable {
+        mySystem.waydroid.enable = lib.mkDefault true;
+        mySystem.podman.enable = lib.mkDefault true;
+        mySystem.libvirt.enable = lib.mkDefault true;
+        mySystem.ydotool.enable = lib.mkDefault true;
+      })
+    ]);
   };
 
   flake.homeModules.shared = {
@@ -125,39 +126,44 @@
       creative.enable = lib.mkEnableOption "Creative profile (Art & Video tools)";
     };
 
-    config = lib.mkIf osConfig.mySystem.shared.enable {
-      # Baseline Home (Minimal CLI)
-      myHome.fish.enable = lib.mkDefault true;
-      myHome.theming.enable = lib.mkDefault true;
-      myHome.git.enable = lib.mkDefault true;
-      myHome.nixvim.enable = lib.mkDefault true;
-      myHome.packages.enable = lib.mkDefault true;
-      myHome.qol.enable = lib.mkDefault true;
+    config = lib.mkIf osConfig.mySystem.shared.enable (lib.mkMerge [
+      # Baseline Home (Shell and Git)
+      {
+        myHome.fish.enable = lib.mkDefault true;
+        myHome.theming.enable = lib.mkDefault true;
+        myHome.git.enable = lib.mkDefault true;
+        myHome.nixvim.enable = lib.mkDefault true;
+        myHome.packages.enable = lib.mkDefault true;
+        myHome.qol.enable = lib.mkDefault true;
 
-      # Full Profile (The standard desktop experience)
-      myHome.spicetify.enable = lib.mkDefault config.myHome.profiles.full.enable;
-      myHome.starship.enable = lib.mkDefault config.myHome.profiles.full.enable;
-      myHome.wallpapers.enable = lib.mkDefault config.myHome.profiles.full.enable;
-      myHome.vscode.enable = lib.mkDefault config.myHome.profiles.full.enable;
+        home.sessionVariables = {
+          FLAKE = "${config.home.homeDirectory}/infra";
+          NH_FLAKE = "${config.home.homeDirectory}/infra";
+        };
 
-      # Tying Home Varieties to System Varieties
-      # (Only active if the corresponding system variety is enabled)
-      programs.caelestia.enable = lib.mkDefault (osConfig.mySystem.caelestia.enable or false);
-      programs.illogical-impulse.enable = lib.mkDefault (osConfig.mySystem.illogical.enable or false);
+        home = {
+          username = lib.mkDefault osConfig.mySystem.shared.user;
+          homeDirectory = lib.mkDefault "/home/${osConfig.mySystem.shared.user}";
+          stateVersion = lib.mkDefault osConfig.mySystem.shared.stateVersion;
+        };
+
+        # Auto-sync varieties
+        programs.caelestia.enable = lib.mkDefault (osConfig.mySystem.caelestia.enable or false);
+        programs.illogical-impulse.enable = lib.mkDefault (osConfig.mySystem.illogical.enable or false);
+      }
+
+      # Full Profile
+      (lib.mkIf config.myHome.profiles.full.enable {
+        myHome.spicetify.enable = lib.mkDefault true;
+        myHome.starship.enable = lib.mkDefault true;
+        myHome.wallpapers.enable = lib.mkDefault true;
+        myHome.vscode.enable = lib.mkDefault true;
+      })
 
       # Creative Profile
-      myHome.packages.creative.enable = lib.mkDefault config.myHome.profiles.creative.enable;
-
-      home.sessionVariables = {
-        FLAKE = "${config.home.homeDirectory}/infra";
-        NH_FLAKE = "${config.home.homeDirectory}/infra";
-      };
-
-      home = {
-        username = osConfig.mySystem.shared.user;
-        homeDirectory = "/home/${osConfig.mySystem.shared.user}";
-        stateVersion = osConfig.mySystem.shared.stateVersion;
-      };
-    };
+      (lib.mkIf config.myHome.profiles.creative.enable {
+        myHome.packages.creative.enable = lib.mkDefault true;
+      })
+    ]);
   };
 }
