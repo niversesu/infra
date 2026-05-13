@@ -58,11 +58,11 @@
 
       # Profile: Desktop
       mySystem.gnome.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
-      mySystem.waydroid.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
       mySystem.nix-flatpak.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
       mySystem.obs-studio.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
 
       # Profile: Virtualization
+      mySystem.waydroid.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
       mySystem.podman.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
       mySystem.libvirt.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
       mySystem.ydotool.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
