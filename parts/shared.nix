@@ -10,7 +10,6 @@
     ...
   }: {
     imports = [
-      inputs.hjem.nixosModules.default
       self.nixosModules.host-kale-hw
       self.nixosModules.host-nomi-hw
       self.nixosModules.host-dream-hw

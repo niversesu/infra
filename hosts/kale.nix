@@ -18,5 +18,6 @@
     mySystem.podman.enable = true;
     mySystem.libvirt.enable = true;
     mySystem.ydotool.enable = true;
+    programs.steam.enable = true;
   };
 }

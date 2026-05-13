@@ -253,7 +253,7 @@ programs.steam.enable = true;
 | `gnome` | GNOME | GDM, extensions, xrdp |
 | `plasma` | KDE Plasma 6 | SDDM, kdeconnect |
 | `illogical` | Hyprland | SDDM, hyprland + illogical-impulse |
-| `caelestia` | Hyprland | SDDM, caelestia dotfiles, hjem |
+| `caelestia` | Hyprland | SDDM, caelestia dotfiles |
 
 ---
 

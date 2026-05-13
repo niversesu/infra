@@ -15,10 +15,12 @@
             efi.canTouchEfiVariables = true;
           };
           hardware.enableRedistributableFirmware = true;
+          # Bluetooth Configuration
           hardware.bluetooth = {
             enable = true;
             powerOnBoot = true;
           };
+          services.blueman.enable = true;
           # Memory Management
           zramSwap = {
             enable = true;

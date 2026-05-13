@@ -26,7 +26,7 @@
           snrs = "sudo nixos-rebuild switch --flake ~/infra#${config.myHome.fish.flakeTarget}";
           docker = "podman";
           nano = "nvim";
-          cachix-push = "cachix push niversesu $(nix path-info .#nixosConfigurations.~/infra${config.myHome.fish.flakeTarget}.config.system.build.toplevel)";
+          cachix-push = "cachix push niversesu $(nix path-info ~/infra#nixosConfigurations.${config.myHome.fish.flakeTarget}.config.system.build.toplevel)";
           nix-gc = "sudo nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo nix store optimise && sudo nix store gc";
         };
         interactiveShellInit = ''

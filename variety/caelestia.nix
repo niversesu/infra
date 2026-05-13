@@ -21,31 +21,6 @@
         enable = true;
         wayland.enable = true;
       };
-      hjem.users.${config.mySystem.shared.user} = {
-        enable = true;
-        directory = "/home/${config.mySystem.shared.user}";
-        files = let
-          collectFiles = configDir: prefix: dir:
-            lib.concatMapAttrs (
-              name: type: let
-                relPath =
-                  if prefix == ""
-                  then name
-                  else "${prefix}/${name}";
-                absPath = "${dir}/${name}";
-              in
-                if type == "regular"
-                then {".config/${configDir}/${relPath}".source = absPath;}
-                else if type == "directory"
-                then collectFiles configDir relPath absPath
-                else {}
-            ) (builtins.readDir dir);
-          dotfiles = inputs.caelestia-dotfiles;
-        in
-          collectFiles "hypr" "" "${dotfiles}/hypr"
-          // collectFiles "btop" "" "${dotfiles}/btop"
-          // collectFiles "foot" "" "${dotfiles}/foot";
-      };
     };
   };
   flake.homeModules.caelestia = {
@@ -75,6 +50,10 @@
             inhibitWhenAudio = false;
             timeouts = [];
           };
+          utilities = {
+            enabled = true;
+            maxToasts = 1;
+          };
           paths.wallpaperDir = "~/Pictures/wallpapers";
         };
         cli = {
@@ -82,10 +61,6 @@
           settings = {
             theme.enableGtk = true;
           };
-        };
-        utilities = {
-          enabled = true;
-          maxToasts = 1;
         };
       };
       programs.foot.enable = true;
@@ -95,6 +70,27 @@
         hyprsunset
         cliphist
       ];
+      home.file = let
+        collectFiles = configDir: prefix: dir:
+          lib.concatMapAttrs (
+            name: type: let
+              relPath =
+                if prefix == ""
+                then name
+                else "${prefix}/${name}";
+              absPath = "${dir}/${name}";
+            in
+              if type == "regular"
+              then {".config/${configDir}/${relPath}".source = absPath;}
+              else if type == "directory"
+              then collectFiles configDir relPath absPath
+              else {}
+          ) (builtins.readDir dir);
+        dotfiles = inputs.caelestia-dotfiles;
+      in
+        collectFiles "hypr" "" "${dotfiles}/hypr"
+        // collectFiles "btop" "" "${dotfiles}/btop"
+        // collectFiles "foot" "" "${dotfiles}/foot";
     };
   };
 }
