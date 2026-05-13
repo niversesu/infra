@@ -1,0 +1,206 @@
+* [31m35259c2[m -[33m (HEAD -> dendritic, origin/dendritic, origin/HEAD)[m minor issue [32m(79 seconds ago) [1;34m<niversesu>[m
+* [31m38895f0[m -[33m[m packages: add fd, yazi, bat, tealdeer, du-dust; fish: add modern-replacement aliases (grep/rg, find/fd, neofetch/fastfetch), restructure git abbrs, add cat/bat alias [32m(5 minutes ago) [1;34m<niversesu>[m
+* [31mabdba15[m -[33m[m wip [32m(28 minutes ago) [1;34m<niversesu>[m
+* [31m1bf4f31[m -[33m[m fixed all symlinks and removed hjem, so peak [32m(2 hours ago) [1;34m<niversesu>[m
+* [31mcf63bb4[m -[33m[m max toasts is 1 [32m(9 hours ago) [1;34m<niversesu>[m
+* [31m2a5242a[m -[33m[m caelestia: switch to power-profiles-daemon; update packages and flake lock [32m(21 hours ago) [1;34m<niversesu>[m
+* [31mce5c26d[m -[33m[m add idle configuration to caelestia [32m(33 hours ago) [1;34m<niversesu>[m
+* [31mab07473[m -[33m[m docs: update README to reflect current repo state (dream host, amani user, caelestia, shared pattern) [32m(34 hours ago) [1;34m<niversesu>[m
+* [31mc1f0910[m -[33m[m noisetorch found unnecessary [32m(2 days ago) [1;34m<niversesu>[m
+* [31md7a29a2[m -[33m[m noisetorch to amani [32m(2 days ago) [1;34m<niversesu>[m
+* [31me0e2bca[m -[33m[m nix-packages update [32m(2 days ago) [1;34m<niversesu>[m
+* [31mdb23434[m -[33m[m added obs-pwvideo to obs-studio module [32m(2 days ago) [1;34m<niversesu>[m
+* [31ma9b7038[m -[33m[m added easyeffects for amani [32m(2 days ago) [1;34m<niversesu>[m
+* [31me2c1b9a[m -[33m[m updated nix-packages lock [32m(2 days ago) [1;34m<niversesu>[m
+* [31m0beb954[m -[33m[m fixed small issue [32m(2 days ago) [1;34m<niversesu>[m
+* [31m83c6047[m -[33m[m add nix-packages input and cliphist/veadotube-mini packages [32m(2 days ago) [1;34m<niversesu>[m
+* [31mff2dfc6[m -[33m[m declared twice [32m(2 days ago) [1;34m<niversesu>[m
+* [31m1aacd12[m -[33m[m remove google-chrome from browser packages [32m(2 days ago) [1;34m<niversesu>[m
+* [31mf365f06[m -[33m[m remove nix/store bind mount from nomi [32m(2 days ago) [1;34m<niversesu>[m
+* [31m1e2d477[m -[33m[m uhhhhhh [32m(2 days ago) [1;34m<niversesu>[m
+* [31mc0827ef[m -[33m[m clobber by default [32m(2 days ago) [1;34m<niversesu>[m
+* [31me9d9b56[m -[33m[m dream grub [32m(2 days ago) [1;34m<niversesu>[m
+* [31mf66cad7[m -[33m[m starship fixed [32m(2 days ago) [1;34m<niversesu>[m
+* [31m2a829f8[m -[33m[m amani fleshed out [32m(2 days ago) [1;34m<niversesu>[m
+* [31m40792a5[m -[33m[m starship symlink [32m(2 days ago) [1;34m<niversesu>[m
+* [31me55b958[m -[33m[m chore: update flake lock, refactor caelestia dotfiles to support multiple config dirs, drop gnome/waydroid from nomi, fix cachix-push alias [32m(2 days ago) [1;34m<niversesu>[m
+* [31mfe9dedc[m -[33m[m feat: replace caelestia-cli input with built-in module, add thunar [32m(2 days ago) [1;34m<niversesu>[m
+* [31meb08e93[m -[33m[m feat: switch to foot terminal, add qt theming, update flake lock [32m(2 days ago) [1;34m<niversesu>[m
+* [31m3c190df[m -[33m[m removed hypr (obsolete) [32m(2 days ago) [1;34m<niversesu>[m
+* [31ma3ffc14[m -[33m[m refactor: move hjem config inline, fix flake input follows [32m(2 days ago) [1;34m<niversesu>[m
+* [31maebeb7c[m -[33m[m save before i maybe nuke config [32m(3 days ago) [1;34m<niversesu>[m
+* [31me0d5b27[m -[33m[m ... [32m(4 days ago) [1;34m<niversesu>[m
+* [31mc0a9de1[m -[33m[m added waypipe [32m(4 days ago) [1;34m<niversesu>[m
+* [31m2d2403f[m -[33m[m fixed faith.nix being outdated [32m(5 days ago) [1;34m<niversesu>[m
+* [31m72f567b[m -[33m[m add nix-gc alias and fix cachix-push flake reference [32m(6 days ago) [1;34m<niversesu>[m
+* [31m27de1eb[m -[33m[m added obs-studio module + virtual camera [32m(7 days ago) [1;34m<niversesu>[m
+* [31m6a92d63[m -[33m[m git ignore update [32m(7 days ago) [1;34m<niversesu>[m
+* [31md9e7eb7[m -[33m[m added devshells: pyautogui for wayland that works without any faults [32m(7 days ago) [1;34m<niversesu>[m
+* [31me87266a[m -[33m[m libmkforce for grub [32m(7 days ago) [1;34m<niversesu>[m
+* [31m9d9e319[m -[33m[m fixed systemd-boot being enabled on a bios system and enabled grub (dream) [32m(7 days ago) [1;34m<niversesu>[m
+* [31mbee9d3d[m -[33m[m disabled gnome for dream [32m(7 days ago) [1;34m<niversesu>[m
+* [31m07b468f[m -[33m[m disabled gnome for dream [32m(7 days ago) [1;34m<niversesu>[m
+* [31md8283f4[m -[33m[m added enable for dream [32m(7 days ago) [1;34m<niversesu>[m
+* [31m7fe4eb0[m -[33m[m fixed nixvim [32m(7 days ago) [1;34m<niversesu>[m
+* [31mf6e23d8[m -[33m[m feat: add git pull.rebase, nixvim clipboard keymap, auto-save before alejandra, move steam to host config [32m(7 days ago) [1;34m<niversesu>[m
+* [31m2869787[m -[33m[m added realer dream-hardware [32m(7 days ago) [1;34m<niversesu>[m
+* [31m37dca6d[m -[33m[m added real dream-hardware [32m(7 days ago) [1;34m<niversesu>[m
+* [31mdd7da56[m -[33m[m feat: add amani user and dream host with Plasma, clean shared config [32m(7 days ago) [1;34m<niversesu>[m
+* [31m6c780c4[m -[33m[m refactor: namespace modules under myHome and consolidate shared host/user options [32m(7 days ago) [1;34m<niversesu>[m
+* [31m245822e[m -[33m[m patch [32m(8 days ago) [1;34m<niversesu>[m
+* [31m919b030[m -[33m[m refactor: consolidate shared configuration and convert modules to conditional enable pattern [32m(8 days ago) [1;34m<niversesu>[m
+* [31m8f9404f[m -[33m[m refactor: convert modules to conditional enable pattern [32m(13 days ago) [1;34m<niversesu>[m
+* [31mb8a6937[m -[33m[m expand nixvim config; update stateVersion to 26.05; update cachix [32m(2 weeks ago) [1;34m<niversesu>[m
+* [31md393d54[m -[33m[m add automatic weekly nix gc [32m(2 weeks ago) [1;34m<niversesu>[m
+* [31m821867b[m -[33m[m disable ydotool on kale [32m(2 weeks ago) [1;34m<niversesu>[m
+* [31md3d1d4d[m -[33m[m add zen-browser and nix-flatpak with sober; enable gaming and tech-tools for niver [32m(2 weeks ago) [1;34m<niversesu>[m
+* [31m0452780[m -[33m[m ohmeingott [32m(3 weeks ago) [1;34m<niversesu>[m
+* [31m55c817f[m -[33m[m no winapps [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m15758d7[m -[33m[m feels the aurax3 [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m173ffa3[m -[33m[m feels the aurax2 [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m5d4eea3[m -[33m[m feels the aura [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m87d8e97[m -[33m[m test for winboat [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m2d44eda[m -[33m[m ambatubas [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m76061a7[m -[33m[m docs: comprehensive README with mermaid diagrams and contributing guide [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m8116e31[m -[33m[m cleanup: remove unused lambda arguments (deadnix) [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m584f02a[m -[33m[m integrate: merge illogical-base into variety/illogical.nix [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31ma40af2b[m -[33m[m remove: caelestia and obs-studio modules [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31me50a31d[m -[33m[m refactor: assign virt modules per host [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31me50453c[m -[33m[m refactor: reorganize nixos/modules with proper categorization [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31mba30472[m -[33m[m cleanup: remove redundant hardware and backup files [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m90a6eea[m -[33m[m rename: drop underscore prefix from module filenames [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31mbfb7fd1[m -[33m[m opencode added [32m(4 weeks ago) [1;34m<niversesu>[m
+* [31m14b42ff[m -[33m[m wip] [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31mbca3401[m -[33m[m virt-ydot seperation [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m1bd2638[m -[33m[m issues [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m67d29b8[m -[33m[m feat: complete dendritic refactor - everything is a flake-part [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m14a1202[m -[33m[m chore: remove fossil files [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m1ad5fd8[m -[33m[m fix: add NUR overlay to hosts [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31me62de8c[m -[33m[m feat: port to dendritic model with flake-parts [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31md153d32[m -[33m (origin/qemu)[m fuhhhx2 [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31mf0b8fd8[m -[33m[m fuhhh [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m6b3f3b2[m -[33m[m faith tools [32m(5 weeks ago) [1;34m<niversesu>[m
+*   [31m1e2a317[m -[33m[m thing [32m(5 weeks ago) [1;34m<niversesu>[m
+[32m|[m[33m\[m  
+[32m|[m * [31m2369d59[m -[33m[m stop tracking result [32m(5 weeks ago) [1;34m<niversesu>[m
+[32m|[m * [31m78a51dd[m -[33m[m ayudamex2 [32m(5 weeks ago) [1;34m<niversesu>[m
+[32m|[m * [31m89af876[m -[33m[m ayudame [32m(5 weeks ago) [1;34m<niversesu>[m
+* [33m|[m [31m32d1f40[m -[33m[m typo [32m(5 weeks ago) [1;34m<niversesu>[m
+* [33m|[m [31mc9a099f[m -[33m[m options testing [32m(5 weeks ago) [1;34m<niversesu>[m
+[33m|[m[33m/[m  
+* [31m31afc26[m -[33m[m ambatanut [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m86bf27d[m -[33m[m dih67 [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m4bf9b40[m -[33m[m ambatukaaaaam [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31mbdf35c4[m -[33m[m hypr-something [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31mef14836[m -[33m[m good! [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31mbf481c6[m -[33m[m eza [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m57f19be[m -[33m[m yeepy [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m872880a[m -[33m[m starshipx3 [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31meef3c5a[m -[33m[m starshipx2 [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31m9757809[m -[33m[m starship [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31mc5b85a0[m -[33m[m hostname change [32m(5 weeks ago) [1;34m<niversesu>[m
+* [31mb090020[m -[33m[m !!! [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31m0c2793f[m -[33m[m everything works [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31m2e0d1d4[m -[33m[m virt-ydot seperation [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31m9e4099f[m -[33m[m hardware path fix [32m(6 weeks ago) [1;34m<niversesu>[m
+*   [31ma81e0ff[m -[33m[m Merge branch 'qemu' of github.com:niversesu/infra into qemu [32m(6 weeks ago) [1;34m<niversesu>[m
+[34m|[m[35m\[m  
+[34m|[m * [31m98a1499[m -[33m[m fixed... [32m(6 weeks ago) [1;34m<niversesu>[m
+[34m|[m * [31mf137971[m -[33m[m fixed hardware error [32m(6 weeks ago) [1;34m<niversesu>[m
+* [35m|[m [31mca27e85[m -[33m[m hardware faith [32m(6 weeks ago) [1;34m<niversesu>[m
+[35m|[m[35m/[m  
+* [31m5074323[m -[33m[m fix! [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31mef66090[m -[33m[m theming [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31m9fe2e78[m -[33m[m tuff [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31m53b769b[m -[33m[m yay [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31me479683[m -[33m[m almost there pls [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31mbd621e0[m -[33m[m ahahsf [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31m5656f12[m -[33m[m infra restructure x2 [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31md93e311[m -[33m[m infra restructure [32m(6 weeks ago) [1;34m<niversesu>[m
+* [31maab34c7[m -[33m[m afsax2 [32m(7 weeks ago) [1;34m<niversesu>[m
+* [31m7dbf098[m -[33m[m keyd fix [32m(8 weeks ago) [1;34m<niversesu>[m
+* [31mdd0be55[m -[33m[m muh [32m(9 weeks ago) [1;34m<niversesu>[m
+* [31m577e588[m -[33m[m muh fixes x2 [32m(2 months ago) [1;34m<niversesu>[m
+* [31m9478459[m -[33m[m muh fixes [32m(2 months ago) [1;34m<niversesu>[m
+* [31md9c3e9b[m -[33m[m xdg [32m(2 months ago) [1;34m<niversesu>[m
+* [31mccdcfd2[m -[33m[m xdg modularization fix [32m(3 months ago) [1;34m<niversesu>[m
+* [31m915ed58[m -[33m[m xdg modularization [32m(3 months ago) [1;34m<niversesu>[m
+* [31m3f5a806[m -[33m[m ehh waveterm is kinda buns [32m(3 months ago) [1;34m<niversesu>[m
+* [31m7447777[m -[33m[m enriqueeeee [32m(3 months ago) [1;34m<niversesu>[m
+* [31m743c7ab[m -[33m[m helvum [32m(3 months ago) [1;34m<niversesu>[m
+* [31mb246beb[m -[33m[m i removed caelestia [32m(3 months ago) [1;34m<niversesu>[m
+* [31m974953d[m -[33m[m w importtree [32m(3 months ago) [1;34m<niversesu>[m
+* [31m6aa22b5[m -[33m[m i added luh packages [32m(3 months ago) [1;34m<niversesu>[m
+* [31mcadace5[m -[33m[m Fuhh... fuuhhh fuhhh fuhhh fuhhhh [32m(3 months ago) [1;34m<niversesu>[m
+* [31m5b1ab19[m -[33m[m Fuhh... fuuhhh fuhhh fuhhh [32m(3 months ago) [1;34m<niversesu>[m
+* [31mffc8200[m -[33m[m uhh.... no plugins? [32m(3 months ago) [1;34m<niversesu>[m
+* [31m4d30c77[m -[33m[m PLUGIIIINS [32m(3 months ago) [1;34m<niversesu>[m
+* [31m663d2dc[m -[33m[m save-x1x21x1x1 [32m(3 months ago) [1;34m<niversesu>[m
+* [31ma31d261[m -[33m[m save-x1x21 [32m(3 months ago) [1;34m<niversesu>[m
+* [31m0a99d83[m -[33m[m save [32m(3 months ago) [1;34m<niversesu>[m
+* [31mc8bf55d[m -[33m[m removed flake.nix [32m(3 months ago) [1;34m<niversesu>[m
+* [31m766a721[m -[33m[m save [32m(3 months ago) [1;34m<niversesu>[m
+* [31m9b6c269[m -[33m[m everything [32m(4 months ago) [1;34m<niversesu>[m
+* [31m2d18d93[m -[33m[m disabled internal keyboard HEEEE [32m(4 months ago) [1;34m<niversesu>[m
+* [31m80e60d1[m -[33m[m ?! [32m(4 months ago) [1;34m<niversesu>[m
+* [31ma14f3ff[m -[33m[m ? [32m(4 months ago) [1;34m<niversesu>[m
+* [31m09fba95[m -[33m[m hyprland dissapear [32m(5 months ago) [1;34m<niversesu>[m
+* [31m4084db7[m -[33m[m it works .... [32m(5 months ago) [1;34m<niversesu>[m
+* [31m97c1c3f[m -[33m[m okay caelestia really gone this time [32m(5 months ago) [1;34m<niversesu>[m
+* [31m6c2faca[m -[33m[m MASSIVE changes and caelestia gone [32m(5 months ago) [1;34m<niversesu>[m
+*   [31m03f4f8c[m -[33m[m Merge branch 'main' into qemu [32m(6 months ago) [1;34m<niversesu>[m
+[36m|[m[1;31m\[m  
+[36m|[m * [31m88be638[m -[33m (origin/main)[m removed minecraft references [32m(7 months ago) [1;34m<niversesu>[m
+[36m|[m * [31m6d394fb[m -[33m[m really cool changes again..x3 [32m(7 months ago) [1;34m<niversesu>[m
+[36m|[m * [31mf367e2e[m -[33m[m really cool changes again..x2 [32m(7 months ago) [1;34m<niversesu>[m
+[36m|[m * [31m3cd04d9[m -[33m[m really cool changes again.. [32m(7 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m13febf2[m -[33m[m things [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m57383a0[m -[33m[m added gologin logo [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m1084202[m -[33m[m caelestia temporarily disabled [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31mb5c511b[m -[33m[m added caelestia.nix [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31ma6cadc0[m -[33m[m added gologin [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31mce76752[m -[33m[m added environment.nix file [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m6868851[m -[33m[m removed hypr folder idgaf [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31mf5491ef[m -[33m[m removed nixcord because its broken [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m3261d11[m -[33m[m home-manager/flake.lock: Update [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m3a41883[m -[33m[m added kdenlive [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m1c3f8fe[m -[33m[m added proxy.nix [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31mbb9205e[m -[33m[m ... [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m4ca7f31[m -[33m[m added qemu and virt-manager [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m3c5a3a7[m -[33m[m Save minecraft branch changes before creating qemu branch [32m(6 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m594103a[m -[33m[m disabled minecraft [32m(7 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31mc36b118[m -[33m[m fixed gnome bug aka reverted deprecated config [32m(7 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m2a5958b[m -[33m[m added minecraft.nix config [32m(7 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31me74f792[m -[33m[m fixed deprecated gnome config [32m(7 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31m4ed425b[m -[33m[m test [32m(7 months ago) [1;34m<niversesu>[m
+* [1;31m|[m [31ma4de337[m -[33m[m flake [32m(7 months ago) [1;34m<niversesu>[m
+[1;31m|[m[1;31m/[m  
+* [31m554d891[m -[33m[m really cool changes [32m(7 months ago) [1;34m<niversesu>[m
+* [31m9272fdd[m -[33m[m removed keyd [32m(7 months ago) [1;34m<niversesu>[m
+* [31me0fd4fd[m -[33m[m added translucence as nixcord theme [32m(7 months ago) [1;34m<niversesu>[m
+* [31m7885d43[m -[33m[m bye bye chrome-remote-desktop x2 [32m(7 months ago) [1;34m<niversesu>[m
+* [31m3895fe0[m -[33m[m Fix home-manager hypr path and reorganize configuration [32m(7 months ago) [1;34m<niversesu>[m
+* [31m7838f66[m -[33m[m bye bye chrome-remote-desktop [32m(7 months ago) [1;34m<niversesu>[m
+* [31m097e7c8[m -[33m[m good gooder [32m(7 months ago) [1;34m<niversesu>[m
+* [31mbd1ec0d[m -[33m[m good good [32m(7 months ago) [1;34m<niversesu>[m
+* [31m4bd74a4[m -[33m[m first commit [32m(7 months ago) [1;34m<niversesu>[m
+* [31mde0913a[m -[33m[m added baseline for chrome-desktop, work on later [32m(7 months ago) [1;34m<niversesu>[m
+* [31m6e21b7a[m -[33m[m set-point [32m(7 months ago) [1;34m<niversesu>[m
+* [31mafccb97[m -[33m[m fixed lots of errors [32m(7 months ago) [1;34m<niversesu>[m
+* [31m9ba68bb[m -[33m[m home-manager/flake.lock: Update [32m(7 months ago) [1;34m<niversesu>[m
+* [31mf7c363a[m -[33m[m home-manager/flake.lock: Update [32m(7 months ago) [1;34m<niversesu>[m
+* [31m32a7114[m -[33m[m home-manager/flake.lock: Update [32m(7 months ago) [1;34m<niversesu>[m
+* [31m2cf6e2b[m -[33m[m add nerd font and gh-copilot [32m(7 months ago) [1;34m<niversesu>[m
+* [31m896b016[m -[33m[m home-manager/flake.lock: Update [32m(7 months ago) [1;34m<niversesu>[m
+* [31m7a50de2[m -[33m[m too many things [32m(7 months ago) [1;34m<niversesu>[m
+* [31mc298441[m -[33m[m browserless [32m(7 months ago) [1;34m<niversesu>[m
+* [31m50f25f8[m -[33m[m a LOOOOT of things [32m(7 months ago) [1;34m<niversesu>[m
+* [31mec3422a[m -[33m[m cursor update.. [32m(8 months ago) [1;34m<niversesu>[m
+* [31m23fc944[m -[33m[m added more nixcord plugins [32m(8 months ago) [1;34m<niversesu>[m
+* [31m400997e[m -[33m[m Ignore hardware-configuration.nix [32m(8 months ago) [1;34m<niversesu>[m
+* [31m4c96244[m -[33m[m Fix nixos folder: track real files instead of symlink [32m(8 months ago) [1;34m<niversesu>[m
+* [31mb8d0caf[m -[33m[m ssh deprecation fix. [32m(8 months ago) [1;34m<niversesu>[m
+* [31m3ec91ae[m -[33m[m added nixcord.. [32m(8 months ago) [1;34m<niversesu>[m
+* [31mb827589[m -[33m[m other... new stuff [32m(8 months ago) [1;34m<niversesu>[m
+* [31m5e7d329[m -[33m[m hey... new stuff? [32m(8 months ago) [1;34m<niversesu>[m
+* [31m6886cb0[m -[33m[m first commit [32m(8 months ago) [1;34m<niversesu>[m
