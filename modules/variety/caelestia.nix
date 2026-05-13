@@ -17,10 +17,21 @@
       services.displayManager.sddm = {
         enable = true;
         wayland.enable = true;
+        theme = "sddm-astronaut-theme";
+        extraPackages = with pkgs; [
+          kdePackages.qtmultimedia
+          gst_all_1.gstreamer
+          gst_all_1.gst-plugins-base
+          gst_all_1.gst-libav
+        ];
       };
+      environment.systemPackages = [
+        (pkgs.sddm-astronaut.override {
+          embeddedTheme = "hyprland_kath";
+        })
+      ];
     };
   };
-
   flake.homeModules.caelestia = {
     config,
     lib,
@@ -63,16 +74,14 @@
         };
         programs.foot.enable = true;
       }
-
       {
         home.packages = with pkgs; [
           nautilus
           loupe
           hyprsunset
           cliphist
-        ];
+        ] ++ [inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default];
       }
-
       {
         home.file = let
           collectFiles = configDir: prefix: dir:

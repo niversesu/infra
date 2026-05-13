@@ -59,11 +59,16 @@
     };
     nix-packages = {
       url = "github:niversesu/nix-packages";
-      inputs.nixpkgs.follows = "nixpkgs"; 
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     wallpapers = {
       url = "github:niversesu/wallpapers";
       flake = false;
+    };
+    rose-pine-hyprcursor = {
+      url = "github:ndom91/rose-pine-hyprcursor";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hyprlang.follows = "hyprland/hyprlang";
     };
   };
   outputs = inputs @ {flake-parts, ...}:
@@ -76,7 +81,7 @@
       ];
       perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShell {
-          packages = [ pkgs.nil ];
+          packages = [pkgs.nil];
         };
       };
     };
