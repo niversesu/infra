@@ -36,6 +36,10 @@
     options.mySystem = {
       shared = {
         enable = lib.mkEnableOption "shared baseline";
+        stateVersion = lib.mkOption {
+          type = lib.types.str;
+          default = "26.05";
+        };
         host = lib.mkOption {
           type = lib.types.str;
           default = "kale";
@@ -140,7 +144,7 @@
       home = {
         username = osConfig.mySystem.shared.user;
         homeDirectory = "/home/${osConfig.mySystem.shared.user}";
-        stateVersion = "26.05";
+        stateVersion = osConfig.mySystem.shared.stateVersion;
       };
     };
   };

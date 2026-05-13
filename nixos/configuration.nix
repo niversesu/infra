@@ -66,7 +66,7 @@
               fi
             '';
           };
-          system.stateVersion = "26.05";
+          system.stateVersion = config.mySystem.shared.stateVersion;
         };
       })
     ];
