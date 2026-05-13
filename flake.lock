@@ -907,7 +907,8 @@
         "nixvim": "nixvim",
         "nur": "nur_2",
         "quickshell": "quickshell_2",
-        "spicetify-nix": "spicetify-nix"
+        "spicetify-nix": "spicetify-nix",
+        "wallpapers": "wallpapers"
       }
     },
     "spicetify-nix": {
@@ -973,6 +974,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "wallpapers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778640545,
+        "narHash": "sha256-Yjl/1ayHpfi1O/EwhHtTwjdNCyF1clpNTvl0VSREB50=",
+        "owner": "niversesu",
+        "repo": "wallpapers",
+        "rev": "da2aca35ec1e76c893ae59f6e7d30636b6197b8d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "niversesu",
+        "repo": "wallpapers",
         "type": "github"
       }
     },

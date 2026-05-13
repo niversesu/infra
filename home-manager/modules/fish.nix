@@ -36,7 +36,6 @@
           find = "fd";
           neofetch = "fastfetch";
           cd = "z";
-          nix = "nom";
           docker = "podman";
           nano = "nvim";
           cachix-push = "cachix push $NH_FLAKE#nixosConfigurations.${config.myHome.fish.flakeTarget}.config.system.build.toplevel";
@@ -55,6 +54,16 @@
           st = "git status";
         };
         functions = {
+          nix = {
+            body = ''
+              switch $argv[1]
+                  case build shell develop
+                      nom $argv
+                  case '*'
+                      command nix $argv
+              end
+            '';
+          };
           snrs = {
             body = ''
               git -C $NH_FLAKE add .
