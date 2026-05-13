@@ -48,6 +48,7 @@
             utilities = {
               enabled = true;
               maxToasts = 1;
+              toasts.nowPlaying = true;
             };
             notifs = {
               expire = true;
