@@ -980,11 +980,11 @@
     "wallpapers": {
       "flake": false,
       "locked": {
-        "lastModified": 1778640545,
-        "narHash": "sha256-Yjl/1ayHpfi1O/EwhHtTwjdNCyF1clpNTvl0VSREB50=",
+        "lastModified": 1778641203,
+        "narHash": "sha256-NyWBtOoZ1VxO5jFxYsiauYuJvWY/AuGV0SRu3yELG90=",
         "owner": "niversesu",
         "repo": "wallpapers",
-        "rev": "da2aca35ec1e76c893ae59f6e7d30636b6197b8d",
+        "rev": "49b1e84573b0de51e563936268c630f4b4939095",
         "type": "github"
       },
       "original": {
