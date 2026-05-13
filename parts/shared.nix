@@ -132,6 +132,11 @@
       # Creative Profile
       myHome.packages.creative.enable = lib.mkDefault config.myHome.profiles.creative.enable;
 
+      home.sessionVariables = {
+        FLAKE = "${config.home.homeDirectory}/infra";
+        NH_FLAKE = "${config.home.homeDirectory}/infra";
+      };
+
       home = {
         username = osConfig.mySystem.shared.user;
         homeDirectory = "/home/${osConfig.mySystem.shared.user}";

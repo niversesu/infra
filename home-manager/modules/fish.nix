@@ -20,11 +20,6 @@
     config = lib.mkIf config.myHome.fish.enable {
       xdg.configFile."fish/config.fish".force = true;
 
-      home.sessionVariables = {
-        FLAKE = "${config.home.homeDirectory}/infra";
-        NH_FLAKE = "${config.home.homeDirectory}/infra";
-      };
-
       programs.fish = {
         enable = true;
         shellAliases = {

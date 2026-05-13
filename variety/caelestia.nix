@@ -53,7 +53,7 @@
             enabled = true;
             maxToasts = 1;
           };
-          paths.wallpaperDir = "~/Pictures/wallpapers";
+          paths.wallpaperDir = "${config.home.homeDirectory}/Pictures/wallpapers";
         };
         cli = {
           enable = true;
