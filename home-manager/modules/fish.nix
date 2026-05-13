@@ -2,6 +2,7 @@
   flake.homeModules.fish = {
     config,
     lib,
+    osConfig,
     ...
   }: {
     options.myHome.fish = {
@@ -19,18 +20,47 @@
     config = lib.mkIf config.myHome.fish.enable {
       xdg.configFile."fish/config.fish".force = true;
 
+      home.sessionVariables = {
+        FLAKE = "/home/${osConfig.mySystem.shared.user}/infra";
+        NH_FLAKE = "/home/${osConfig.mySystem.shared.user}/infra";
+      };
+
       programs.fish = {
         enable = true;
         shellAliases = {
           ls = "eza --all --icons --color=auto --time-style=iso --classify";
-          snrs = "sudo nixos-rebuild switch --flake ~/infra#${config.myHome.fish.flakeTarget}";
+          g = "lazygit";
+          ga = "git add .";
+          cam = "git add . && git commit --amend --no-edit";
+          cd = "z";
+          zi = "z -i";
+          nix = "nom";
           docker = "podman";
           nano = "nvim";
-          cachix-push = "cachix push niversesu $(nix path-info ~/infra#nixosConfigurations.${config.myHome.fish.flakeTarget}.config.system.build.toplevel)";
-          nix-gc = "sudo nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo nix store optimise && sudo nix store gc";
+          cachix-push = "cachix push $NH_FLAKE#nixosConfigurations.${config.myHome.fish.flakeTarget}.config.system.build.toplevel";
+          nix-gc = "nh clean all --keep 5";
+          nix-diff = "nvd diff /nix/var/nix/profiles/system-$(math (readlink /nix/var/nix/profiles/system | string replace -r '.*-([0-9]+)-link' '$1') - 1)-link /nix/var/nix/profiles/system";
+          z-prime = "find . -maxdepth 3 -not -path '*/.*' -type d -exec zoxide add {} +";
         };
-        interactiveShellInit = ''
-          fish_config theme choose ${config.myHome.fish.theme}
+        functions = {
+          snrs = {
+            body = ''
+              git -C $NH_FLAKE add .
+              if test (git -C $NH_FLAKE log -1 --pretty=%s) = "wip"
+                  git -C $NH_FLAKE commit --amend --no-edit
+              else
+                  git -C $NH_FLAKE commit -m "wip"
+              end
+              nh os switch $NH_FLAKE
+            '';
+          };
+        };
+        interactiveShellInit = ''          fish_config theme choose ${config.myHome.fish.theme}
+          ${lib.optionalString (osConfig.mySystem.caelestia.enable or false) ''
+            if type -q caelestia
+              caelestia scheme set -n shadotheme
+            end
+          ''}
         '';
       };
     };

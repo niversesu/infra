@@ -21,6 +21,13 @@
             mpv
             curl
             home-manager
+            nh
+            nix-output-monitor
+            nvd
+            zoxide
+            fzf
+            nix-index
+            comma
             wl-clipboard
             cpx
             cachix

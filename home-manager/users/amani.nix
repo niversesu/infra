@@ -16,7 +16,7 @@
     myHome.packages.creative.enable = true;
     myHome.packages.tech-tools.enable = true;
     home.packages = [
-      inputs.nix-packages.packages.${pkgs.system}.veadotube-mini
+      inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.veadotube-mini
     ];
   };
 }

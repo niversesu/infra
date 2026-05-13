@@ -75,6 +75,7 @@
       self.homeModules.vscode
       self.homeModules.illogical
       self.homeModules.caelestia
+      self.homeModules.qol
       self.homeModules.spicetify
       self.homeModules.packages
     ];
@@ -87,7 +88,6 @@
       myHome.starship.enable = lib.mkDefault true;
       myHome.theming.enable = lib.mkDefault false;
       myHome.vscode.enable = lib.mkDefault true;
-      nixpkgs.config.allowUnfree = true;
       home = {
         username = osConfig.mySystem.shared.user;
         homeDirectory = "/home/${osConfig.mySystem.shared.user}";

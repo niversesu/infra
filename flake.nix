@@ -37,7 +37,10 @@
       inputs.hyprland.follows = "hyprland";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    hjem.url = "github:feel-co/hjem";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     illogical-dotfiles = {
       url = "git+https://github.com/end-4/dots-hyprland?submodules=1";
       flake = false;
@@ -69,5 +72,10 @@
         (inputs.import-tree ./home-manager/users)
         (inputs.import-tree ./variety)
       ];
+      perSystem = {pkgs, ...}: {
+        devShells.default = pkgs.mkShell {
+          packages = [ pkgs.nil ];
+        };
+      };
     };
 }
