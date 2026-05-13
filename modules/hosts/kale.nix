@@ -15,6 +15,7 @@
 
     mySystem.gnome.enable = false;
     mySystem.caelestia.enable = true;
+    mySystem.waydroid.enable = false;
 
     programs.steam.enable = true;
   };
