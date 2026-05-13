@@ -14,7 +14,13 @@
       self.nixosModules.host-nomi-hw
       self.nixosModules.host-dream-hw
 
-      self.nixosModules.configuration
+      self.nixosModules.core-boot
+      self.nixosModules.core-nix
+      self.nixosModules.core-locale
+      self.nixosModules.core-network
+      self.nixosModules.core-hardware
+      self.nixosModules.core-shell
+
       self.nixosModules.packages
       self.nixosModules.services
 
@@ -57,7 +63,13 @@
 
     config = lib.mkIf config.mySystem.shared.enable {
       # Baseline - Always on for all hosts
-      mySystem.configuration.enable = lib.mkDefault true;
+      mySystem.core.boot.enable = lib.mkDefault true;
+      mySystem.core.nix.enable = lib.mkDefault true;
+      mySystem.core.locale.enable = lib.mkDefault true;
+      mySystem.core.network.enable = lib.mkDefault true;
+      mySystem.core.hardware.enable = lib.mkDefault true;
+      mySystem.core.shell.enable = lib.mkDefault true;
+
       mySystem.packages.enable = lib.mkDefault true;
       mySystem.services.enable = lib.mkDefault true;
       mySystem.keyd.enable = lib.mkDefault true;

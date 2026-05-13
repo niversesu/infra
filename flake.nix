@@ -68,7 +68,6 @@
         inputs.home-manager.flakeModules.home-manager
         (inputs.import-tree ./parts)
         (inputs.import-tree ./nixos/modules)
-        ./nixos/configuration.nix
         ./nixos/packages.nix
         ./nixos/services.nix
         (inputs.import-tree ./hosts)
