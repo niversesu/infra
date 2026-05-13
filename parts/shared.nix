@@ -111,7 +111,8 @@
 
     config = lib.mkIf osConfig.mySystem.shared.enable {
       # Baseline Home (Minimal CLI)
-      myHome.fish.enable = lib.mkDefault false;
+      myHome.fish.enable = lib.mkDefault true;
+      myHome.theming.enable = lib.mkDefault true;
       myHome.git.enable = lib.mkDefault true;
       myHome.nixvim.enable = lib.mkDefault true;
       myHome.packages.enable = lib.mkDefault true;
@@ -122,7 +123,6 @@
       myHome.starship.enable = lib.mkDefault config.myHome.profiles.full.enable;
       myHome.wallpapers.enable = lib.mkDefault config.myHome.profiles.full.enable;
       myHome.vscode.enable = lib.mkDefault config.myHome.profiles.full.enable;
-      myHome.theming.enable = lib.mkDefault config.myHome.profiles.full.enable;
 
       # Tying Home Varieties to System Varieties
       # (Only active if the corresponding system variety is enabled)
