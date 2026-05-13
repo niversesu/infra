@@ -35,6 +35,7 @@
           grep = "rg";
           find = "fd";
           neofetch = "fastfetch";
+          cd = "z";
           nix = "nom";
           docker = "podman";
           nano = "nvim";
