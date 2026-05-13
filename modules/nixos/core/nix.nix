@@ -1,14 +1,15 @@
-{pkgs, ...}: {
+{...}: {
   flake.nixosModules.core-nix = {
     config,
     lib,
+    pkgs,
     ...
   }: {
     options.mySystem.core.nix.enable = lib.mkEnableOption "Core Nix Settings";
     config = lib.mkIf config.mySystem.core.nix.enable {
       nix.settings = {
         experimental-features = ["nix-command" "flakes"];
-        trusted-users = ["root" "faith" "niver" "amani"]; # Added amani
+        trusted-users = ["root" "faith" "niver" "amani"];
         substituters = [
           "https://cache.nixos.org"
           "https://nix-community.cachix.org"
@@ -23,6 +24,7 @@
       };
       nixpkgs.config.allowUnfree = true;
       boot.kernelPackages = pkgs.linuxPackages_latest;
+      system.stateVersion = config.mySystem.shared.stateVersion;
     };
   };
 }

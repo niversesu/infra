@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{...}: {
   flake.nixosModules.core-shell = {
     config,
     lib,
+    pkgs,
     ...
   }: {
     options.mySystem.core.shell.enable = lib.mkEnableOption "Core Shell Integration (Fish, Sudo-rs)";
