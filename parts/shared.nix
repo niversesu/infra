@@ -35,7 +35,7 @@
 
     options.mySystem = {
       shared = {
-        enable = lib.mkEnableOption "shared";
+        enable = lib.mkEnableOption "shared baseline";
         host = lib.mkOption {
           type = lib.types.str;
           default = "kale";
@@ -46,22 +46,29 @@
         };
       };
       profiles = {
-        desktop.enable = lib.mkEnableOption "Desktop profile (Gnome, Waydroid, Flatpak, OBS)";
-        virtualization.enable = lib.mkEnableOption "Virtualization profile (Podman, Libvirt, Ydotool)";
+        desktop.enable = lib.mkEnableOption "Desktop profile (Gnome + standard GUI tools)";
+        virtualization.enable = lib.mkEnableOption "Virtualization profile (Containers, VMs, Android)";
       };
     };
 
     config = lib.mkIf config.mySystem.shared.enable {
+      # Baseline - Always on for all hosts
       mySystem.configuration.enable = lib.mkDefault true;
       mySystem.packages.enable = lib.mkDefault true;
       mySystem.services.enable = lib.mkDefault true;
+      mySystem.keyd.enable = lib.mkDefault true;
 
-      # Profile: Desktop
+      # Profile: Desktop (Plumbing & Default DE)
       mySystem.gnome.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
       mySystem.nix-flatpak.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
       mySystem.obs-studio.enable = lib.mkDefault config.mySystem.profiles.desktop.enable;
+      
+      # Desktop Alternatives (Explicitly OFF by default, even with Desktop Profile)
+      mySystem.plasma.enable = lib.mkDefault false;
+      mySystem.caelestia.enable = lib.mkDefault false;
+      mySystem.illogical.enable = lib.mkDefault false;
 
-      # Profile: Virtualization
+      # Profile: Virtualization (Infrastructure)
       mySystem.waydroid.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
       mySystem.podman.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
       mySystem.libvirt.enable = lib.mkDefault config.mySystem.profiles.virtualization.enable;
@@ -98,26 +105,31 @@
     ];
 
     options.myHome.profiles = {
-      full.enable = lib.mkEnableOption "Full home profile (Includes all major modules)";
-      creative.enable = lib.mkEnableOption "Creative profile (Krita, GIMP, Kdenlive)";
+      full.enable = lib.mkEnableOption "Full home profile (Includes all major tool configs)";
+      creative.enable = lib.mkEnableOption "Creative profile (Art & Video tools)";
     };
 
     config = lib.mkIf osConfig.mySystem.shared.enable {
-      # Defaults for all users
+      # Baseline Home (Minimal CLI)
       myHome.fish.enable = lib.mkDefault false;
       myHome.git.enable = lib.mkDefault true;
       myHome.nixvim.enable = lib.mkDefault true;
       myHome.packages.enable = lib.mkDefault true;
       myHome.qol.enable = lib.mkDefault true;
 
-      # Full Profile behavior
+      # Full Profile (The standard desktop experience)
       myHome.spicetify.enable = lib.mkDefault config.myHome.profiles.full.enable;
       myHome.starship.enable = lib.mkDefault config.myHome.profiles.full.enable;
       myHome.wallpapers.enable = lib.mkDefault config.myHome.profiles.full.enable;
       myHome.vscode.enable = lib.mkDefault config.myHome.profiles.full.enable;
-      myHome.theming.enable = lib.mkDefault false;
+      myHome.theming.enable = lib.mkDefault config.myHome.profiles.full.enable;
 
-      # Creative Profile behavior
+      # Tying Home Varieties to System Varieties
+      # (Only active if the corresponding system variety is enabled)
+      programs.caelestia.enable = lib.mkDefault (osConfig.mySystem.caelestia.enable or false);
+      programs.illogical-impulse.enable = lib.mkDefault (osConfig.mySystem.illogical.enable or false);
+
+      # Creative Profile
       myHome.packages.creative.enable = lib.mkDefault config.myHome.profiles.creative.enable;
 
       home = {
