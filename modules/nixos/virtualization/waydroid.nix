@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ ...}: {
   flake.nixosModules.waydroid = {
     config,
     lib,

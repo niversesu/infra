@@ -2,8 +2,6 @@
   flake.homeModules.wallpapers = {
     config,
     lib,
-    pkgs,
-    osConfig,
     ...
   }: {
     options.myHome.wallpapers = {

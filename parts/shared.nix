@@ -1,12 +1,10 @@
 {
   self,
-  lib,
   ...
 }: {
   flake.nixosModules.shared = {
     config,
     lib,
-    inputs,
     ...
   }: {
     imports = [
