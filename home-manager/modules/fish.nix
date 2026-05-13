@@ -29,11 +29,12 @@
         enable = true;
         shellAliases = {
           ls = "eza --all --icons --color=auto --time-style=iso --classify";
-          g = "lazygit";
-          ga = "git add .";
-          cam = "git add . && git commit --amend --no-edit";
-          cd = "z";
-          zi = "z -i";
+          cat = "bat";
+          y = "yazi";
+          du = "dust";
+          grep = "rg";
+          find = "fd";
+          neofetch = "fastfetch";
           nix = "nom";
           docker = "podman";
           nano = "nvim";
@@ -41,6 +42,16 @@
           nix-gc = "nh clean all --keep 5";
           nix-diff = "nvd diff /nix/var/nix/profiles/system-$(math (readlink /nix/var/nix/profiles/system | string replace -r '.*-([0-9]+)-link' '$1') - 1)-link /nix/var/nix/profiles/system";
           z-prime = "find . -maxdepth 3 -not -path '*/.*' -type d -exec zoxide add {} +";
+        };
+        shellAbbrs = {
+          g = "lazygit";
+          ga = "git add .";
+          cam = "git commit --amend --no-edit";
+          cm = "git commit -m";
+          ca = "git commit -am";
+          ps = "git push";
+          pl = "git pull";
+          st = "git status";
         };
         functions = {
           snrs = {

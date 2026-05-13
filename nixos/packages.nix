@@ -12,6 +12,7 @@
           environment.systemPackages = with pkgs; [
             fastfetch
             ripgrep
+            fd
             gparted
             alejandra
             unzip
@@ -28,6 +29,11 @@
             fzf
             nix-index
             comma
+            yazi
+            bat
+            fd
+            tealdeer
+            du-dust
             wl-clipboard
             cpx
             cachix
