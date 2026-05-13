@@ -1,40 +1,32 @@
-{inputs, ...}:
-let
-  system = "x86_64-linux";
-
-  # Workaround for quickshell build race condition in QML type registration.
-  # Automatic QML type registration generates _qmltyperegistrations.cpp files
-  # but ninja tries to compile them before generation completes (missing dependency).
-  # Fix: disable PCH, force single-threaded ninja (-j1), and use clang (recommended
-  # by upstream for faster builds; also handles generated file dependencies better).
-  qsPackage = inputs.quickshell.packages.${system}.default;
-  nixpkgs = inputs.nixpkgs.legacyPackages.${system};
-  fixedQuickshell = qsPackage.unwrapped.overrideAttrs (old: {
-    cmakeFlags = (old.cmakeFlags or []) ++ [
-      "-DNO_PCH=ON"
-    ];
-
-    preBuild = ''
-      export NIX_BUILD_CORES=1
-      # Qt6 generates _qmltyperegistrations.cpp at build time but the ninja
-      # dependencies are missing. We generate empty stubs here so compilation
-      # doesn't fail; Qt's qmltyperegistrar will overwrite them later.
-      if [ -f build/build.ninja ]; then
-        sed -n 's/.*:.* \([^ ]*_qmltyperegistrations\.cpp\)$/\1/p' build/build.ninja \
-          | sort -u | while read src; do
-            mkdir -p "$(dirname "build/$src")"
-            touch "build/$src"
-          done
-      fi
-    '';
-  });
-in {
+{inputs, ...}: {
   flake.nixosModules.illogical = {
     config,
     pkgs,
     lib,
     ...
-  }: {
+  }: let
+    system = pkgs.stdenv.hostPlatform.system;
+    qsPackage = inputs.quickshell.packages.${system}.default;
+    fixedQuickshell = qsPackage.unwrapped.overrideAttrs (old: {
+      cmakeFlags = (old.cmakeFlags or []) ++ [
+        "-DNO_PCH=ON"
+      ];
+
+      preBuild = ''
+        export NIX_BUILD_CORES=1
+        # Qt6 generates _qmltyperegistrations.cpp at build time but the ninja
+        # dependencies are missing. We generate empty stubs here so compilation
+        # doesn't fail; Qt's qmltyperegistrar will overwrite them later.
+        if [ -f build/build.ninja ]; then
+          sed -n 's/.*:.* \([^ ]*_qmltyperegistrations\.cpp\)$/\1/p' build/build.ninja \
+            | sort -u | while read src; do
+              mkdir -p "$(dirname "build/$src")"
+              touch "build/$src"
+            done
+        fi
+      '';
+    });
+  in {
     options.mySystem.illogical.enable = lib.mkEnableOption "illogical impulse";
 
     config = lib.mkIf config.mySystem.illogical.enable {
@@ -53,6 +45,7 @@ in {
         qt6.qt5compat
         qt6.qtpositioning
         kdePackages.syntax-highlighting
+        fixedQuickshell
       ];
     };
   };
@@ -66,6 +59,23 @@ in {
     cfg = osConfig.mySystem.illogical;
     flakeSrc = "${inputs.illogical-flake}";
     customPkgs = import "${flakeSrc}/pkgs" { inherit pkgs; };
+    system = pkgs.stdenv.hostPlatform.system;
+    qsPackage = inputs.quickshell.packages.${system}.default;
+    fixedQuickshell = qsPackage.unwrapped.overrideAttrs (old: {
+      cmakeFlags = (old.cmakeFlags or []) ++ [
+        "-DNO_PCH=ON"
+      ];
+      preBuild = ''
+        export NIX_BUILD_CORES=1
+        if [ -f build/build.ninja ]; then
+          sed -n 's/.*:.* \([^ ]*_qmltyperegistrations\.cpp\)$/\1/p' build/build.ninja \
+            | sort -u | while read src; do
+              mkdir -p "$(dirname "build/$src")"
+              touch "build/$src"
+            done
+        fi
+      '';
+    });
 
     qtImports = with pkgs; [
       kdePackages.qtbase kdePackages.qtdeclarative kdePackages.qtsvg

@@ -7,13 +7,14 @@
     module,
     user,
     homeModule,
+    system ? "x86_64-linux",
     extraModules ? [],
   }:
     inputs.nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs self;};
       modules =
         [
-          { nixpkgs.hostPlatform = "x86_64-linux"; }
+          { nixpkgs.hostPlatform = system; }
           inputs.home-manager.nixosModules.home-manager
           module
           ({...}: {

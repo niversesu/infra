@@ -9,7 +9,7 @@
       enable = lib.mkEnableOption "fish";
       flakeTarget = lib.mkOption {
         type = lib.types.str;
-        default = "kale";
+        default = osConfig.networking.hostName;
       };
       theme = lib.mkOption {
         type = lib.types.str;
@@ -21,8 +21,8 @@
       xdg.configFile."fish/config.fish".force = true;
 
       home.sessionVariables = {
-        FLAKE = "/home/${osConfig.mySystem.shared.user}/infra";
-        NH_FLAKE = "/home/${osConfig.mySystem.shared.user}/infra";
+        FLAKE = "${config.home.homeDirectory}/infra";
+        NH_FLAKE = "${config.home.homeDirectory}/infra";
       };
 
       programs.fish = {
