@@ -2,6 +2,7 @@
   flake.nixosModules.host-kale-hw = {
     config,
     lib,
+    pkgs,
     ...
   }: {
     options.mySystem.host-kale-hw.enable = lib.mkEnableOption "host-kale-hw";

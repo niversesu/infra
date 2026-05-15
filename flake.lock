@@ -89,11 +89,11 @@
     "caelestia-dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1778719313,
-        "narHash": "sha256-5Vr6AANsTz87RAFFoNVolvizCTpSHVHW+nu5lqpICYo=",
+        "lastModified": 1779096387,
+        "narHash": "sha256-BZvTxCekQP06AyeG6wAn/cQ2bWP6z1ozVvrPEq/1Vtk=",
         "ref": "refs/heads/main",
-        "rev": "80174a91d1ce746c7f1a3661507e085149f39444",
-        "revCount": 215,
+        "rev": "a0a323efe0f8d44730875b5566686af862445537",
+        "revCount": 219,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/niversesu/caelestia"

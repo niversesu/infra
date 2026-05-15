@@ -12,6 +12,7 @@
         package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
         portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       };
+      programs.gpu-screen-recorder.enable = true;
       services.geoclue2.enable = true;
       services.power-profiles-daemon.enable = true;
       services.displayManager.sddm = {
@@ -81,29 +82,26 @@
           loupe
           hyprsunset
           cliphist
-        ] ++ [inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default];
+        ] ++ [inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default];
       }
       {
-        home.file = let
-          collectFiles = configDir: prefix: dir:
-            lib.concatMapAttrs (
-              name: type: let
-                relPath = if prefix == "" then name else "${prefix}/${name}";
-                absPath = "${dir}/${name}";
-              in
-                if type == "regular"
-                then {".config/${configDir}/${relPath}".source = absPath;}
-                else if type == "directory"
-                then collectFiles configDir relPath absPath
-                else {}
-            ) (builtins.readDir dir);
-          dotfiles = inputs.caelestia-dotfiles;
-        in
-          lib.mkMerge [
-            (collectFiles "hypr" "" "${dotfiles}/hypr")
-            (collectFiles "btop" "" "${dotfiles}/btop")
-            (collectFiles "foot" "" "${dotfiles}/foot")
-          ];
+        home.file = {
+          ".config/hypr" = {
+            source = "${inputs.caelestia-dotfiles}/hypr";
+            recursive = true;
+            force = true;
+          };
+          ".config/btop" = {
+            source = "${inputs.caelestia-dotfiles}/btop";
+            recursive = true;
+            force = true;
+          };
+          ".config/foot" = {
+            source = "${inputs.caelestia-dotfiles}/foot";
+            recursive = true;
+            force = true;
+          };
+        };
       }
     ]);
   };

@@ -10,6 +10,7 @@
       host = "dream";
     };
     mySystem.profiles.desktop.enable = true;
+    mySystem.hardware.gpu = "intel";
     mySystem.host-dream-hw.enable = true;
     mySystem.gnome.enable = false;
     mySystem.plasma.enable = false;

@@ -5,6 +5,7 @@
   flake.nixosModules.shared = {
     config,
     lib,
+    pkgs,
     ...
   }: {
     imports = [
@@ -36,6 +37,8 @@
       self.nixosModules.waydroid
       self.nixosModules.nix-flatpak
       self.nixosModules.obs-studio
+      self.nixosModules.jellyfin
+      self.nixosModules.caddy
     ];
 
     options.mySystem = {
@@ -57,6 +60,13 @@
       profiles = {
         desktop.enable = lib.mkEnableOption "Desktop profile (Gnome + standard GUI tools)";
         virtualization.enable = lib.mkEnableOption "Virtualization profile (Containers, VMs, Android)";
+      };
+      hardware = {
+        gpu = lib.mkOption {
+          type = lib.types.enum ["intel" "amd" "nvidia" "none"];
+          default = "none";
+          description = "The type of GPU in the system";
+        };
       };
     };
 
@@ -81,6 +91,22 @@
           extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
         };
         services.getty.autologinUser = lib.mkDefault config.mySystem.shared.user;
+
+        hardware.graphics = {
+          enable = lib.mkDefault (config.mySystem.hardware.gpu != "none");
+          extraPackages = with pkgs;
+            lib.mkMerge [
+              (lib.mkIf (config.mySystem.hardware.gpu == "intel") [
+                intel-media-driver
+                intel-compute-runtime
+                vpl-gpu-rt
+              ])
+              (lib.mkIf (config.mySystem.hardware.gpu == "amd") [
+                rocm-opencl-icd
+                rocm-opencl-runtime
+              ])
+            ];
+        };
       }
 
       # Desktop Profile

@@ -19,7 +19,6 @@
             aria2
             eza
             wget
-            mpv
             curl
             home-manager
             nh
@@ -38,6 +37,12 @@
             cpx
             cachix
             waypipe
+            (mpv.override {
+              scripts = [
+                mpvScripts.uosc
+                mpvScripts.sponsorblock
+              ];
+            })
           ];
         };
       })

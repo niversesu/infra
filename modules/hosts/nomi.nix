@@ -10,6 +10,7 @@
       host = "nomi";
     };
     mySystem.profiles.desktop.enable = true;
+    mySystem.hardware.gpu = "intel";
     mySystem.host-nomi-hw.enable = true;
   };
 }
