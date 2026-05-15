@@ -12,6 +12,7 @@
     mySystem.profiles.desktop.enable = true;
     mySystem.profiles.virtualization.enable = true;
     mySystem.host-kale-hw.enable = true;
+    mySystem.core.kernel.type = "cachyos";
 
     mySystem.gnome.enable = false;
     mySystem.caelestia.enable = true;

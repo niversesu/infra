@@ -23,7 +23,6 @@
         auto-optimise-store = true;
       };
       nixpkgs.config.allowUnfree = true;
-      boot.kernelPackages = pkgs.linuxPackages_latest;
       system.stateVersion = config.mySystem.shared.stateVersion;
     };
   };

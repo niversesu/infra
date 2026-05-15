@@ -13,6 +13,7 @@
       self.nixosModules.host-dream-hw
 
       self.nixosModules.core-boot
+      self.nixosModules.core-kernel
       self.nixosModules.core-nix
       self.nixosModules.core-locale
       self.nixosModules.core-network
@@ -63,6 +64,7 @@
       # Baseline - Essential system services
       {
         mySystem.core.boot.enable = lib.mkDefault true;
+        mySystem.core.kernel.enable = lib.mkDefault true;
         mySystem.core.nix.enable = lib.mkDefault true;
         mySystem.core.locale.enable = lib.mkDefault true;
         mySystem.core.network.enable = lib.mkDefault true;
