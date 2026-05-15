@@ -50,23 +50,24 @@
             enable = true;
             target = "graphical-session.target";
           };
+          general.idle.timeouts = {
+            "600" = {
+              idleAction = [ ];
+            };
+          };
           settings = {
             bar.status.showBattery = true;
-            idle = {
-              lockBeforeSleep = false;
-              inhibitWhenAudio = false;
-            };
-            utilities = {
-              enabled = true;
-              maxToasts = 1;
-              toasts.nowPlaying = true;
-            };
-            notifs = {
-              expire = true;
-              defaultExpireTimeout = 5000;
-            };
-            paths.wallpaperDir = "${config.home.homeDirectory}/Pictures/wallpapers";
           };
+          utilities = {
+            enabled = true;
+            maxToasts = 1;
+            toasts.nowPlaying = true;
+          };
+          notifs = {
+            expire = true;
+            defaultExpireTimeout = 5000;
+          };
+          paths.wallpaperDir = "${config.home.homeDirectory}/Pictures/wallpapers";
           cli = {
             enable = true;
             settings.theme.enableGtk = true;
