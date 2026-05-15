@@ -1,5 +1,9 @@
 {
   inputs = {
+    hypr-kdeconnect-nix = {
+      url = "github:niversesu/hypr-kdeconnect-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
@@ -63,6 +67,10 @@
     };
     wallpapers = {
       url = "github:niversesu/wallpapers";
+      flake = false;
+    };
+    videos = {
+      url = "github:niversesu/videos";
       flake = false;
     };
     rose-pine-hyprcursor = {

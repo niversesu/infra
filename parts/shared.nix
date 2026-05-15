@@ -23,6 +23,7 @@
 
       self.nixosModules.packages
       self.nixosModules.services
+      self.nixosModules.kdeconnect
 
       self.nixosModules.gnome
       self.nixosModules.plasma
@@ -83,6 +84,7 @@
 
         mySystem.packages.enable = lib.mkDefault true;
         mySystem.services.enable = lib.mkDefault true;
+        mySystem.services.kdeconnect.enable = lib.mkDefault true;
         mySystem.keyd.enable = lib.mkDefault true;
 
         networking.hostName = lib.mkDefault config.mySystem.shared.host;
@@ -145,6 +147,7 @@
       self.homeModules.spicetify
       self.homeModules.packages
       self.homeModules.wallpapers
+      self.homeModules.kdeconnect
     ];
 
     options.myHome.profiles = {

@@ -24,6 +24,7 @@
         programs.fish = {
           enable = true;
           shellAliases = {
+            cp = "cpx";
             ls = "eza --all --icons --color=auto --time-style=iso --classify";
             cat = "bat";
             y = "yazi";

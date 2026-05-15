@@ -53,7 +53,7 @@
         home.packages = with pkgs; [celluloid ffmpeg yt-dlp];
       })
       (lib.mkIf cfg.filemanagement.enable {
-        home.packages = [pkgs.kdePackages.filelight pkgs.rclone];
+        home.packages = [pkgs.kdePackages.filelight pkgs.rclone pkgs.localsend];
       })
       (lib.mkIf cfg.cliutilities.enable {
         home.packages = with pkgs; [gemini-cli-bin claude-code opencode];

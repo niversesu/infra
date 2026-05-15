@@ -7,6 +7,10 @@
   }: {
     options.mySystem.caelestia.enable = lib.mkEnableOption "caelestia";
     config = lib.mkIf config.mySystem.caelestia.enable {
+      mySystem.services.sddm = {
+        enable = true;
+        theme = "astronaut";
+      };
       programs.hyprland = {
         enable = true;
         package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -15,22 +19,6 @@
       programs.gpu-screen-recorder.enable = true;
       services.geoclue2.enable = true;
       services.power-profiles-daemon.enable = true;
-      services.displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-        theme = "sddm-astronaut-theme";
-        extraPackages = with pkgs; [
-          kdePackages.qtmultimedia
-          gst_all_1.gstreamer
-          gst_all_1.gst-plugins-base
-          gst_all_1.gst-libav
-        ];
-      };
-      environment.systemPackages = [
-        (pkgs.sddm-astronaut.override {
-          embeddedTheme = "hyprland_kath";
-        })
-      ];
     };
   };
   flake.homeModules.caelestia = {
@@ -54,7 +42,7 @@
           settings = {
             general.idle.timeouts = {
               "600" = {
-                idleAction = [ ];
+                idleAction = [];
               };
             };
             bar.status.showBattery = true;
@@ -77,12 +65,14 @@
         programs.foot.enable = true;
       }
       {
-        home.packages = with pkgs; [
-          nautilus
-          loupe
-          hyprsunset
-          cliphist
-        ] ++ [inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default];
+        home.packages = with pkgs;
+          [
+            nautilus
+            loupe
+            hyprsunset
+            cliphist
+          ]
+          ++ [inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default];
       }
       {
         home.file = {

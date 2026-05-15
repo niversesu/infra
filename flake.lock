@@ -221,6 +221,24 @@
     },
     "flake-parts_2": {
       "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_3": {
+      "inputs": {
         "nixpkgs-lib": [
           "illogical-flake",
           "nur",
@@ -241,9 +259,9 @@
         "type": "github"
       }
     },
-    "flake-parts_3": {
+    "flake-parts_4": {
       "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_2"
+        "nixpkgs-lib": "nixpkgs-lib_3"
       },
       "locked": {
         "lastModified": 1778716662,
@@ -259,7 +277,7 @@
         "type": "github"
       }
     },
-    "flake-parts_4": {
+    "flake-parts_5": {
       "inputs": {
         "nixpkgs-lib": [
           "nur",
@@ -319,6 +337,45 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "hypr-kdeconnect-nix": {
+      "inputs": {
+        "flake-parts": "flake-parts_2",
+        "hypr-kdeconnect-src": "hypr-kdeconnect-src",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779759680,
+        "narHash": "sha256-V+8WW3/lbTtZa3GL+rSjKp8kJB3IxMshI1MVkxkfOSA=",
+        "owner": "niversesu",
+        "repo": "hypr-kdeconnect-nix",
+        "rev": "2d20425231c8855d08aabf15cf3390a75ebb3ccf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "niversesu",
+        "repo": "hypr-kdeconnect-nix",
+        "type": "github"
+      }
+    },
+    "hypr-kdeconnect-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778039172,
+        "narHash": "sha256-OW18+pO92XvlTLrHo+S9/EVUophr5Dl1GdGJcmVAq/o=",
+        "owner": "gfhdhytghd",
+        "repo": "hypr-kdeconnect-fix",
+        "rev": "ea55f66c8238235983d60d381bf2abe1fed50043",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gfhdhytghd",
+        "repo": "hypr-kdeconnect-fix",
+        "rev": "ea55f66c8238235983d60d381bf2abe1fed50043",
         "type": "github"
       }
     },
@@ -735,7 +792,7 @@
         "cachyos-kernel": "cachyos-kernel",
         "cachyos-kernel-patches": "cachyos-kernel-patches",
         "flake-compat": "flake-compat_2",
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_4",
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
@@ -854,6 +911,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_3": {
+      "locked": {
+        "lastModified": 1777168982,
+        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1772542754,
@@ -928,7 +1000,7 @@
     },
     "nur": {
       "inputs": {
-        "flake-parts": "flake-parts_2",
+        "flake-parts": "flake-parts_3",
         "nixpkgs": [
           "illogical-flake",
           "nixpkgs"
@@ -950,7 +1022,7 @@
     },
     "nur_2": {
       "inputs": {
-        "flake-parts": "flake-parts_4",
+        "flake-parts": "flake-parts_5",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -1062,6 +1134,7 @@
         "caelestia-shell": "caelestia-shell_2",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "hypr-kdeconnect-nix": "hypr-kdeconnect-nix",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "illogical-dotfiles": "illogical-dotfiles",
@@ -1077,6 +1150,7 @@
         "quickshell": "quickshell_3",
         "rose-pine-hyprcursor": "rose-pine-hyprcursor",
         "spicetify-nix": "spicetify-nix",
+        "videos": "videos",
         "wallpapers": "wallpapers"
       }
     },
@@ -1201,6 +1275,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "videos": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780013582,
+        "narHash": "sha256-6O1SThW8A/Wot/MKzXOeVLQyN6EUW9xJ86F4ohwPvuw=",
+        "owner": "niversesu",
+        "repo": "videos",
+        "rev": "5a5ecec61ed46bd6c281bc2980741d781934f2f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "niversesu",
+        "repo": "videos",
         "type": "github"
       }
     },
