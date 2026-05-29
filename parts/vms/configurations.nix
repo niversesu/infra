@@ -7,7 +7,7 @@
       homeModule = self.homeModules.user-niver;
       extraModules = [
         self.nixosModules.vm-baseline
-        ({...}: { })
+        ({...}: {})
       ];
     };
 
@@ -18,7 +18,7 @@
       homeModule = self.homeModules.user-faith;
       extraModules = [
         self.nixosModules.vm-baseline
-        ({...}: { 
+        ({...}: {
           mySystem.gnome.enable = false;
           mySystem.caelestia.enable = true;
         })
@@ -32,7 +32,7 @@
       homeModule = self.homeModules.user-amani;
       extraModules = [
         self.nixosModules.vm-baseline
-        ({...}: { })
+        ({...}: {})
       ];
     };
   };

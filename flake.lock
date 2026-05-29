@@ -787,6 +787,22 @@
         "type": "github"
       }
     },
+    "media": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780068264,
+        "narHash": "sha256-irhYlf4YoeqtK5X4WF6jjKenxPGOntDy1GwqDvCOFYs=",
+        "owner": "niversesu",
+        "repo": "media",
+        "rev": "eb2bd2670ec88d264c92825188eaa2b9f2ca0f06",
+        "type": "github"
+      },
+      "original": {
+        "owner": "niversesu",
+        "repo": "media",
+        "type": "github"
+      }
+    },
     "nix-cachyos-kernel": {
       "inputs": {
         "cachyos-kernel": "cachyos-kernel",
@@ -1140,6 +1156,7 @@
         "illogical-dotfiles": "illogical-dotfiles",
         "illogical-flake": "illogical-flake",
         "import-tree": "import-tree",
+        "media": "media",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nix-flatpak": "nix-flatpak",
         "nix-index-database": "nix-index-database",
@@ -1150,7 +1167,6 @@
         "quickshell": "quickshell_3",
         "rose-pine-hyprcursor": "rose-pine-hyprcursor",
         "spicetify-nix": "spicetify-nix",
-        "videos": "videos",
         "wallpapers": "wallpapers"
       }
     },
@@ -1275,22 +1291,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "videos": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1780013582,
-        "narHash": "sha256-6O1SThW8A/Wot/MKzXOeVLQyN6EUW9xJ86F4ohwPvuw=",
-        "owner": "niversesu",
-        "repo": "videos",
-        "rev": "5a5ecec61ed46bd6c281bc2980741d781934f2f9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "niversesu",
-        "repo": "videos",
         "type": "github"
       }
     },

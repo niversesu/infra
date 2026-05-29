@@ -1,4 +1,4 @@
-{ ...}: {
+{...}: {
   flake.homeModules.packages = {
     pkgs,
     lib,

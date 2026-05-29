@@ -13,7 +13,6 @@
         description = "The SDDM theme to use";
       };
     };
-
     config = lib.mkIf config.mySystem.services.sddm.enable {
       services.displayManager.sddm = {
         enable = true;
@@ -31,41 +30,33 @@
         (pkgs.sddm-astronaut.override {
           embeddedTheme = "hyprland_kath";
           themeConfig = {
-            Background = "${inputs.videos}/sukuna.mp4";
+            Background = "${inputs.media}/sukuna/sukuna.mp4";
             BackgroundPlaceholder = "Backgrounds/hyprland_kath.png";
-
             HeaderTextColor = "#f5f5f5";
             DateTextColor = "#f5f5f5";
             TimeTextColor = "#f5f5f5";
-
             FormBackgroundColor = "#0a0a0a";
             BackgroundColor = "#0a0a0a";
             DimBackgroundColor = "#0a0a0a";
-
             LoginFieldBackgroundColor = "#1a1a1a";
             PasswordFieldBackgroundColor = "#1a1a1a";
             LoginFieldTextColor = "#f5f5f5";
             PasswordFieldTextColor = "#f5f5f5";
             UserIconColor = "#c0151a";
             PasswordIconColor = "#c0151a";
-
             PlaceholderTextColor = "#888888";
             WarningColor = "#c0151a";
-
             LoginButtonTextColor = "#f5f5f5";
             LoginButtonBackgroundColor = "#c0151a";
             SystemButtonsIconsColor = "#f5f5f5";
             SessionButtonTextColor = "#f5f5f5";
             VirtualKeyboardButtonTextColor = "#f5f5f5";
-
             DropdownTextColor = "#f5f5f5";
             DropdownSelectedBackgroundColor = "#c0151a";
             DropdownBackgroundColor = "#2a0a0a";
-
             HighlightTextColor = "#f5f5f5";
             HighlightBackgroundColor = "#c0151a";
             HighlightBorderColor = "transparent";
-
             HoverUserIconColor = "#c0151a";
             HoverPasswordIconColor = "#c0151a";
             HoverSystemButtonsIconsColor = "#c0151a";

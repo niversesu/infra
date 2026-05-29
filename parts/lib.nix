@@ -15,7 +15,7 @@
         specialArgs = {inherit inputs self;};
         modules =
           [
-            { nixpkgs.hostPlatform = system; }
+            {nixpkgs.hostPlatform = system;}
             inputs.home-manager.nixosModules.home-manager
             module
             ({...}: {

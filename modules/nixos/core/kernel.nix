@@ -1,7 +1,4 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   flake.nixosModules.core-kernel = {
     config,
     lib,
@@ -9,7 +6,7 @@
     ...
   }: {
     options.mySystem.core.kernel = {
-      enable = lib.mkEnableOption "Core Kernel Configuration" // { default = true; };
+      enable = lib.mkEnableOption "Core Kernel Configuration" // {default = true;};
       type = lib.mkOption {
         type = lib.types.enum ["default" "cachyos" "zen"];
         default = "default";
@@ -41,7 +38,7 @@
         # DIRECT INJECTION: This avoids overlays and uses the exact binary from the flake
         # This is the most reliable way to force the binary cache to be used.
         boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxPackages-cachyos-latest;
-        
+
         # We still add the overlay just in case other parts of the system expect cachyosKernels
         nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.default];
       })

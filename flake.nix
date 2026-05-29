@@ -69,8 +69,8 @@
       url = "github:niversesu/wallpapers";
       flake = false;
     };
-    videos = {
-      url = "github:niversesu/videos";
+    media = {
+      url = "github:niversesu/media";
       flake = false;
     };
     rose-pine-hyprcursor = {

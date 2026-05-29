@@ -1,7 +1,11 @@
-{ ...}: {
+{...}: {
   flake.nixosModules = {
     # The "Standard Fixes" - Everything needed to make a VM actually work.
-    vm-baseline = {config, lib, ...}: {
+    vm-baseline = {
+      config,
+      lib,
+      ...
+    }: {
       # Standard Resources
       virtualisation.vmVariant.virtualisation = {
         memorySize = lib.mkDefault 8192;
@@ -14,7 +18,10 @@
         ];
         # Standard Port Forwarding
         forwardPorts = [
-          { host.port = 2222; guest.port = 22; }
+          {
+            host.port = 2222;
+            guest.port = 22;
+          }
         ];
       };
 
@@ -25,7 +32,7 @@
 
       # Standard VM User Settings
       users.users.${config.mySystem.shared.user}.password = lib.mkDefault "123";
-      
+
       # Guest agent for better integration
       services.spice-vdagentd.enable = true;
     };

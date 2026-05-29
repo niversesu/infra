@@ -1,5 +1,5 @@
 {self, ...}: {
-  flake.nixosModules.host-dream = { ...}: {
+  flake.nixosModules.host-dream = {...}: {
     imports = [
       self.nixosModules.shared
     ];
