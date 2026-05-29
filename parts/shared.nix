@@ -1,7 +1,4 @@
-{
-  self,
-  ...
-}: {
+{self, ...}: {
   flake.nixosModules.shared = {
     config,
     lib,
@@ -29,6 +26,8 @@
       self.nixosModules.plasma
       self.nixosModules.illogical
       self.nixosModules.caelestia
+
+      self.nixosModules.sddm
 
       self.nixosModules.keyd
 

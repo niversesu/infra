@@ -31,10 +31,7 @@
           portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         };
         services.geoclue2.enable = true;
-        services.displayManager.sddm = {
-          enable = true;
-          wayland.enable = true;
-        };
+        mySystem.services.sddm.enable = true;
       }
       {
         environment.systemPackages = with pkgs; [
@@ -56,7 +53,7 @@
   }: let
     cfg = osConfig.mySystem.illogical;
     flakeSrc = "${inputs.illogical-flake}";
-    customPkgs = import "${flakeSrc}/pkgs" { inherit pkgs; };
+    customPkgs = import "${flakeSrc}/pkgs" {inherit pkgs;};
     system = pkgs.stdenv.hostPlatform.system;
     qsPackage = inputs.quickshell.packages.${system}.default;
     fixedQuickshell = qsPackage.unwrapped.overrideAttrs (old: {
@@ -74,19 +71,45 @@
     });
 
     qtImports = with pkgs; [
-      kdePackages.qtbase kdePackages.qtdeclarative kdePackages.qtsvg
-      kdePackages.qtwayland kdePackages.qt5compat kdePackages.qtimageformats
-      kdePackages.qtmultimedia kdePackages.qtpositioning kdePackages.qtsensors
-      kdePackages.qtquicktimeline kdePackages.qttools kdePackages.qttranslations
-      kdePackages.qtvirtualkeyboard kdePackages.qtwebsockets
-      kdePackages.syntax-highlighting kdePackages.kirigami.unwrapped
+      kdePackages.qtbase
+      kdePackages.qtdeclarative
+      kdePackages.qtsvg
+      kdePackages.qtwayland
+      kdePackages.qt5compat
+      kdePackages.qtimageformats
+      kdePackages.qtmultimedia
+      kdePackages.qtpositioning
+      kdePackages.qtsensors
+      kdePackages.qtquicktimeline
+      kdePackages.qttools
+      kdePackages.qttranslations
+      kdePackages.qtvirtualkeyboard
+      kdePackages.qtwebsockets
+      kdePackages.syntax-highlighting
+      kdePackages.kirigami.unwrapped
     ];
 
     pythonEnv = pkgs.python3.withPackages (ps: [
-      ps.build ps.cffi ps.click ps."dbus-python" ps."kde-material-you-colors"
-      ps.libsass ps.loguru ps."material-color-utilities" ps.materialyoucolor
-      ps.numpy ps.pillow ps.psutil ps.pycairo ps.pygobject3 ps.pywayland
-      ps.setproctitle ps."setuptools-scm" ps.tqdm ps.wheel ps."pyproject-hooks"
+      ps.build
+      ps.cffi
+      ps.click
+      ps."dbus-python"
+      ps."kde-material-you-colors"
+      ps.libsass
+      ps.loguru
+      ps."material-color-utilities"
+      ps.materialyoucolor
+      ps.numpy
+      ps.pillow
+      ps.psutil
+      ps.pycairo
+      ps.pygobject3
+      ps.pywayland
+      ps.setproctitle
+      ps."setuptools-scm"
+      ps.tqdm
+      ps.wheel
+      ps."pyproject-hooks"
       ps.opencv4
     ]);
   in {
@@ -122,23 +145,31 @@
         };
       }
       {
-        home.packages = [
-          (pkgs.writeShellScriptBin "qs" ''
-            export QT_PLUGIN_PATH="${lib.makeSearchPath "lib/qt-6/plugins" qtImports}:${lib.makeSearchPath "lib/qt6/plugins" qtImports}:${lib.makeSearchPath "lib/plugins" qtImports}"
-            export QML2_IMPORT_PATH="${lib.makeSearchPath "lib/qt-6/qml" qtImports}"
-            export XDG_DATA_DIRS="${lib.makeSearchPath "share" [
-              pkgs.adwaita-icon-theme pkgs.hicolor-icon-theme pkgs.papirus-icon-theme
-              customPkgs.illogical-impulse-oneui4-icons pkgs.gnome-icon-theme
-              pkgs.kdePackages.breeze-icons pkgs.lxqt.pavucontrol-qt pkgs.pavucontrol
-            ]}:$HOME/.nix-profile/share:$HOME/.local/share:/etc/profiles/per-user/$USER/share:/run/current-system/sw/share:/usr/share:$XDG_DATA_DIRS"
-            export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-            export QT_QPA_PLATFORMTHEME=gtk3
-            exec ${fixedQuickshell}/bin/qs "$@"
-          '')
-        ] ++ qtImports ++ [
-          pkgs.qt6Packages.qt6ct
-          pythonEnv
-        ];
+        home.packages =
+          [
+            (pkgs.writeShellScriptBin "qs" ''
+              export QT_PLUGIN_PATH="${lib.makeSearchPath "lib/qt-6/plugins" qtImports}:${lib.makeSearchPath "lib/qt6/plugins" qtImports}:${lib.makeSearchPath "lib/plugins" qtImports}"
+              export QML2_IMPORT_PATH="${lib.makeSearchPath "lib/qt-6/qml" qtImports}"
+              export XDG_DATA_DIRS="${lib.makeSearchPath "share" [
+                pkgs.adwaita-icon-theme
+                pkgs.hicolor-icon-theme
+                pkgs.papirus-icon-theme
+                customPkgs.illogical-impulse-oneui4-icons
+                pkgs.gnome-icon-theme
+                pkgs.kdePackages.breeze-icons
+                pkgs.lxqt.pavucontrol-qt
+                pkgs.pavucontrol
+              ]}:$HOME/.nix-profile/share:$HOME/.local/share:/etc/profiles/per-user/$USER/share:/run/current-system/sw/share:/usr/share:$XDG_DATA_DIRS"
+              export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+              export QT_QPA_PLATFORMTHEME=gtk3
+              exec ${fixedQuickshell}/bin/qs "$@"
+            '')
+          ]
+          ++ qtImports
+          ++ [
+            pkgs.qt6Packages.qt6ct
+            pythonEnv
+          ];
       }
     ]);
   };
