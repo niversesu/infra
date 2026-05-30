@@ -12,6 +12,11 @@
         default = "none";
         description = "The SDDM theme to use";
       };
+      video = lib.mkOption {
+        type = lib.types.enum ["sukuna"];
+        default = "sukuna";
+        description = "The video that will be played";
+      };
     };
     config = lib.mkIf config.mySystem.services.sddm.enable {
       services.displayManager.sddm = {
@@ -30,7 +35,7 @@
         (pkgs.sddm-astronaut.override {
           embeddedTheme = "hyprland_kath";
           themeConfig = {
-            Background = "${inputs.media}/sukuna/sukuna.mp4";
+            Background = "${inputs.media}/${config.mySystem.services.sddm.video}/${config.mySystem.services.sddm.video}.mp4";
             BackgroundPlaceholder = "Backgrounds/hyprland_kath.png";
             HeaderTextColor = "#f5f5f5";
             DateTextColor = "#f5f5f5";

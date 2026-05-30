@@ -10,6 +10,7 @@
       mySystem.services.sddm = {
         enable = true;
         theme = "astronaut";
+        video = "sukuna";
       };
       programs.hyprland = {
         enable = true;
