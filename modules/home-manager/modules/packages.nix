@@ -32,6 +32,7 @@
           meslo-lgs-nf
           minecraftia
           montserrat
+          comfortaa
         ];
       })
       (lib.mkIf cfg.gaming.enable {
@@ -56,7 +57,7 @@
         home.packages = [pkgs.kdePackages.filelight pkgs.rclone pkgs.localsend];
       })
       (lib.mkIf cfg.cliutilities.enable {
-        home.packages = with pkgs; [gemini-cli-bin claude-code opencode];
+        home.packages = with pkgs; [gemini-cli-bin opencode];
       })
       (lib.mkIf cfg.creative.enable {
         home.packages = with pkgs; [krita gimp3-with-plugins kdePackages.kdenlive];

@@ -36,7 +36,7 @@
           embeddedTheme = "hyprland_kath";
           themeConfig = {
             Background = "${inputs.media}/${config.mySystem.services.sddm.video}/${config.mySystem.services.sddm.video}.mp4";
-            BackgroundPlaceholder = "Backgrounds/hyprland_kath.png";
+            BackgroundPlaceholder = "${inputs.media}/${config.mySystem.services.sddm.video}/${config.mySystem.services.sddm.video}.png";
             HeaderTextColor = "#f5f5f5";
             DateTextColor = "#f5f5f5";
             TimeTextColor = "#f5f5f5";

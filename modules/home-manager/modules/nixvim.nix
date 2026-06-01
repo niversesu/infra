@@ -9,6 +9,10 @@
     ];
     options.myHome.nixvim.enable = lib.mkEnableOption "nixvim";
     config = lib.mkIf config.myHome.nixvim.enable {
+      home.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+      };
       programs.nixvim = {
         enable = true;
 

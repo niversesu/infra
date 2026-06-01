@@ -79,19 +79,20 @@
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    agenix.url = "github:ryantm/agenix";
+    agenix-rekey = {
+      url = "github:oddlama/agenix-rekey";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
+        inputs.agenix-rekey.flakeModules.default
         inputs.home-manager.flakeModules.home-manager
         (inputs.import-tree ./parts)
         (inputs.import-tree ./modules)
       ];
-      perSystem = {pkgs, ...}: {
-        devShells.default = pkgs.mkShell {
-          packages = [pkgs.nil];
-        };
-      };
     };
 }

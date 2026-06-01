@@ -41,11 +41,21 @@
             target = "graphical-session.target";
           };
           settings = {
-            general.idle.timeouts = {
-              "600" = {
-                idleAction = [];
-              };
-            };
+            general.idle.timeouts = [
+              {
+                timeout = 600;
+                idleAction = "lock";
+              }
+              {
+                timeout = 900;
+                idleAction = "dpms off";
+                returnAction = "dpms on";
+              }
+              {
+                timeout = 1200;
+                idleAction = ["systemctl" "suspend"];
+              }
+            ];
             bar.status.showBattery = true;
             utilities = {
               enabled = true;

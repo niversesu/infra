@@ -30,8 +30,8 @@
       mySystem.host-nomi-hw.enable = lib.mkForce false;
       mySystem.host-dream-hw.enable = lib.mkForce false;
 
-      # Standard VM User Settings
-      users.users.${config.mySystem.shared.user}.password = lib.mkDefault "123";
+      # Root filesystem for evaluation
+      fileSystems."/" = lib.mkDefault {device = "/dev/sda1";};
 
       # Guest agent for better integration
       services.spice-vdagentd.enable = true;

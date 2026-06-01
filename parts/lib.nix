@@ -17,6 +17,8 @@
           [
             {nixpkgs.hostPlatform = system;}
             inputs.home-manager.nixosModules.home-manager
+            inputs.agenix.nixosModules.default
+            inputs.agenix-rekey.nixosModules.default
             module
             ({...}: {
               nixpkgs.overlays = [inputs.nur.overlays.default];

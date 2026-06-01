@@ -17,9 +17,10 @@
       self.nixosModules.core-network
       self.nixosModules.core-hardware
       self.nixosModules.core-shell
+      self.nixosModules.core-secrets
 
       self.nixosModules.packages
-      self.nixosModules.services
+      self.nixosModules.xdg-portal
       self.nixosModules.kdeconnect
 
       self.nixosModules.gnome
@@ -54,7 +55,7 @@
         };
         user = lib.mkOption {
           type = lib.types.str;
-          default = "kale";
+          default = "niver";
         };
       };
       profiles = {
@@ -80,16 +81,21 @@
         mySystem.core.network.enable = lib.mkDefault true;
         mySystem.core.hardware.enable = lib.mkDefault true;
         mySystem.core.shell.enable = lib.mkDefault true;
+        mySystem.core.secrets.enable = lib.mkDefault true;
 
         mySystem.packages.enable = lib.mkDefault true;
-        mySystem.services.enable = lib.mkDefault true;
         mySystem.services.kdeconnect.enable = lib.mkDefault true;
         mySystem.keyd.enable = lib.mkDefault true;
 
         networking.hostName = lib.mkDefault config.mySystem.shared.host;
+        users.mutableUsers = false;
         users.users.${config.mySystem.shared.user} = {
           isNormalUser = true;
           extraGroups = ["networkmanager" "wheel" "input" "uinput" "ydotool" "libvirtd" "podman"];
+        };
+        users.users.recovery = {
+          isNormalUser = true;
+          extraGroups = ["wheel"];
         };
         services.getty.autologinUser = lib.mkDefault config.mySystem.shared.user;
 
@@ -165,7 +171,6 @@
         myHome.qol.enable = lib.mkDefault true;
 
         home.sessionVariables = {
-          FLAKE = "${config.home.homeDirectory}/infra";
           NH_FLAKE = "${config.home.homeDirectory}/infra";
         };
 

@@ -1,5 +1,6 @@
 {self, ...}: {
   flake.homeModules.user-niver = {
+    config,
     pkgs,
     inputs,
     ...

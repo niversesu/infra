@@ -12,7 +12,6 @@
           environment.systemPackages = with pkgs; [
             fastfetch
             ripgrep
-            fd
             gparted
             alejandra
             unzip

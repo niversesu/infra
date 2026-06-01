@@ -15,6 +15,7 @@
         enable = true;
         memoryPercent = 100;
       };
+      services.upower.enable = true;
     };
   };
 }
