@@ -24,7 +24,7 @@
 
     config = lib.mkIf cfg.enable (lib.mkMerge [
       (lib.mkIf cfg.remotetools.enable {
-        home.packages = [pkgs.remmina pkgs.ntfs3g];
+        home.packages = [pkgs.remmina];
       })
       (lib.mkIf cfg.fonts.enable {
         home.packages = with pkgs; [

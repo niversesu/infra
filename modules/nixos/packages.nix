@@ -13,6 +13,7 @@
             fastfetch
             ripgrep
             gparted
+            ntfs3g
             alejandra
             unzip
             aria2
