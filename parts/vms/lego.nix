@@ -35,6 +35,18 @@
 
       # Guest agent for better integration
       services.spice-vdagentd.enable = true;
+
+      # Force a static password of "123" inside local test VMs to bypass agenix password decryption.
+      virtualisation.vmVariant = {
+        users.users.${config.mySystem.shared.user} = {
+          hashedPasswordFile = lib.mkForce null;
+          password = "123";
+        };
+        users.users.recovery = {
+          hashedPasswordFile = lib.mkForce null;
+          password = "123";
+        };
+      };
     };
 
     # Lego: Resource Boost (16GB RAM / 12 Cores)

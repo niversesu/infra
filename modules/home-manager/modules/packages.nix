@@ -45,16 +45,16 @@
         home.packages = [pkgs.vesktop];
       })
       (lib.mkIf (osConfig.mySystem.waydroid.enable or false) {
-        home.packages = [
-          pkgs.nur.repos.ataraxiasjel.waydroid-script
-          pkgs.waydroid-helper
+        home.packages =  with pkgs; [
+          nur.repos.ataraxiasjel.waydroid-script
+          waydroid-helper
         ];
       })
       (lib.mkIf cfg.media.enable {
         home.packages = with pkgs; [celluloid ffmpeg yt-dlp];
       })
       (lib.mkIf cfg.filemanagement.enable {
-        home.packages = [pkgs.kdePackages.filelight pkgs.rclone pkgs.localsend];
+        home.packages = with pkgs; [kdePackages.filelight rclone localsend];
       })
       (lib.mkIf cfg.cliutilities.enable {
         home.packages = with pkgs; [gemini-cli-bin opencode];

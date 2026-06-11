@@ -13,6 +13,7 @@
       self.nixosModules.core-boot
       self.nixosModules.core-kernel
       self.nixosModules.core-nix
+      self.nixosModules.core-nixbuild
       self.nixosModules.core-locale
       self.nixosModules.core-network
       self.nixosModules.core-hardware

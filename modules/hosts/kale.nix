@@ -1,5 +1,5 @@
 {self, ...}: {
-  flake.nixosModules.host-kale = {...}: {
+  flake.nixosModules.host-kale = {config, ...}: {
     imports = [
       self.nixosModules.shared
     ];
@@ -14,6 +14,11 @@
     mySystem.hardware.gpu = "intel";
     mySystem.host-kale-hw.enable = true;
     mySystem.core.kernel.type = "cachyos";
+
+    mySystem.core.nixbuild = {
+      enable = true;
+      identityFile = config.age.secrets.nixbuildKey.path;
+    };
 
     mySystem.gnome.enable = false;
     mySystem.caelestia.enable = true;
