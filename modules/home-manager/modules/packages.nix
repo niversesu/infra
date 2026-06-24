@@ -45,7 +45,7 @@
         home.packages = [pkgs.vesktop];
       })
       (lib.mkIf (osConfig.mySystem.waydroid.enable or false) {
-        home.packages =  with pkgs; [
+        home.packages = with pkgs; [
           nur.repos.ataraxiasjel.waydroid-script
           waydroid-helper
         ];
@@ -57,7 +57,7 @@
         home.packages = with pkgs; [kdePackages.filelight rclone localsend];
       })
       (lib.mkIf cfg.cliutilities.enable {
-        home.packages = with pkgs; [gemini-cli-bin opencode];
+        home.packages = with pkgs; [devenv];
       })
       (lib.mkIf cfg.creative.enable {
         home.packages = with pkgs; [krita gimp3-with-plugins kdePackages.kdenlive];

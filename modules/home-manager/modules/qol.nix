@@ -24,6 +24,7 @@
       programs.fzf = {
         enable = true;
         enableFishIntegration = true;
+        enableNushellIntegration = false;
       };
 
       programs.nix-index = {

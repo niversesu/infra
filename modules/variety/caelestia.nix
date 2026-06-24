@@ -92,11 +92,7 @@
             recursive = true;
             force = true;
           };
-          ".config/btop" = {
-            source = "${inputs.caelestia-dotfiles}/btop";
-            recursive = true;
-            force = true;
-          };
+
           ".config/foot" = {
             source = "${inputs.caelestia-dotfiles}/foot";
             recursive = true;

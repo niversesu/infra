@@ -3,9 +3,7 @@
     config,
     lib,
     ...
-  }: let
-    cfg = config.mySystem.core.nixbuild;
-  in {
+  }: {
     options.mySystem.core.nixbuild = {
       enable = lib.mkEnableOption "nixbuild.net distributed builds";
       identityFile = lib.mkOption {
@@ -15,17 +13,17 @@
       };
     };
 
-    config = lib.mkIf cfg.enable {
+    config = lib.mkIf config.mySystem.core.nixbuild.enable {
       programs.ssh.extraConfig = ''
         Host eu.nixbuild.net
           PubkeyAcceptedKeyTypes ssh-ed25519
           ServerAliveInterval 60
-          IdentityFile ${cfg.identityFile}
+          IdentityFile ${config.mySystem.core.nixbuild.identityFile}
       '';
 
       programs.ssh.knownHosts = {
         nixbuild = {
-          hostNames = [ "eu.nixbuild.net" ];
+          hostNames = ["eu.nixbuild.net"];
           publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
         };
       };
@@ -37,7 +35,7 @@
             hostName = "eu.nixbuild.net";
             system = "x86_64-linux";
             maxJobs = 100;
-            supportedFeatures = [ "benchmark" "big-parallel" ];
+            supportedFeatures = ["benchmark" "big-parallel"];
           }
         ];
       };

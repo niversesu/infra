@@ -28,6 +28,7 @@
       self.nixosModules.plasma
       self.nixosModules.illogical
       self.nixosModules.caelestia
+      self.nixosModules.noctalia
 
       self.nixosModules.sddm
 
@@ -149,6 +150,7 @@
       self.homeModules.vscode
       self.homeModules.illogical
       self.homeModules.caelestia
+      self.homeModules.noctalia
       self.homeModules.qol
       self.homeModules.spicetify
       self.homeModules.packages

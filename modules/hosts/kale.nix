@@ -17,11 +17,11 @@
 
     mySystem.core.nixbuild = {
       enable = true;
-      identityFile = config.age.secrets.nixbuildKey.path;
+      identityFile = config.sops.secrets.nixbuildKey.path;
     };
 
     mySystem.gnome.enable = false;
-    mySystem.caelestia.enable = true;
+    mySystem.noctalia.enable = true;
     mySystem.jellyfin = {
       enable = true;
       domain = "jellyfin.kale";

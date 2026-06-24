@@ -34,7 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.54.2";
+      url = "github:hyprwm/Hyprland/v0.55.0";
     };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -51,6 +51,10 @@
     };
     caelestia-dotfiles = {
       url = "git+https://github.com/niversesu/caelestia?submodules=1";
+      flake = false;
+    };
+    noctalia-dotfiles = {
+      url = "git+https://github.com/niversesu/noctalia?submodules=1";
       flake = false;
     };
     caelestia-cli = {
@@ -87,12 +91,15 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
-        inputs.sops-nix.flakeModules.default
         inputs.home-manager.flakeModules.home-manager
         (inputs.import-tree ./parts)
         (inputs.import-tree ./modules)
