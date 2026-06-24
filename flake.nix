@@ -79,9 +79,8 @@
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-    agenix.url = "github:ryantm/agenix";
-    agenix-rekey = {
-      url = "github:oddlama/agenix-rekey";
+    sops-nix = {
+      url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     antigravity-nix = {
@@ -93,7 +92,7 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
-        inputs.agenix-rekey.flakeModules.default
+        inputs.sops-nix.flakeModules.default
         inputs.home-manager.flakeModules.home-manager
         (inputs.import-tree ./parts)
         (inputs.import-tree ./modules)

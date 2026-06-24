@@ -36,7 +36,7 @@
       # Guest agent for better integration
       services.spice-vdagentd.enable = true;
 
-      # Force a static password of "123" inside local test VMs to bypass agenix password decryption.
+      # Force a static password of "123" inside local test VMs to bypass sops-nix password decryption.
       virtualisation.vmVariant = {
         users.users.${config.mySystem.shared.user} = {
           hashedPasswordFile = lib.mkForce null;
