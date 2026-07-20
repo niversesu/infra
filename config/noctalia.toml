@@ -61,7 +61,7 @@ warning_threshold = 20
 
 [desktop_widgets]
 schema_version = 2
-widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-0000000000000002", "desktop-widget-0000000000000003" ]
+widget_order = [ "desktop-widget-0000000000000002" ]
 
     [desktop_widgets.grid]
     cell_size = 16
@@ -115,6 +115,24 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
 
 [dock]
 smart_auto_hide = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
 
 [location]
 auto_locate = true
@@ -180,13 +198,13 @@ source = "wallpaper"
 directory = "/home/niver/Pictures/wallpapers"
 
     [wallpaper.default]
-    path = "/home/niver/Pictures/wallpapers/maki.png"
+    path = "/home/niver/Pictures/wallpapers/tahoe-dark.png"
 
     [wallpaper.last]
-    path = "/home/niver/Pictures/wallpapers/maki.png"
+    path = "/home/niver/Pictures/wallpapers/tahoe-dark.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/niver/Pictures/wallpapers/maki.png"
+    path = "/home/niver/Pictures/wallpapers/tahoe-dark.png"
 
 [widget.clock]
 capsule = true

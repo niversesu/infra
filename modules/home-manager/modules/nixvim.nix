@@ -36,9 +36,8 @@
         };
 
         # ── Colorscheme ─────────────────────────────────────────────────────
-        colorschemes.catppuccin = {
+        colorschemes.rose-pine = {
           enable = true;
-          settings.flavour = "mocha";
         };
 
         # ── Plugins ─────────────────────────────────────────────────────────

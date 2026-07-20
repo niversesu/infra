@@ -21,7 +21,6 @@
     myHome.packages.gaming.enable = true;
     myHome.packages.tech-tools.enable = true;
     home.packages = [
-      inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.veadotube-mini
       inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.delphitools-cli
       inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli

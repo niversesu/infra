@@ -21,7 +21,7 @@
     };
 
     mySystem.gnome.enable = false;
-    mySystem.noctalia.enable = true;
+    mySystem.caelestia.enable = true;
     mySystem.jellyfin = {
       enable = true;
       domain = "jellyfin.kale";

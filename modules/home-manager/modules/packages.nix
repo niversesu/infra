@@ -1,5 +1,6 @@
 {...}: {
   flake.homeModules.packages = {
+    inputs,
     pkgs,
     lib,
     config,
@@ -60,7 +61,7 @@
         home.packages = with pkgs; [devenv];
       })
       (lib.mkIf cfg.creative.enable {
-        home.packages = with pkgs; [krita gimp3-with-plugins kdePackages.kdenlive];
+        home.packages = with pkgs; [krita inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.nix-photogimp kdePackages.kdenlive];
       })
       (lib.mkIf cfg.tech-tools.enable {
         home.packages = with pkgs; [keyd ydotool distrobox nixos-container];
