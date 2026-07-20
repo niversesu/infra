@@ -36,6 +36,7 @@
       {
         programs.noctalia = {
           enable = true;
+          settings = ../../config/noctalia.toml;
         };
         programs.foot.enable = true;
       }
