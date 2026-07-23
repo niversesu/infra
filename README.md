@@ -1,12 +1,13 @@
 # 🏠 Infrastructure
 
-> **NixOS dotfiles powered by flakes, flake-parts, and home-manager using the shared module pattern**  
-> Three machines, for now...
+> **NixOS dotfiles powered by flakes, flake-parts, import-tree, and home-manager using the shared module pattern**  
+> Three physical machines, test VMs, and modular desktop profile varieties.
 
 <!-- Badges -->
-![NixOS](https://img.shields.io/badge/NixOS-Unstable-blue?style=flat-square&logo=NixOS&logoColor=white)
+![NixOS](https://img.shields.io/badge/NixOS-26.05%20Unstable-blue?style=flat-square&logo=NixOS&logoColor=white)
 ![flake](https://img.shields.io/badge/Flakes-✓-orange?style=flat-square)
 ![flake-parts](https://img.shields.io/badge/flake--parts-Modular-purple?style=flat-square)
+![sops-nix](https://img.shields.io/badge/sops--nix-Encrypted-green?style=flat-square)
 
 ---
 
@@ -16,48 +17,61 @@
 
 | Command | Description |
 |---------|-------------|
-| `snrs` | Rebuild current host (defined in fish config) |
-| `sudo nixos-rebuild switch --flake .#<host>` | Switch to host config |
-| `sudo nixos-rebuild dry-run --flake .#<host>` | Test without switching |
-| `nix flake update` | Update all inputs |
+| `snrs` | Rebuild current host (defined in fish config via `NH_FLAKE`) |
+| `sudo nixos-rebuild switch --flake .#<host>` | Switch to host configuration (`kale`, `nomi`, `dream`) |
+| `sudo nixos-rebuild dry-run --flake .#<host>` | Test configuration build without switching |
+| `nixos-rebuild build-vm --flake .#<host>-vm` | Build runnable QEMU VM instance of host |
+| `nix flake update` | Update all flake inputs |
 
 ### Available Hosts
 
-| Host | User | Desktop Environment | Special Config |
-|------|------|---------------------|---------------|
-| `nomi` | faith | GNOME | waydroid |
-| `kale` | niver | Caelestia (Hyprland) | keyd, libvirt, podman, ydotool |
-| `dream` | amani | Caelestia (Hyprland) + Plasma | steam |
+| Host | User | Profiles & Variety | Key Services & Features |
+|------|------|--------------------|-------------------------|
+| `kale` | `niver` | Desktop + Virtualization + Caelestia | CachyOS Kernel, Jellyfin (`jellyfin.kale`), nixbuild server, Steam, Waydroid |
+| `nomi` | `faith` | Desktop (GNOME) | Waydroid, Flatpak, OBS Studio |
+| `dream` | `amani` | Desktop + Caelestia | Steam gaming |
+| `*-vm` | `niver`/`faith`/`amani` | VM Baseline / Lego modules | QEMU virtual machine test targets (`kale-vm`, `nomi-vm`, `dream-vm`) |
 
 ### Project Stats
 ```
-34 .nix files  ·  3 NixOS hosts  ·  8 home-manager modules
-4 DE configs   ·  4 virtualization modules
+52 .nix files  ·  6 NixOS configurations (3 Hosts + 3 VMs)  ·  10 home-manager modules
+5 DE/Shell varieties  ·  8 NixOS services  ·  9 NixOS core modules  ·  4 virtualization modules
 ```
 
 ### File Structure
 ```
 infra/
-├── flake.nix              # Flake entry point
-├── dotfiles/              # Shared dotfiles (starship, hypr)
-├── parts/
-│   ├── hosts.nix         # Host configurations
-│   └── shared.nix        # Shared module pattern
-├── hosts/                 # Host-specific modules
-│   ├── nomi/            # faith's machine
-│   ├── kale/            # niver's machine
-│   └── dream/           # amani's machine
-├── nixos/               # System-level modules
-│   ├── modules/
-│   │   ├── services/    # keyd, nix-flatpak, obs-studio
-│   │   └── virtualization/  # waydroid, podman, libvirt, ydotool
-│   ├── configuration.nix # Base system config
-│   ├── packages.nix     # System packages
-│   └── services.nix      # System services
-├── home-manager/        # User environment
-│   ├── modules/         # Reusable modules (fish, nixvim, etc)
-│   └── users/           # Per-user configs
-└── variety/             # DE-specific configs (gnome, plasma, illogical, caelestia)
+├── flake.nix              # Flake entry point (imports ./parts & ./modules via import-tree)
+├── config/                # Component configuration files (e.g. noctalia.toml)
+├── secrets/               # SOPS encrypted secrets and keys
+│   ├── secrets.yaml       # Password hashes & nixbuild keys
+│   └── key/               # Public SSH keys
+├── parts/                 # Flake-parts infrastructure & VM builders
+│   ├── hosts.nix          # NixOS host target definitions
+│   ├── shared.nix         # Baseline shared NixOS & Home Manager modules & profile options
+│   ├── lib.nix            # Flake helper library (mkHost builder)
+│   └── vms/               # VM modular building blocks ("Lego" system)
+│       ├── lego.nix       # vm-baseline, vm-boost, vm-lite modules
+│       └── configurations.nix # VM NixOS target configurations (*-vm)
+└── modules/               # Auto-discovered modules (via import-tree)
+    ├── hosts/             # Physical host definitions & hardware modules
+    │   ├── kale.nix / kale-hardware.nix
+    │   ├── nomi.nix / nomi-hardware.nix
+    │   └── dream.nix / dream-hardware.nix
+    ├── nixos/             # NixOS system-level modules
+    │   ├── core/          # boot, hardware, kernel, locale, network, nix, nixbuild, secrets, shell
+    │   ├── services/      # caddy, jellyfin, kdeconnect, keyd, nix-flatpak, obs-studio, sddm, xdg-portal
+    │   ├── virtualization/# libvirt, podman, waydroid, ydotool
+    │   └── packages.nix   # System package collections
+    ├── home-manager/      # User environments & Home Manager modules
+    │   ├── modules/       # fish, git, nixvim, packages, qol, spicetify, starship, theming, vscode, wallpapers
+    │   └── users/         # User configs (niver.nix, faith.nix, amani.nix)
+    └── variety/           # Desktop environment & shell varieties
+        ├── caelestia.nix  # Caelestia Hyprland desktop shell
+        ├── gnome.nix      # GNOME desktop environment
+        ├── illogical.nix  # Illogical Impulse Hyprland setup
+        ├── noctalia.nix   # Noctalia desktop shell + Astronaut SDDM
+        └── plasma.nix     # KDE Plasma 6 desktop
 ```
 
 ---
@@ -76,68 +90,68 @@ flowchart TB
     subgraph parts["parts/"]
         hosts["hosts.nix"]
         shared["shared.nix"]
-    end
-
-    subgraph nixos["NixOS Configuration"]
-        subgraph nixos-modules["nixos/modules/"]
-            sm["services/"]
-            vm["virtualization/"]
+        lib["lib.nix"]
+        subgraph vms["parts/vms/"]
+            vmlego["lego.nix (vm-baseline, vm-boost, vm-lite)"]
+            vmconfigs["configurations.nix (*-vm)"]
         end
-        config["configuration.nix"]
-        pkgs["packages.nix"]
-        svc["services.nix"]
     end
 
-    subgraph hosts_dir["hosts/"]
-        nomi["host-nomi"]
-        kale["host-kale"]
-        dream["host-dream"]
-    end
-
-    subgraph variety["variety/"]
-        gnome["gnome"]
-        plasma["plasma"]
-        illogical["illogical"]
-        caelestia["caelestia"]
-    end
-
-    subgraph hm["home-manager"]
-        subgraph hm-modules["home-manager/modules/"]
-            fish["fish"]
-            nixvim["nixvim"]
-            git["git"]
-            starship["starship"]
-            vscode["vscode"]
-            spicetify["spicetify"]
-            theming["theming"]
-            packages["packages"]
+    subgraph modules["modules/"]
+        subgraph hosts_dir["modules/hosts/"]
+            nomi["host-nomi"]
+            kale["host-kale"]
+            dream["host-dream"]
         end
-        subgraph hm-users["home-manager/users/"]
-            faith["user-faith"]
-            niver["user-niver"]
-            amani["user-amani"]
+
+        subgraph nixos["modules/nixos/"]
+            core["core/ (boot, kernel, nix, secrets...)"]
+            services["services/ (caddy, jellyfin, keyd...)"]
+            virt["virtualization/ (podman, libvirt, waydroid...)"]
+        end
+
+        subgraph variety["modules/variety/"]
+            gnome["gnome"]
+            plasma["plasma"]
+            illogical["illogical"]
+            caelestia["caelestia"]
+            noctalia["noctalia"]
+        end
+
+        subgraph hm["modules/home-manager/"]
+            subgraph hm-modules["modules/"]
+                fish["fish"]
+                nixvim["nixvim"]
+                git["git"]
+                starship["starship"]
+                vscode["vscode"]
+                spicetify["spicetify"]
+                theming["theming"]
+                wallpapers["wallpapers"]
+                qol["qol"]
+            end
+            subgraph hm-users["users/"]
+                faith["user-faith"]
+                niver["user-niver"]
+                amani["user-amani"]
+            end
         end
     end
 
     fp --> it
     it --> parts
-    it --> nixos-modules
-    it --> hosts_dir
-    it --> hm-modules
-    it --> hm-users
-    it --> variety
+    it --> modules
 
-    shared --> nixos-modules
-    shared --> config
-    shared --> pkgs
-    shared --> svc
+    shared --> core
+    shared --> services
+    shared --> virt
     shared --> variety
+    shared --> hm-modules
 
+    hosts --> hosts_dir
     hosts_dir --> shared
-
-    nomi --> hm-users
-    kale --> hm-users
-    dream --> hm-users
+    hosts_dir --> hm-users
+    vmconfigs --> vmlego
 ```
 
 ### Data Flow
@@ -147,43 +161,29 @@ sequenceDiagram
     participant U as User
     participant N as nixos-rebuild
     participant F as flake.nix
-    participant S as shared.nix
-    participant H as Host Config
-    participant M as Modules
+    participant S as parts/shared.nix
+    participant H as modules/hosts/kale.nix
+    participant M as NixOS & Variety Modules
     participant HM as Home Manager
 
-    U->>N: nixos-rebuild switch --flake .#nomi
-    N->>F: Evaluate flake
-    F->>F: Load flake-parts + import-tree
-    F->>H: Get host-nomi config
-    H->>S: Enable shared module (sets host/user)
-    S->>M: Import all modules (conditionally enabled)
-    H->>HM: Get user-faith config
-    HM->>HM: Apply user config
-    N->>U: System activated
+    U->>N: nixos-rebuild switch --flake .#kale
+    N->>F: Evaluate flake outputs
+    F->>F: Auto-import ./parts and ./modules via import-tree
+    F->>H: Get nixosConfigurations.kale
+    H->>S: Enable mySystem.shared (sets user & host)
+    S->>M: Apply profiles (desktop, virtualization, core modules)
+    H->>HM: Evaluate home-manager user-niver config
+    HM->>HM: Apply myHome baseline + profile settings
+    N->>U: System successfully rebuilt & activated
 ```
 
 ---
 
 ## 🖥️ Hosts
 
-### nomi
+### `kale`
 
-faith's daily driver — GNOME with Waydroid.
-
-```nix
-# Configured via shared module
-mySystem.shared = {
-  enable = true;
-  user = "faith";
-  host = "nomi";
-};
-mySystem.gnome.enable = true;
-```
-
-### kale
-
-niver's powerhouse — Caelestia (Hyprland) with full virtualization stack.
+niver's daily driver — Caelestia Hyprland shell with CachyOS kernel, virtualization stack, remote nixbuild server, and Jellyfin media server.
 
 ```nix
 mySystem.shared = {
@@ -191,16 +191,36 @@ mySystem.shared = {
   user = "niver";
   host = "kale";
 };
+mySystem.profiles.desktop.enable = true;
+mySystem.profiles.virtualization.enable = true;
+mySystem.hardware.gpu = "intel";
+mySystem.core.kernel.type = "cachyos";
+mySystem.gnome.enable = false;
 mySystem.caelestia.enable = true;
-mySystem.keyd.enable = true;
-mySystem.podman.enable = true;
-mySystem.libvirt.enable = true;
-mySystem.ydotool.enable = true;
+mySystem.jellyfin = {
+  enable = true;
+  domain = "jellyfin.kale";
+};
+programs.steam.enable = true;
 ```
 
-### dream
+### `nomi`
 
-amani's machine — Caelestia (Hyprland) with Plasma fallback, Steam gaming.
+faith's machine — GNOME desktop with flatpak, waydroid, and multimedia tools.
+
+```nix
+mySystem.shared = {
+  enable = true;
+  user = "faith";
+  host = "nomi";
+};
+mySystem.profiles.desktop.enable = true;
+mySystem.hardware.gpu = "intel";
+```
+
+### `dream`
+
+amani's machine — Caelestia Hyprland desktop with Steam gaming setup.
 
 ```nix
 mySystem.shared = {
@@ -208,52 +228,93 @@ mySystem.shared = {
   user = "amani";
   host = "dream";
 };
+mySystem.profiles.desktop.enable = true;
+mySystem.hardware.gpu = "intel";
+mySystem.gnome.enable = false;
 mySystem.caelestia.enable = true;
 programs.steam.enable = true;
 ```
 
 ---
 
-## 📦 Modules
+## 📦 Modules Reference
 
-### NixOS Modules
+### NixOS Core Modules (`modules/nixos/core/`)
 
-#### `nixos/modules/services/`
+| Module | Option Namespace | Description |
+|--------|------------------|-------------|
+| `boot` | `mySystem.core.boot` | GRUB / systemd-boot configuration |
+| `kernel` | `mySystem.core.kernel` | Linux kernel configuration (supports standard & CachyOS kernel variants) |
+| `nix` | `mySystem.core.nix` | Flakes, garbage collection, binary caches |
+| `nixbuild` | `mySystem.core.nixbuild` | Remote build offloading to nixbuild.net |
+| `secrets` | `mySystem.core.secrets` | sops-nix secrets management for password hashes and SSH keys |
+| `locale` / `network` / `hardware` / `shell` | `mySystem.core.*` | NetworkManager, locale, pipewire audio, default zsh/fish shells |
+
+### NixOS Services (`modules/nixos/services/`)
+
 | Module | Purpose |
 |--------|---------|
-| `keyd` | Keyboard remapping (disables laptop keyboard) |
-| `nix-flatpak` | Flatpak integration via nix-flatpak |
+| `caddy` | Reverse proxy server |
+| `jellyfin` | Media server service (`jellyfin.kale`) |
+| `kdeconnect` | Cross-device integration daemon |
+| `keyd` | Hardware key remapping daemon |
+| `nix-flatpak` | Declarative Flatpak package manager |
 | `obs-studio` | OBS Studio with virtual camera support |
+| `sddm` | SDDM display manager with custom themes |
+| `xdg-portal` | Desktop portals for Wayland/Hyprland |
 
-#### `nixos/modules/virtualization/`
-| Module | Purpose |
-|--------|---------|
-| `waydroid` | Android emulation via Waydroid |
-| `podman` | Rootless container runtime |
-| `libvirt` | VM hypervisor + virt-manager |
-| `ydotool` | Input automation for Wayland |
+### Virtualization Stack (`modules/nixos/virtualization/`)
 
-### Home Manager Modules
+| Module | Option | Purpose |
+|--------|--------|---------|
+| `waydroid` | `mySystem.waydroid.enable` | Android container emulation |
+| `podman` | `mySystem.podman.enable` | Rootless container engine & podman-compose |
+| `libvirt` | `mySystem.libvirt.enable` | KVM hypervisor & virt-manager |
+| `ydotool` | `mySystem.ydotool.enable` | Wayland input automation service |
+
+### Variety / Desktop Environments (`modules/variety/`)
+
+| Module | Desktop / Shell | Features |
+|--------|-----------------|----------|
+| `caelestia` | Hyprland | Modern Caelestia desktop shell with custom CLI & dotfiles |
+| `noctalia` | Hyprland | Noctalia quickshell desktop bar + Astronaut SDDM video theme |
+| `gnome` | GNOME 47 | GDM, extensions, RDP support |
+| `illogical` | Hyprland | Illogical Impulse Hyprland desktop environment |
+| `plasma` | KDE Plasma 6 | SDDM, KDE Connect integration |
+
+### Home Manager Modules (`modules/home-manager/modules/`)
 
 | Module | Description |
 |--------|-------------|
-| `fish` | Shell with fish, aliases, snrs command |
-| `nixvim` | Neovim config with catppuccin + plugins |
-| `git` | Git config with GitHub SSH rewrite |
-| `starship` | Rust-powered shell prompt |
-| `vscode` | VSCode FHS environment |
-| `spicetify` | Spotify theming |
-| `theming` | GTK, cursor, icon themes |
-| `packages` | Unified package management |
+| `fish` | Shell aliases (`snrs`), Catppuccin theme integration |
+| `nixvim` | Declarative Neovim environment with Catppuccin & language LSP plugins |
+| `git` | Git configuration & GitHub SSH URL rewrites |
+| `starship` | Prompt theme configuration |
+| `vscode` | VSCode editor configuration |
+| `spicetify` | Custom Spotify themes and extensions |
+| `theming` | GTK, icon themes, Bibata cursors |
+| `wallpapers` | Declarative wallpaper distribution |
+| `qol` | Quality of Life tools (bat, eza, fzf, ripgrep, zoxide) |
+| `packages` | User-level package collections (gaming, tech-tools, creative) |
 
-### Variety (DE Configs)
+### Virtual Machine Lego System (`parts/vms/`)
 
-| Module | Desktop | Notes |
-|--------|---------|-------|
-| `gnome` | GNOME | GDM, extensions, xrdp |
-| `plasma` | KDE Plasma 6 | SDDM, kdeconnect |
-| `illogical` | Hyprland | SDDM, hyprland + illogical-impulse |
-| `caelestia` | Hyprland | SDDM, caelestia dotfiles |
+Provides composable VM modules to build and test configurations locally in QEMU:
+
+| Lego Module | Description |
+|-------------|-------------|
+| `vm-baseline` | Base QEMU virtual machine settings (display acceleration, SSH forwarding on port 2222, default credentials) |
+| `vm-boost` | High performance allocation (16GB RAM / 12 Cores) |
+| `vm-lite` | Lightweight allocation (4GB RAM / 4 Cores) |
+
+---
+
+## 🔐 Secrets Management
+
+System secrets (such as user password hashes and SSH private keys) are encrypted using **[sops-nix](https://github.com/mic92/sops-nix)** with age keys.
+
+- Secret definition file: `secrets/secrets.yaml`
+- Module loading: `modules/nixos/core/secrets.nix`
 
 ---
 
@@ -261,307 +322,128 @@ programs.steam.enable = true;
 
 ### Adding a New Home Manager Module
 
-1. Create the file:
+1. Create the module file in `modules/home-manager/modules/`:
    ```bash
-   touch home-manager/modules/my-module.nix
+   touch modules/home-manager/modules/my-module.nix
    ```
 
-2. Define the module:
+2. Export the home module:
    ```nix
    { ... }: {
      flake.homeModules.my-module = { ... }: {
-       # Your config here
+       # Your configuration here
      };
    }
    ```
 
-3. Import it in the shared module or a user config:
+3. Import it in `parts/shared.nix` (`flake.homeModules.shared`):
    ```nix
-   # parts/shared.nix or home-manager/users/faith.nix
    imports = [
-     self.homeModules.my-module  # Add this
-     # ... existing imports
+     self.homeModules.my-module
    ];
    ```
 
-### Adding a New NixOS Module
+### Adding a New NixOS Service or Core Module
 
-1. Choose the right location:
+1. Create the module file in `modules/nixos/services/` or `modules/nixos/core/`:
    ```bash
-   # For services
-   touch nixos/modules/services/my-service.nix
-
-   # For virtualization
-   touch nixos/modules/virtualization/my-virt.nix
-
-   # For DE-specific stuff
-   touch variety/my-de.nix
+   touch modules/nixos/services/my-service.nix
    ```
 
-2. Define the module:
+2. Export the NixOS module:
    ```nix
    { ... }: {
-     flake.nixosModules.my-module = { ... }: {
-       # Your config here
+     flake.nixosModules.my-service = { ... }: {
+       # Options and config here
      };
    }
    ```
 
-3. Import it in `parts/shared.nix`:
+3. Import it in `parts/shared.nix` (`flake.nixosModules.shared`):
    ```nix
    imports = [
-     self.nixosModules.my-module  # Add this
-     # ... existing imports
+     self.nixosModules.my-service
    ];
    ```
 
-### Adding a New Host
+### Adding a New Physical Host
 
-1. Create hardware config:
+1. Add hardware and host configuration files in `modules/hosts/`:
    ```bash
-   touch hosts/myhost-hardware.nix
+   touch modules/hosts/myhost-hardware.nix
+   touch modules/hosts/myhost.nix
    ```
 
-2. Create host config:
-   ```bash
-   touch hosts/myhost.nix
-   ```
-
-3. Register in `parts/hosts.nix`:
+2. Register the host in `parts/hosts.nix`:
    ```nix
-   myhost = mkHost {
+   myhost = self.lib.mkHost {
      module = self.nixosModules.host-myhost;
      user = "myuser";
      homeModule = self.homeModules.user-myuser;
    };
    ```
 
-4. Create user config:
-   ```bash
-   touch home-manager/users/myuser.nix
-   ```
+3. Create the user file in `modules/home-manager/users/myuser.nix`.
 
-### Code Quality
+### Code Quality & Validation
 
 ```bash
-# Format all .nix files
-nix run nixpkgs#alejandra -- --check .  # Check
-nix run nixpkgs#alejandra -- --fix .     # Fix
+# Verify flake evaluation
+nix flake show
 
-# Find dead code
+# Format .nix code
+nix run nixpkgs#alejandra -- --check .
+nix run nixpkgs#alejandra -- --fix .
+
+# Check for unused code
 nix run nixpkgs#deadnix .
-
-# Full check
-nix flake check
 ```
 
 ---
 
-## 📖 In-Depth Documentation
+## 📖 In-Depth Architecture Details
 
 <details>
-<summary><b>🔮 How flake-parts Works</b></summary>
+<summary><b>🔮 Automatic Discovery via import-tree</b></summary>
 
-flake-parts extends Nix flakes with a module system. Instead of manually defining `nixosConfigurations`, you use:
-
-```nix
-flake-parts.lib.mkFlake { inherit inputs; } {
-  # Automatically creates nixosConfigurations from flake.nixosModules
-  # Automatically creates homeConfigurations from flake.homeModules
-}
-```
-
-Modules export themselves via `flake.nixosModules.<name>` or `flake.homeModules.<name>`, and are auto-discovered by `import-tree`.
-
-</details>
-
-<details>
-<summary><b>🌲 How import-tree Works</b></summary>
-
-`import-tree` recursively imports all `.nix` files in a directory. Files with `/_` in the path are ignored (for helpers/private code).
+`flake.nix` imports `./parts` and `./modules` using `import-tree`:
 
 ```nix
-# This imports ALL .nix files in ./variety/
-(inputs.import-tree ./variety)
-# └── gnome.nix      → flake.nixosModules.gnome
-# └── plasma.nix     → flake.nixosModules.plasma
-# └── illogical.nix  → flake.nixosModules.illogical + flake.homeModules.illogical
-# └── caelestia.nix  → flake.nixosModules.caelestia + flake.homeModules.caelestia
-```
-
-The filename becomes the module name, directory is just for organization.
-
-</details>
-
-<details>
-<summary><b>🏠 The Shared Module Pattern</b></summary>
-
-Instead of each host duplicating imports, `parts/shared.nix` defines a **shared module** that all hosts use:
-
-```nix
-# In hosts/nomi.nix
-imports = [ self.nixosModules.shared ];
-
-mySystem.shared = {
-  enable = true;
-  user = "faith";
-  host = "nomi";
-};
-mySystem.gnome.enable = true;
-```
-
-The shared module conditionally enables modules based on host-specific options. Each host only sets what's different from defaults.
-
-</details>
-
-<details>
-<summary><b>🏠 How Home Manager Integration Works</b></summary>
-
-Home Manager is integrated as a NixOS module:
-
-```nix
-# In parts/hosts.nix
-modules = [
-  inputs.home-manager.nixosModules.home-manager  # HM as NixOS module
-  self.nixosModules.host-nomi
-  ({ ... }: {
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      users.faith = self.homeModules.user-faith;
-    };
-  })
-];
-```
-
-Users import `self.homeModules.shared` which provides common modules (nixvim, fish, git, etc.), then override per-user options.
-
-</details>
-
-<details>
-<summary><b>🔗 Module Dependencies</b></summary>
-
-Modules can reference each other via `self.homeModules.*` or `self.nixosModules.*`:
-
-```nix
-# In parts/shared.nix (homeModules.shared)
 imports = [
-  self.homeModules.nixvim
-  self.homeModules.fish
-  # ...
+  inputs.home-manager.flakeModules.home-manager
+  (inputs.import-tree ./parts)
+  (inputs.import-tree ./modules)
 ];
 ```
 
-The `mySystem` option namespace is used for system-level toggles:
-
-```nix
-# In variety/caelestia.nix
-options.mySystem.caelestia.enable = lib.mkEnableOption "caelestia";
-
-# In hosts/dream.nix
-mySystem.caelestia.enable = true;
-```
+`import-tree` recursively imports every `.nix` file inside `./parts` and `./modules`. Each module registers its NixOS and Home Manager components into `flake.nixosModules` or `flake.homeModules`.
 
 </details>
 
 <details>
-<summary><b>📦 Virtualization Stack</b></summary>
+<summary><b>🏠 System & Home Profiles</b></summary>
 
-The virtualization modules are split for composability:
+Profiles allow coarse-grained feature toggles across machines:
 
-| Module | What it does |
-|--------|-------------|
-| `waydroid` | Enables Waydroid service |
-| `podman` | Enables podman.socket + podman-compose |
-| `libvirt` | Starts libvirtd, enables virt-manager |
-| `ydotool` | Enables ydotool daemon, sets socket path |
-
-Each can be enabled/disabled independently via `mySystem.virt.<module>.enable`.
+- **`mySystem.profiles.desktop`**: Enables GNOME base, Flatpak support, OBS Studio, and multimedia tools.
+- **`mySystem.profiles.virtualization`**: Enables Podman containers, libvirt / KVM, Waydroid, and ydotool.
+- **`myHome.profiles.full`**: Enables Spicetify, Starship, VSCode, and Wallpapers.
+- **`myHome.profiles.creative`**: Enables video editing & digital art package suite.
 
 </details>
 
 <details>
-<summary><b>🎨 Theming System</b></summary>
+<summary><b>🧪 QEMU VM Testing</b></summary>
 
-The `theming` module provides unified GTK/cursor/icon theming:
-
-```nix
-# In home-manager/users/faith.nix
-myHome.theming = {
-  enable = true;
-  cursorName = "Bibata-Modern-Amber";
-};
-
-# Defined in modules/theming.nix
-options.myHome.theming = {
-  enable = lib.mkEnableOption "theming";
-  cursorName = lib.mkOption { type = lib.types.str; };
-};
-```
-
-Uses `lib.mkIf config.myHome.theming.enable` to conditionally apply config.
-
-</details>
-
-<details>
-<summary><b>🐚 Fish Shell Config</b></summary>
-
-Fish is configured via `home-manager/modules/fish.nix`:
-
-```nix
-programs.fish = {
-  enable = true;
-  shellAliases = {
-    nano = "nvim";
-    ls = "eza --all --icons ...";
-    snrs = "sudo nixos-rebuild switch --flake .#${config.myHome.fish.flakeTarget}";
-  };
-  interactiveShellInit = ''
-    fish_config theme choose ${config.myHome.fish.theme}
-  '';
-};
-```
-
-The `snrs` (sudo nixos rebuild switch) alias is set per-user via `flakeTarget`.
-
-</details>
-
----
-
-## 🆘 Troubleshooting
-
-<details>
-<summary><b>❌ "attribute 'foo' missing"</b></summary>
-
-The module isn't being found. Check:
-
-1. File is in correct location (import-tree recursive)
-2. File isn't ignored (`/_` prefix)
-3. Module is added to git (`git add`)
-4. Module exports correct attr: `flake.homeModules.foo` or `flake.nixosModules.foo`
-
-</details>
-
-<details>
-<summary><b>❌ "option does not exist"</b></summary>
-
-Usually means a module isn't imported, or options are defined after they're read. Check that the module defining the option is imported before modules that reference it.
-
-</details>
-
-<details>
-<summary><b>❌ Build fails after pulling</b></summary>
+Any host can be built and booted inside a virtual machine without changing physical hardware state:
 
 ```bash
-# Clear evaluation cache
-rm -rf ~/.cache/nix/eval-cache-*
-
-# Update lock file
-nix flake update
-
-# Test dry-run
-sudo nixos-rebuild dry-run --flake .#<host>
+# Build & run Kale VM
+nixos-rebuild build-vm --flake .#kale-vm
+./result/bin/run-kale-vm-vm
 ```
+
+VM instances use `vm-baseline` which automatically configures default QEMU parameters, OpenGL acceleration, fallback authentication password (`123`), and SSH access on `localhost:2222`.
 
 </details>
 
@@ -571,11 +453,13 @@ sudo nixos-rebuild dry-run --flake .#<host>
 
 | Project | Description |
 |---------|-------------|
-| [flake-parts](https://github.com/hercules-ci/flake-parts) | The module system that makes this all possible |
-| [dendritic](https://github.com/mightyiam/dendritic) | The amazing NixOS host pattern (beginners don't use) |
+| [flake-parts](https://github.com/hercules-ci/flake-parts) | The modular framework powering flake output definitions |
+| [import-tree](https://github.com/vic/import-tree) | Recursive directory module auto-discovery |
+| [home-manager](https://github.com/nix-community/home-manager) | Declarative user environment management |
+| [sops-nix](https://github.com/mic92/sops-nix) | Atomic secret management for NixOS |
 
 ---
 
 ## 📜 License
 
-MIT © niversesu
+MIT © [niversesu](https://github.com/niversesu)
