@@ -13,11 +13,14 @@
 
       sops.secrets.userPassword = {
         neededForUsers = true;
-        key = {
-          kale = "niverPassword";
-          nomi = "faithPassword";
-          dream = "amaniPassword";
-        }.${config.mySystem.shared.host};
+        key =
+          {
+            kale = "niverPassword";
+            nomi = "faithPassword";
+            dream = "amaniPassword";
+          }.${
+            config.mySystem.shared.host
+          };
       };
 
       sops.secrets.tailscaleAuthKey = {};

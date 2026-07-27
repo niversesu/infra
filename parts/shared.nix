@@ -142,7 +142,7 @@
     ...
   }: {
     imports = [
-      self.homeModules.nixvim
+      self.homeModules.nvf
       self.homeModules.fish
       self.homeModules.theming
       self.homeModules.starship
@@ -169,7 +169,7 @@
         myHome.fish.enable = lib.mkDefault true;
         myHome.theming.enable = lib.mkDefault true;
         myHome.git.enable = lib.mkDefault true;
-        myHome.nixvim.enable = lib.mkDefault true;
+        myHome.nvf.enable = lib.mkDefault true;
         myHome.packages.enable = lib.mkDefault true;
         myHome.qol.enable = lib.mkDefault true;
 
